@@ -1,0 +1,7 @@
+html
+gulpfile.js
+node_modules
+package-lock.json
+package.json
+src/img/contribution.txt
+dist/img/contribution.txt
