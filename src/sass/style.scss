@@ -21,15 +21,15 @@ body
 
     &__content
     {
+        position: relative;
         display: flex;
-        justify-content: end;
+        justify-content: center;
         align-items: center;
     }
 
     &__title
     {
-        margin: 0 auto;
-        font-size: 1.5rem;
+        font-size: 1.6rem;
 
         .green
         {
@@ -37,16 +37,30 @@ body
         }
     }
 
-    &__button
+    &__mode
     {
-        background: none;
-        border: none;
-        color: var(--text);
+        position: absolute;
+        right: 0;
+    }
+
+    &__click
+    {
+        display: flex;
+        align-items: center;
+        padding: 5px;
         cursor: pointer;
     }
 
     &__img
     {
+        margin-right: 5px;
         width: 1.3rem;
     }
+
+    &__mode-color
+    {
+        margin-right: 5px;
+    }
 }
+
+@import 'small'

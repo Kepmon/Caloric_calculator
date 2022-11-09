@@ -1,0 +1,19 @@
+@media (max-width: 768px) {
+	.header {
+		padding: 1.5rem 1rem .5rem;
+
+		&__content {
+			flex-direction: column;
+			align-items: center;
+		}
+
+		&__mode {
+			position: relative;
+		}
+
+		&__click {
+            margin-top: 1rem;
+			font-size: 0.8rem;
+		}
+	}
+}

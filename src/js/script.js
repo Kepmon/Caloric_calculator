@@ -1,31 +1,24 @@
 const body = document.querySelector('body')
-const modeButton = document.querySelector('.header__button')
+const modeChange = document.querySelector('.header__click')
 
-let attributeValue = body.getAttribute('data-mode')
-
-const setModeImg = () => {
+const handleMode = () => {
     const modeImg = document.querySelector('.header__img')
+    const spanImg = document.querySelector('.header__mode-color')
+    let attributeValue = body.getAttribute('data-mode')
 
-    if (attributeValue === 'dark')
-    {
-        modeImg.setAttribute('src', 'dist/img/light.png')
-    }
-    else
-    {
-        modeImg.setAttribute('src', 'dist/img/crescent-moon-and-star.png')
-    }
-}
-
-const changeMode = () => {
     if (attributeValue === 'dark')
     {
         body.setAttribute('data-mode', 'light')
+        modeImg.setAttribute('src', 'dist/img/crescent-moon-and-star.png')
+        spanImg.textContent = 'Dark'
     }
     else
     {
         body.setAttribute('data-mode', 'dark')
+        modeImg.setAttribute('src', 'dist/img/light.png')
+        spanImg.textContent = 'Light'
     }
 }
 
-window.addEventListener('DOMContentLoaded', setModeImg)
-modeButton.addEventListener('click', changeMode)
+
+modeChange.addEventListener('click', handleMode)
