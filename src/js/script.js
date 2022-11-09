@@ -1,5 +1,8 @@
 const body = document.querySelector('body')
 const modeChange = document.querySelector('.header__click')
+const whyQuestion = document.querySelector('.main__question-header')
+
+console.log(whyQuestion);
 
 const handleMode = () => {
     const modeImg = document.querySelector('.header__img')
@@ -20,5 +23,11 @@ const handleMode = () => {
     }
 }
 
+const showReasons = () => {
+    const whyReasons = document.querySelector('.main__question-answers')
+
+    whyReasons.classList.toggle('show-height')
+}
 
 modeChange.addEventListener('click', handleMode)
+whyQuestion.addEventListener('click', showReasons)
