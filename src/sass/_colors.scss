@@ -1,7 +1,6 @@
 :root
 {
     --main-color: #00b300;
-    --slider-color: #d9d9d9;
 }
 
 [data-mode='dark']
@@ -9,11 +8,13 @@
     --background-color: #1d1d1d;
     --text: #fff;
     --header-background: #151515;
+    --slider-color: #d9d9d9;
 }
 
 [data-mode='light']
 {
     --background-color: #d9d9d9;
     --text: #000;
-    --header-background: #fdfddf;
+    --header-background: #fdfdfd;
+    --slider-color: #fdfdfd;
 }
