@@ -3,6 +3,7 @@ const modeImg = document.querySelector('.header__img')
 const spanImg = document.querySelector('.header__mode-color')
 const modeChange = document.querySelector('.header__click')
 const whyQuestion = document.querySelector('.main__question-header')
+const looseOption = document.querySelector('.main__question-option')
 const sliders = document.querySelectorAll('.main__slider')
 
 const handleMode = () => {
@@ -43,6 +44,12 @@ const showReasons = () => {
 	whyReasons.classList.toggle('show-height')
 }
 
+const showMoreOptions = () => {
+	const moreOptions = document.querySelector('.main__loose-options')
+
+	moreOptions.classList.toggle('show-more-options')
+}
+
 for (let i = 0; i < sliders.length; i++) {
     const handleSlideThumb = () => {
         const inputs = document.querySelectorAll('.main__input')
@@ -72,4 +79,5 @@ const handleThumbDescription = () => {
 modeChange.addEventListener('click', handleMode)
 window.addEventListener('DOMContentLoaded', saveMode)
 whyQuestion.addEventListener('click', showReasons)
+looseOption.addEventListener('click', showMoreOptions)
 sliders[4].addEventListener('input', handleThumbDescription)

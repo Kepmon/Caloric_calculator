@@ -53,9 +53,24 @@
                     <p>Goal</p>
                 </div>
                 <div class="main__question-options">
-                    <button class="main__question-option">Loose weight</button>
-                    <button class="main__question-option">Gain muscle</button>
-                    <button class="main__question-option">Maintain</button>
+                    <div class="main__lose">
+                        <input type="button" class="main__question-option" value="Lose weight">
+                        <div class="main__lose-options">
+                            <div class="main__lose-title">Choose your preference:</div>
+                            <form>
+                                <div class="main__lose-option">
+                                    <input type="radio" id="faster" name="lose-option">
+                                    <label for="faster">Faster fat loss in exchange for lower caloric intake</label>
+                                </div>
+                                <div class="main__lose-option">
+                                    <input type="radio" id="slower" name="lose-option">
+                                    <label for="slower">Slower fat loss in exchange for higher caloric intake</label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <input type="button" class="main__question-option" value="Gain muscle">
+                    <input type="button" class="main__question-option" value="Maintain">
                 </div>
             </div>
 
@@ -65,8 +80,8 @@
                     <p>Gender</p>
                 </div>
                 <div class="question-options">
-                    <button class="main__question-option">Male</button>
-                    <button class="main__question-option">Female</button>
+                    <input type="button" class="main__question-option" value="Male">
+                    <input type="button" class="main__question-option" value="Female">
                 </div>
             </div>
 
