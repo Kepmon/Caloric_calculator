@@ -3,7 +3,7 @@ const modeImg = document.querySelector('.header__img')
 const spanImg = document.querySelector('.header__mode-color')
 const modeChange = document.querySelector('.header__click')
 const whyQuestion = document.querySelector('.main__question-header')
-const looseOption = document.querySelector('.main__question-option')
+const loseOption = document.querySelector('.main__question-option')
 const sliders = document.querySelectorAll('.main__slider')
 
 const handleMode = () => {
@@ -45,17 +45,19 @@ const showReasons = () => {
 }
 
 const showMoreOptions = () => {
-	const moreOptions = document.querySelector('.main__loose-options')
+	const moreOptions = document.querySelector('.main__lose-options')
 
 	moreOptions.classList.toggle('show-more-options')
 }
+
+console.log(sliders);
 
 for (let i = 0; i < sliders.length; i++) {
     const handleSlideThumb = () => {
         const inputs = document.querySelectorAll('.main__input')
 		const percentValue = (sliders[i].value - sliders[i].getAttribute('min')) / (sliders[i].getAttribute('max') - sliders[i].getAttribute('min')) * 100
         
-        sliders[i].style.backgroundImage = `linear-gradient(90deg, var(--main-color) ${percentValue}%, var(--slider-color) ${percentValue}%)`
+        sliders[i].style.backgroundImage = `linear-gradient(90deg, var(--main-color) ${percentValue}%, var(--option-color) ${percentValue}%)`
         inputs[i].style.left = `${percentValue}%`
         inputs[i].style.transform = 'translateX(-50%)'
 		inputs[i].setAttribute('placeholder', `${sliders[i].value}`)
@@ -79,5 +81,5 @@ const handleThumbDescription = () => {
 modeChange.addEventListener('click', handleMode)
 window.addEventListener('DOMContentLoaded', saveMode)
 whyQuestion.addEventListener('click', showReasons)
-looseOption.addEventListener('click', showMoreOptions)
+loseOption.addEventListener('click', showMoreOptions)
 sliders[4].addEventListener('input', handleThumbDescription)
