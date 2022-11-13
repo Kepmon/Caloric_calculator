@@ -6,8 +6,10 @@ const whyQuestion = document.querySelector('.main__question-header')
 const loseOption = document.querySelector('.main__question-option')
 const sliders = document.querySelectorAll('.main__slider')
 const photos = document.querySelector('.main__fat-photos')
-const closeBtn = document.querySelector('.close-button')
+const closeBtn = document.querySelectorAll('.close-button')
 const photosLink = document.querySelector('.main__charts')
+const activityDescription = document.querySelector('.main__activity-examples')
+const examplesLink = document.querySelector('.main__examples')
 
 const handleMode = () => {
 	let attributeValue = body.getAttribute('data-mode')
@@ -83,10 +85,21 @@ const showPhotos = () => photos.classList.add('photos-visible')
 
 const closePhotos = () => photos.classList.remove('photos-visible')
 
-const closeOnBody = e => {
+const closePhotosOnBody = e => {
 	if (e.target !== photosLink)
 	{
 		photos.classList.remove('photos-visible')
+	}
+}
+
+const showActivityLevels = () => activityDescription.classList.add('photos-visible')
+
+const closeActivityLevels = () => activityDescription.classList.remove('photos-visible')
+
+const closeActivityOnBody = e => {
+	if (e.target !== examplesLink)
+	{
+		activityDescription.classList.remove('photos-visible')
 	}
 }
 
@@ -96,5 +109,10 @@ whyQuestion.addEventListener('click', showReasons)
 loseOption.addEventListener('click', showMoreOptions)
 sliders[4].addEventListener('input', handleThumbDescription)
 photosLink.addEventListener('click', showPhotos)
-closeBtn.addEventListener('click', closePhotos)
-body.addEventListener('click', closeOnBody)
+examplesLink.addEventListener('click', showActivityLevels)
+closeBtn[0].addEventListener('click', closePhotos)
+closeBtn[1].addEventListener('click', closeActivityLevels)
+body.addEventListener('click', closePhotosOnBody)
+body.addEventListener('click', closeActivityOnBody)
+
+console.log(closeBtn);

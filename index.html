@@ -121,7 +121,6 @@
                         <img src="dist/img/discount-tag.png" alt="" class="question-icon">
                         <p>Body fat (<a class="main__charts">show helpful charts</a>)</p>
                         <div class="main__fat-photos">
-                            <div class="close-button"></div>
                             <div class="main__photo">
                                 <p class="main__photo-header">Body fat percentage for women:</p>
                                 <img src="dist/img/body_fat_women.png" alt="Photos of different body fat values for women" class="main__photo-img">
@@ -130,6 +129,7 @@
                                 <p class="main__photo-header">Body fat percentage for men:</p>
                                 <img src="dist/img/body_fat_men.png" alt="Photos of different body fat values for men" class="main__photo-img">
                             </div>
+                            <div class="close-button"></div>
                         </div>
                     </div>
                     <div class="main__slider-container">
@@ -140,18 +140,48 @@
                 <div class="main__question-slider">
                     <div class="main__question-header">
                         <img src="dist/img/activity.png" alt="" class="question-icon">
-                        <p>Activity level</p>
+                        <p>Activity level (<span class="main__examples">show examples</span>)</p>
+                        <div class="main__activity-examples">
+                            <div class="close-button"></div>
+                            <h3 class="main__activity-header">Activity levels:</h3>
+                            <h4 class="main__activity-subheader">Little or no exercise:</h4>
+                            <ul class="main__activitity-items">
+                                <li>No intentional exercise,</li>
+                                <li>Intetional low-intensity exercise, such as stretching, yoga, slow walking, walking a dog, performed under 30 minutes a day,</li>
+                                <li>Activities of daily living, such as cleaning, shopping, gardering, taking out the trash, TV watching, using a computer,</li>
+                                <li>Most of the day spent sitting.</li>
+                            </ul>
+                            <h4 class="main__activity-subheader">Light activity:</h4>
+                            <ul class="main__activitity-items">
+                                <li>Low-intensity intentional exercise, such as fast walking, bowling, playing pool, performed for at least 30 minutes a day,</li>
+                                <li>Some more intense exercise, such as jogging, slow cycling, performed for a shorter period of time (e.g. 15-20 minutes).</li>
+                            </ul>
+                            <h4 class="main__activity-subheader">Moderate activity:</h4>
+                            <ul class="main__activitity-items">
+                                <li>Intentional more intense exercise, such as weight training, running, swimming, boxing, playing basketball etc., performed for 4-6 hours a week,</li>
+                                <li>Having a job that requires a low-intensity activity, such as a waitress or a mailman.</li>
+                            </ul>
+                            <h4 class="main__activity-subheader">Moderate activity:</h4>
+                            <ul class="main__activitity-items">
+                                <li>Intentional more intense exercise, such as weight training, running, swimming, boxing, playing basketball etc., performed for 7-9 hours a week.</li>
+                            </ul>
+                            <h4 class="main__activity-subheader">Moderate activity:</h4>
+                            <ul class="main__activitity-items">
+                                <li>Daily intense exercise, performed for over an hour a day,</li>
+                                <li>Having a job that requires a more intense activity, such as a construction worker or a bike delivery man.</li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="main__slider-container">
                         <input type="range" min="0" max="100" value="50" step="25" class="main__slider">
                         <input type="number" min="1" max="50" placeholder="25" class="main__input main__input--invisible">
-                        <div class="main__input-description">Moderate activity</div>
+                        <div class="main__input-description"> Moderate activity</div>
                     </div>
                 </div>
                 <div class="main__question-slider">
                     <div class="main__question-header">
                         <img src="dist/img/stove.png" alt="" class="question-icon">
-                        <p>Daily caloric exhaust</p>
+                        <p>Daily caloric exhaust (<span class="main__examples">optional</span>)</p>
                     </div>
                     <div class="main__slider-container">
                         <input type="range" min="1" max="1500" value="750" class="main__slider">

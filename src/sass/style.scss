@@ -232,7 +232,7 @@ body {
 		-moz-appearance: textfield;
 	  }
 
-	&__charts
+	&__charts, &__examples
 	{
 		color: var(--main-color);
 		cursor: pointer;
@@ -260,9 +260,46 @@ body {
 		font-size: 1.2rem;
 	}
 
-	&__photo:first-child
+	&__photo:first-of-type
 	{
 		margin-bottom: 1rem;
+	}
+
+	&__activity-examples
+	{
+		display: none;
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		padding: 1.5rem;
+		text-align: left;
+		background-color: var(--photos-background);
+		border-radius: 10px;
+		transform: translate(-50%, -50%);
+		z-index: 1;
+	}
+
+	&__activity-header
+	{
+		margin-bottom: 1rem;
+		font-size: 1rem;
+	}
+
+	&__activity-subheader
+	{
+		font-size: 1rem;
+		font-weight: 400;
+	}
+
+	&__activitity-items
+	{
+		margin-bottom: 1rem;
+		list-style: inside;
+	}
+
+	&__activitity-items:last-child
+	{
+		margin-bottom: 0;
 	}
 }
 
