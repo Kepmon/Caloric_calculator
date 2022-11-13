@@ -5,6 +5,9 @@ const modeChange = document.querySelector('.header__click')
 const whyQuestion = document.querySelector('.main__question-header')
 const loseOption = document.querySelector('.main__question-option')
 const sliders = document.querySelectorAll('.main__slider')
+const photos = document.querySelector('.main__fat-photos')
+const closeBtn = document.querySelector('.close-button')
+const photosLink = document.querySelector('.main__charts')
 
 const handleMode = () => {
 	let attributeValue = body.getAttribute('data-mode')
@@ -50,8 +53,6 @@ const showMoreOptions = () => {
 	moreOptions.classList.toggle('show-more-options')
 }
 
-console.log(sliders);
-
 for (let i = 0; i < sliders.length; i++) {
     const handleSlideThumb = () => {
         const inputs = document.querySelectorAll('.main__input')
@@ -78,8 +79,22 @@ const handleThumbDescription = () => {
 	}
 }
 
+const showPhotos = () => photos.classList.add('photos-visible')
+
+const closePhotos = () => photos.classList.remove('photos-visible')
+
+const closeOnBody = e => {
+	if (e.target !== photosLink)
+	{
+		photos.classList.remove('photos-visible')
+	}
+}
+
 modeChange.addEventListener('click', handleMode)
 window.addEventListener('DOMContentLoaded', saveMode)
 whyQuestion.addEventListener('click', showReasons)
 loseOption.addEventListener('click', showMoreOptions)
 sliders[4].addEventListener('input', handleThumbDescription)
+photosLink.addEventListener('click', showPhotos)
+closeBtn.addEventListener('click', closePhotos)
+body.addEventListener('click', closeOnBody)

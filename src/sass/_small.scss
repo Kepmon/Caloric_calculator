@@ -1,6 +1,6 @@
 @media (max-width: 768px) {
 	.header {
-		padding: 1.5rem 1rem .5rem;
+		padding: 1.5rem 1rem 0.5rem;
 
 		&__content {
 			flex-direction: column;
@@ -12,8 +12,53 @@
 		}
 
 		&__click {
-            margin-top: 1rem;
+			margin-top: 1rem;
 			font-size: 0.8rem;
 		}
+	}
+
+	.main {
+		&__question-header {
+			display: flex;
+			flex-direction: column;
+		}
+
+		&__question-buttons {
+			max-width: 80vw;
+		}
+
+		&__lose-options {
+			width: 70vw;
+		}
+
+		&__question-options,
+		&__slider {
+			max-width: 90vw;
+		}
+
+		&__fat-photos {
+			width: 100vw;
+		}
+
+		&__photo-header {
+			font-size: 0.9rem;
+		}
+
+		&__photo-img {
+			width: 80vw;
+		}
+	}
+
+	.close-button,
+	.close-button::before,
+	.close-button::after {
+		height: 3px;
+		width: 20px;
+	}
+
+	.close-button::after,
+	.close-button::before {
+		top: 0;
+		right: -1.5rem;
 	}
 }
