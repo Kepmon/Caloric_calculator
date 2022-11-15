@@ -49,6 +49,17 @@
 
             <div class="main__question-buttons">
                 <div class="main__question-header">
+                    <img src="dist/img/kettlebell.png" alt="" class="question-icon">
+                    <p>Units</p>
+                </div>
+                <div class="question-options">
+                    <input type="button" class="main__question-option" value="Metric">
+                    <input type="button" class="main__question-option" value="Imperial">
+                </div>
+            </div>
+
+            <div class="main__question-buttons">
+                <div class="main__question-header">
                     <img src="dist/img/target.png" alt="" class="question-icon">
                     <p>Goal</p>
                 </div>
@@ -94,26 +105,29 @@
                     <div class="main__slider-container">
                         <input type="range" min="1" max="100" value="50" class="main__slider">
                         <input type="number" min="1" max="100" placeholder="50" class="main__input">
+                        <p class="main__error"></p>
                     </div>
                 </div>
                 <div class="main__question-slider">
                     <div class="main__question-header">
                         <img src="dist/img/weighing-scale.png" alt="" class="question-icon">
-                        <p>Weight</p>
+                        <p>Weight (<span class="main__unit">in kg</span>)</p>
                     </div>
                     <div class="main__slider-container">
                         <input type="range" min="30" max="190" value="110" class="main__slider">
                         <input type="number" min="30" max="190" placeholder="110" class="main__input">
+                        <p class="main__error"></p>
                     </div>
                 </div>
                 <div class="main__question-slider">
                     <div class="main__question-header">
                         <img src="dist/img/analytics.png" alt="" class="question-icon">
-                        <p>Height</p>
+                        <p>Height (<span class="main__unit">in cm</span>)</p>
                     </div>
                     <div class="main__slider-container">
                         <input type="range" min="20" max="220" value="120" class="main__slider">
                         <input type="number" min="20" max="220" placeholder="120" class="main__input">
+                        <p class="main__error"></p>
                     </div>
                 </div>
                 <div class="main__question-slider">
@@ -135,6 +149,7 @@
                     <div class="main__slider-container">
                         <input type="range" min="1" max="50" value="25" class="main__slider">
                         <input type="number" min="1" max="50" placeholder="25" class="main__input">
+                        <p class="main__error"></p>
                     </div>
                 </div>
                 <div class="main__question-slider">
@@ -186,6 +201,7 @@
                     <div class="main__slider-container">
                         <input type="range" min="1" max="1500" value="750" class="main__slider">
                         <input type="number" min="1" max="1500" placeholder="750" class="main__input">
+                        <p class="main__error"></p>
                     </div>
                 </div>
             </div>

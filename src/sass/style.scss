@@ -221,6 +221,18 @@ body {
 		font-size: 0.9rem;
 		color: #000;
 	}
+	
+	&__unit
+	{
+		color: var(--main-color);
+	}
+
+	&__error
+	{
+		position: absolute;
+		top: 3.5rem;
+		color: var(--error-color);
+	}
 
 	input::-webkit-outer-spin-button,
 	input::-webkit-inner-spin-button {
@@ -237,6 +249,7 @@ body {
 		color: var(--main-color);
 		cursor: pointer;
 	}
+
 
 	&__fat-photos
 	{

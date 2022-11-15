@@ -5,6 +5,8 @@ const modeChange = document.querySelector('.header__click')
 const whyQuestion = document.querySelector('.main__question-header')
 const loseOption = document.querySelector('.main__question-option')
 const sliders = document.querySelectorAll('.main__slider')
+const inputs = document.querySelectorAll('.main__input')
+const errors = document.querySelectorAll('.main__error')
 const photos = document.querySelector('.main__fat-photos')
 const closeBtn = document.querySelectorAll('.close-button')
 const photosLink = document.querySelector('.main__charts')
@@ -57,7 +59,6 @@ const showMoreOptions = () => {
 
 for (let i = 0; i < sliders.length; i++) {
     const handleSlideThumb = () => {
-        const inputs = document.querySelectorAll('.main__input')
 		const percentValue = (sliders[i].value - sliders[i].getAttribute('min')) / (sliders[i].getAttribute('max') - sliders[i].getAttribute('min')) * 100
         
         sliders[i].style.backgroundImage = `linear-gradient(90deg, var(--main-color) ${percentValue}%, var(--option-color) ${percentValue}%)`
@@ -66,7 +67,23 @@ for (let i = 0; i < sliders.length; i++) {
 		inputs[i].setAttribute('placeholder', `${sliders[i].value}`)
     }
 
+	const handlePlaceholder = () => inputs[i].setAttribute('placeholder', '')
+
+	const addSliderValue = e => {
+		if (e.key === 'Enter' && inputs[i].value <= sliders[i].getAttribute('max') || inputs[i].value >= sliders[i].getAttribute('min'))
+		{
+			sliders[i].value = inputs[i].value
+			handleSlideThumb()
+		}
+		else if (e.key === 'Enter')
+		{
+			errors[i].textContent = `Provide a value within ${sliders[i].getAttribute('min')} - ${sliders[i].getAttribute('max')}.`
+		}
+	}
+
     sliders[i].addEventListener('input', handleSlideThumb)
+	inputs[i].addEventListener('click', handlePlaceholder)
+	inputs[i].addEventListener('keypress', addSliderValue)
 }
 
 const handleThumbDescription = () => {
