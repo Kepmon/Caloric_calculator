@@ -378,4 +378,9 @@ body {
 	flex-direction: column;
 }
 
+.clicked-button
+{
+	background-color: var(--main-color)
+}
+
 @import 'small';
