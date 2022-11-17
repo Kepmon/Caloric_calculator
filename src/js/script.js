@@ -14,6 +14,7 @@ const closeBtn = document.querySelectorAll('.close-button')
 const photosLink = document.querySelector('.main__charts')
 const activityDescription = document.querySelector('.main__activity-examples')
 const examplesLink = document.querySelector('.main__examples')
+const resultButton = document.querySelector('.main__show-result')
 
 const handleMode = () => {
 	let attributeValue = body.getAttribute('data-mode')
@@ -179,6 +180,19 @@ const closeActivityOnBody = (e) => {
 	}
 }
 
+const showResult = () => {
+	const resultPopup = document.querySelector('.main__result-popup')
+
+	resultPopup.classList.toggle('show-result')
+}
+
+const displayYear = () => {
+	const year = document.querySelector('.footer__year')
+	
+	const currentYear = new Date().getFullYear()
+	year.textContent = currentYear
+}
+
 modeChange.addEventListener('click', handleMode)
 window.addEventListener('DOMContentLoaded', saveMode)
 whyQuestion.addEventListener('click', showReasons)
@@ -193,3 +207,5 @@ closeBtn[0].addEventListener('click', closePhotos)
 closeBtn[1].addEventListener('click', closeActivityLevels)
 body.addEventListener('click', closePhotosOnBody)
 body.addEventListener('click', closeActivityOnBody)
+resultButton.addEventListener('click', showResult)
+window.addEventListener('DOMContentLoaded', displayYear)
