@@ -3,7 +3,7 @@ const modeImg = document.querySelector('.header__img')
 const spanImg = document.querySelector('.header__mode-color')
 const modeChange = document.querySelector('.header__click')
 const whyQuestion = document.querySelector('.main__question-header')
-const questionButtons = document.querySelectorAll('.main__question-option')
+const questionButtons = Array.from(document.querySelectorAll('.main__question-option'))
 const moreOptions = document.querySelector('.main__lose-options')
 const sliders = document.querySelectorAll('.main__slider')
 const unitInfo = document.querySelectorAll('.main__unit')
@@ -15,6 +15,11 @@ const photosLink = document.querySelector('.main__charts')
 const activityDescription = document.querySelector('.main__activity-examples')
 const examplesLink = document.querySelector('.main__examples')
 const resultButton = document.querySelector('.main__show-result')
+const units = Array.from(document.querySelectorAll('.unit'))
+const goals = Array.from(document.querySelectorAll('.goal'))
+const genders = Array.from(document.querySelectorAll('.gender'))
+
+let selectedValues = []
 
 const handleMode = () => {
 	let attributeValue = body.getAttribute('data-mode')
@@ -51,16 +56,38 @@ const showReasons = () => {
 	whyReasons.classList.toggle('show-height')
 }
 
-for (let i = 0; i < questionButtons.length; i++) {
-	const addButtonColor = () =>
-		questionButtons[i].classList.toggle('clicked-button')
+const removeUnitColor = () => units.forEach(unit => unit.classList.remove('clicked-button'))
+const removeGoalColor = () => goals.forEach(goal => goal.classList.remove('clicked-button'))
+const removeGenderColor = () => genders.forEach(gender => gender.classList.remove('clicked-button'))
 
-	questionButtons[i].addEventListener('click', addButtonColor)
+for (let i = 0; i < units.length; i++) {
+	const addUnitColor = () => {
+		removeUnitColor()
+		units[i].classList.add('clicked-button')
+	}
+	
+	units[i].addEventListener('click', addUnitColor)
+}
+
+for (let i = 0; i < goals.length; i++) {
+	const addGoalColor = () => {
+		removeGoalColor()
+		goals[i].classList.add('clicked-button')
+	}
+	
+	goals[i].addEventListener('click', addGoalColor)
+}
+
+for (let i = 0; i < genders.length; i++) {
+	const addGenderColor = () => {
+		removeGenderColor()
+		genders[i].classList.add('clicked-button')
+	}
+	
+	genders[i].addEventListener('click', addGenderColor)
 }
 
 const handleImperialUnits = () => {
-	questionButtons[0].classList.remove('clicked-button')
-
 	unitInfo[0].textContent = 'in lb'
 	unitInfo[1].textContent = 'in ft'
 
@@ -77,9 +104,6 @@ const handleImperialUnits = () => {
 }
 
 const handleMetricUnits = () => {
-	questionButtons[0].classList.add('clicked-button')
-	questionButtons[1].classList.remove('clicked-button')
-
 	unitInfo[0].textContent = 'in kg'
 	unitInfo[1].textContent = 'in cm'
 
@@ -93,8 +117,6 @@ const handleMetricUnits = () => {
 	inputs[1].setAttribute('placeholder', 110)
 	inputs[2].setAttribute('placeholder', 120)
 }
-
-
 
 const showMoreOptions = () => moreOptions.classList.toggle('show-more-options')
 
@@ -119,14 +141,17 @@ for (let i = 0; i < sliders.length; i++) {
 		inputs[i].setAttribute('placeholder', `${sliders[i].value}`)
 	}
 
-	const handlePlaceholder = () => inputs[i].setAttribute('placeholder', '')
+	const handlePlaceholder = e => {
+		inputs[i].setAttribute('placeholder', '')
+
+		if (e.key === 'Tab')
+		{
+			inputs[i].setAttribute('placeholder', '')
+		}
+	}
 
 	const addSliderValue = (e) => {
-		if (
-			(e.key === 'Enter' &&
-				inputs[i].value <= sliders[i].getAttribute('max')) ||
-			inputs[i].value >= sliders[i].getAttribute('min')
-		) {
+		if (((e.key === 'Enter' || e.key === 'Tab') && (inputs[i].value <= sliders[i].getAttribute('max')) || inputs[i].value >= sliders[i].getAttribute('min'))) {
 			sliders[i].value = inputs[i].value
 			handleSlideThumb()
 		} else if (e.key === 'Enter') {
@@ -138,7 +163,8 @@ for (let i = 0; i < sliders.length; i++) {
 
 	sliders[i].addEventListener('input', handleSlideThumb)
 	inputs[i].addEventListener('click', handlePlaceholder)
-	inputs[i].addEventListener('keypress', addSliderValue)
+	inputs[i].addEventListener('keyup', handlePlaceholder)
+	inputs[i].addEventListener('keyup', addSliderValue)
 }
 
 const handleThumbDescription = () => {
@@ -184,6 +210,60 @@ const showResult = () => {
 	const resultPopup = document.querySelector('.main__result-popup')
 
 	resultPopup.classList.toggle('show-result')
+}
+
+const readSelectedUnits = () => {
+	units.forEach(unit => {
+		if (unit.classList.contains('clicked-button'))
+		{
+			const selectedUnit = unit.value
+			selectedValues.push(selectedUnit)
+		}
+	})
+}
+
+const readSelectedGoal = () => {
+	goals.forEach(goal => {
+		if (goal.classList.contains('clicked-button')) {
+			const selectedGoal = goal.value
+			selectedValues.push(selectedGoal)
+		}
+	})
+}
+
+const readSelectedGender = () => {
+	genders.forEach(gender => {
+		if (gender.classList.contains('clicked-button')) {
+			const selectedGender = gender.value
+			selectedValues.push(selectedGender)
+		}
+	})
+}
+
+const readSlidersValues = () => {
+	sliders.forEach(slider => {
+		selectedValues.push(slider.value)
+	})
+}
+
+const calculateBMR = () => {
+	readSelectedGoal()
+	readSelectedGender()
+	readSlidersValues()
+	console.log(selectedValues);
+	
+	if (selectedValues[1] === 'Male')
+	{
+		const bmrhbe = (13.397*selectedValues[3]) + (4.799*selectedValues[4]) - (5.677*selectedValues[2]) + 88.362
+		const bmrce = 500 + (22*(1 - (selectedValues[5]/100)) * selectedValues[3])
+	}
+	else if (selectedValues[1] === 'Female')
+	{
+		const bmrhbe = (9.247*selectedValues[3]) + (3.098*selectedValues[4]) - (4.33*selectedValues[2]) + 447.593
+		const bmrce = 500 + (22*(1 - (selectedValues[5]/100)) * selectedValues[3])
+	}
+
+	selectedValues = []
 }
 
 const displayYear = () => {
