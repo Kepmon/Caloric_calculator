@@ -331,6 +331,48 @@ const totalExpenditure = () => {
 	selectedValues = []
 }
 
+const calculateCaloricIntake = () => {
+	calculateBMR()
+	totalExpenditure()
+	readSelectedGoal()
+
+	const loseOption = document.querySelectorAll('.lose-option')
+	const resultValue = document.querySelector('.main__result-value')
+	let selectedLoseOption
+	let caloricIntake
+
+	if (selectedValues[0] === 'Lose weight')
+	{
+		loseOption.forEach(option => {
+			if (option.checked)
+			{
+				selectedLoseOption = option
+			}
+		})
+
+		if (selectedLoseOption.getAttribute('id') === 'faster')
+		{
+			caloricIntake = tdee - 500
+		}
+		else if (selectedLoseOption.getAttribute('id') === 'slower')
+		{
+			caloricIntake = tdee - 250
+		}
+	}
+	else if (selectedValues[0] === 'Gain muscle')
+	{
+		caloricIntake = tdee + 200
+	}
+	else if (selectedValues[0] === 'Maintain')
+	{
+		caloricIntake = tdee
+	}
+
+	resultValue.textContent = `${parseInt(caloricIntake)} kcal`
+}
+
+resultButton.addEventListener('click', calculateCaloricIntake)
+
 const displayYear = () => {
 	const year = document.querySelector('.footer__year')
 	
