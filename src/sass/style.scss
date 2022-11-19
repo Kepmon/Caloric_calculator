@@ -154,6 +154,15 @@ body {
 	&__question-slider
 	{
 		margin-bottom: 4rem;
+
+		&--hidden
+		{
+			margin-top: 2rem;
+			margin-bottom: 0;
+			max-height: 0;
+			overflow: hidden;
+			transition: max-height .3s, margin-bottom .3s;
+		}
 	}
 
 	&__slider-container
@@ -315,6 +324,11 @@ body {
 		margin-bottom: 0;
 	}
 
+	&__calories-burnt
+	{
+		margin-top: 3rem;
+	}
+
 	&__show-result, &__result-popup
 	{
 		background-color: var(--option-color);
@@ -325,7 +339,6 @@ body {
 	&__show-result
 	{
 		padding: .5rem 1rem;
-		margin-top: 3rem;
 		border: none;
 		font-size: 1.1rem;
 		transition: background-color .3s;
@@ -423,6 +436,13 @@ body {
 .clicked-button
 {
 	background-color: var(--main-color)
+}
+
+.show-calories-burnt
+{
+	margin-bottom: 2rem;
+	max-height: 30vh;
+	overflow: visible;
 }
 
 .show-result

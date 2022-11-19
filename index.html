@@ -189,22 +189,27 @@
                     </div>
                     <div class="main__slider-container">
                         <input type="range" min="0" max="100" value="50" step="25" class="main__slider">
-                        <input type="number" min="1" max="50" placeholder="25" class="main__input main__input--invisible">
+                        <input type="number" min="1" max="50" class="main__input main__input--invisible">
                         <div class="main__input-description"> Moderate activity</div>
                     </div>
-                </div>
-                <div class="main__question-slider">
-                    <div class="main__question-header">
-                        <img src="dist/img/stove.png" alt="" class="question-icon">
-                        <p>Daily caloric exhaust (<span class="main__examples">optional</span>)</p>
+
+                    <div class="main__calories-burnt">
+                        <input type="checkbox" id="calories-burnt" class="checkbox">
+                        <label for="calories-burnt">I know my daily caloric exhaust</label>
                     </div>
-                    <div class="main__slider-container">
-                        <input type="range" min="1" max="1500" value="750" class="main__slider">
-                        <input type="number" min="1" max="1500" placeholder="750" class="main__input">
-                        <p class="main__error"></p>
+                    <div class="main__question-slider main__question-slider--hidden">
+                        <div class="main__question-header">
+                            <img src="dist/img/stove.png" alt="" class="question-icon">
+                            <p>Daily caloric exhaust</p>
+                        </div>
+                        <div class="main__slider-container">
+                            <input type="range" min="1" max="1500" value="750" class="main__slider">
+                            <input type="number" min="1" max="1500" placeholder="750" class="main__input">
+                            <p class="main__error"></p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </div>   
 
             <div class="main__result">
                 <button class="main__show-result">Show result</button>

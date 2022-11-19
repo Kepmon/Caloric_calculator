@@ -18,8 +18,13 @@ const resultButton = document.querySelector('.main__show-result')
 const units = Array.from(document.querySelectorAll('.unit'))
 const goals = Array.from(document.querySelectorAll('.goal'))
 const genders = Array.from(document.querySelectorAll('.gender'))
+const checkboxInput = document.querySelector('.checkbox')
 
 let selectedValues = []
+let bmrhbe
+let bmrce
+let bmr
+let tdee
 
 const handleMode = () => {
 	let attributeValue = body.getAttribute('data-mode')
@@ -206,6 +211,12 @@ const closeActivityOnBody = (e) => {
 	}
 }
 
+const showCaloriesSlider = () => {
+	const caloriesSlider = document.querySelector('.main__question-slider--hidden')
+
+	caloriesSlider.classList.toggle('show-calories-burnt')
+}
+
 const showResult = () => {
 	const resultPopup = document.querySelector('.main__result-popup')
 
@@ -247,20 +258,74 @@ const readSlidersValues = () => {
 }
 
 const calculateBMR = () => {
+	readSelectedUnits()
 	readSelectedGoal()
 	readSelectedGender()
 	readSlidersValues()
-	console.log(selectedValues);
 	
-	if (selectedValues[1] === 'Male')
+	if (selectedValues[0] === 'Metric')
 	{
-		const bmrhbe = (13.397*selectedValues[3]) + (4.799*selectedValues[4]) - (5.677*selectedValues[2]) + 88.362
-		const bmrce = 500 + (22*(1 - (selectedValues[5]/100)) * selectedValues[3])
+		if (selectedValues[2] === 'Male') {
+			bmrhbe = (13.397*selectedValues[4]) + (4.799*selectedValues[5]) - (5.677*selectedValues[3]) + 88.362
+			bmrce = 500 + (22*(1 - (selectedValues[6]/100)) * selectedValues[4])
+			bmr = (bmrhbe + bmrce) / 2
+		}
+		else if (selectedValues[2] === 'Female') {
+			bmrhbe = (9.247*selectedValues[4]) + (3.098*selectedValues[5]) - (4.33*selectedValues[3]) + 447.593
+			bmrce = 500 + (22*(1 - (selectedValues[6]/100)) * selectedValues[4])
+			bmr = (bmrhbe + bmrce) / 2
+		}
 	}
-	else if (selectedValues[1] === 'Female')
+	else if (selectedValues[0] === 'Imperial')
 	{
-		const bmrhbe = (9.247*selectedValues[3]) + (3.098*selectedValues[4]) - (4.33*selectedValues[2]) + 447.593
-		const bmrce = 500 + (22*(1 - (selectedValues[5]/100)) * selectedValues[3])
+		const weight = selectedValues[4] / 2.2046
+		const height = selectedValues[5] * 30.48
+
+		if (selectedValues[2] === 'Male') {
+			bmrhbe = (13.397*weight) + (4.799*height) - (5.677*selectedValues[3]) + 88.362
+			bmrce = 500 + (22*(1 - (selectedValues[6]/100)) * weight)
+			bmr = (bmrhbe + bmrce) / 2
+		}
+		else if (selectedValues[2] === 'Female') {
+			bmrhbe = (9.247*weight) + (3.098*height) - (4.33*selectedValues[3]) + 447.593
+			bmrce = 500 + (22*(1 - (selectedValues[6]/100)) * weight)
+			bmr = (bmrhbe + bmrce) / 2
+		}
+	}
+
+	selectedValues = []
+}
+
+const totalExpenditure = () => {
+	calculateBMR()
+	readSlidersValues()
+
+	const selectedCaloricNumber = parseInt(selectedValues[5])
+	const selectedActivityValue = parseInt(selectedValues[4])
+
+	if (checkboxInput.checked)
+	{
+		tdee = bmrValue + selectedCaloricNumber
+	}
+	else
+	{
+		switch (selectedActivityValue) {
+			case 0:
+				tdee = bmr * 1.2
+				break
+			case 25:
+				tdee = bmr * 1.375
+				break
+			case 50:
+				tdee = bmr * 1.55
+				break
+			case 75:
+				tdee = bmr * 1.725
+				break
+			case 100:
+				tdee = bmr * 1.9
+				break
+		}
 	}
 
 	selectedValues = []
@@ -287,5 +352,6 @@ closeBtn[0].addEventListener('click', closePhotos)
 closeBtn[1].addEventListener('click', closeActivityLevels)
 body.addEventListener('click', closePhotosOnBody)
 body.addEventListener('click', closeActivityOnBody)
+checkboxInput.addEventListener('change', showCaloriesSlider)
 resultButton.addEventListener('click', showResult)
 window.addEventListener('DOMContentLoaded', displayYear)
