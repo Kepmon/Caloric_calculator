@@ -153,7 +153,7 @@ for (let i = 0; i < sliders.length; i++) {
 	const addSliderValue = (e) => {
 		if (e.key === 'Enter' || e.key === 'Tab')
 		{
-			if (inputs[i].value <= sliders[i].getAttribute('max') || inputs[i].value >= sliders[i].getAttribute('min'))
+			if (parseInt(inputs[i].value) <= parseInt(sliders[i].getAttribute('max')) && parseInt(inputs[i].value) >= parseInt(sliders[i].getAttribute('min')))
 			{
 				sliders[i].value = inputs[i].value
 				errors[i].style.display = 'none'
