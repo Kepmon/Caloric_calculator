@@ -19,6 +19,7 @@ const units = Array.from(document.querySelectorAll('.unit'))
 const goals = Array.from(document.querySelectorAll('.goal'))
 const genders = Array.from(document.querySelectorAll('.gender'))
 const checkboxInput = document.querySelector('.checkbox')
+const resultPopup = document.querySelector('.main__result-popup')
 
 let selectedValues = []
 let bmrhbe
@@ -53,12 +54,6 @@ const saveMode = () => {
 		modeImg.setAttribute('src', 'dist/img/crescent-moon-and-star.png')
 		spanImg.textContent = 'Dark'
 	}
-}
-
-const showReasons = () => {
-	const whyReasons = document.querySelector('.main__question-answers')
-
-	whyReasons.classList.toggle('show-height')
 }
 
 const removeUnitColor = () => units.forEach(unit => unit.classList.remove('clicked-button'))
@@ -156,20 +151,25 @@ for (let i = 0; i < sliders.length; i++) {
 	}
 
 	const addSliderValue = (e) => {
-		if (((e.key === 'Enter' || e.key === 'Tab') && (inputs[i].value <= sliders[i].getAttribute('max')) || inputs[i].value >= sliders[i].getAttribute('min'))) {
-			sliders[i].value = inputs[i].value
-			handleSlideThumb()
-		} else if (e.key === 'Enter') {
-			errors[i].textContent = `Provide a value within ${sliders[i].getAttribute(
-				'min'
-			)} - ${sliders[i].getAttribute('max')}.`
+		if (e.key === 'Enter' || e.key === 'Tab')
+		{
+			if (inputs[i].value <= sliders[i].getAttribute('max') || inputs[i].value >= sliders[i].getAttribute('min'))
+			{
+				sliders[i].value = inputs[i].value
+				errors[i].style.display = 'none'
+				handleSlideThumb()
+			}
+			else
+			{
+				errors[i].textContent = `Provide a value within ${sliders[i].getAttribute('min')} - ${sliders[i].getAttribute('max')}.`
+			}
 		}
 	}
 
 	sliders[i].addEventListener('input', handleSlideThumb)
 	inputs[i].addEventListener('click', handlePlaceholder)
 	inputs[i].addEventListener('keyup', handlePlaceholder)
-	inputs[i].addEventListener('keyup', addSliderValue)
+	inputs[i].addEventListener('keydown', addSliderValue)
 }
 
 const handleThumbDescription = () => {
@@ -217,10 +217,31 @@ const showCaloriesSlider = () => {
 	caloriesSlider.classList.toggle('show-calories-burnt')
 }
 
-const showResult = () => {
-	const resultPopup = document.querySelector('.main__result-popup')
+const showResult = () => 
+{
+	readSelectedUnits()
+	readSelectedGoal()
+	readSelectedGender()
+	readSlidersValues()
 
-	resultPopup.classList.toggle('show-result')
+	const generalError = document.querySelector('.main__result-error')
+
+	if (selectedValues.length >= 8)
+	{
+		resultPopup.classList.toggle('show-result')
+		generalError.classList.remove('show-error')
+	}
+	else
+	{
+		generalError.classList.add('show-error')
+	}
+}
+
+const hideResult = e => {
+	if (e.target !== resultButton)
+	{
+		resultPopup.classList.remove('show-result')
+	}
 }
 
 const readSelectedUnits = () => {
@@ -305,25 +326,25 @@ const totalExpenditure = () => {
 
 	if (checkboxInput.checked)
 	{
-		tdee = bmrValue + selectedCaloricNumber
+		tdee = bmr + selectedCaloricNumber
 	}
 	else
 	{
 		switch (selectedActivityValue) {
 			case 0:
-				tdee = bmr * 1.2
+				tdee = bmr * 1.1
 				break
 			case 25:
-				tdee = bmr * 1.375
+				tdee = bmr * 1.275
 				break
 			case 50:
-				tdee = bmr * 1.55
+				tdee = bmr * 1.35
 				break
 			case 75:
-				tdee = bmr * 1.725
+				tdee = bmr * 1.625
 				break
 			case 100:
-				tdee = bmr * 1.9
+				tdee = bmr * 1.8
 				break
 		}
 	}
@@ -371,8 +392,6 @@ const calculateCaloricIntake = () => {
 	resultValue.textContent = `${parseInt(caloricIntake)} kcal`
 }
 
-resultButton.addEventListener('click', calculateCaloricIntake)
-
 const displayYear = () => {
 	const year = document.querySelector('.footer__year')
 	
@@ -382,7 +401,6 @@ const displayYear = () => {
 
 modeChange.addEventListener('click', handleMode)
 window.addEventListener('DOMContentLoaded', saveMode)
-whyQuestion.addEventListener('click', showReasons)
 questionButtons[2].addEventListener('click', showMoreOptions)
 body.addEventListener('click', hideMoreOptions)
 sliders[4].addEventListener('input', handleThumbDescription)
@@ -395,5 +413,8 @@ closeBtn[1].addEventListener('click', closeActivityLevels)
 body.addEventListener('click', closePhotosOnBody)
 body.addEventListener('click', closeActivityOnBody)
 checkboxInput.addEventListener('change', showCaloriesSlider)
+resultButton.addEventListener('click', calculateCaloricIntake)
 resultButton.addEventListener('click', showResult)
+sliders.forEach(slider => slider.addEventListener('change', hideResult))
+body.addEventListener('click', hideResult)
 window.addEventListener('DOMContentLoaded', displayYear)

@@ -80,17 +80,14 @@ body {
 
     &__question-answers
     {
-		padding: 0 1rem;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height .3s;
+		padding: 0 1rem 2rem;
     }
 
 	&__question-header{
 		display: flex;
         align-items: center;
 		justify-content: center;
-		margin-bottom: 1rem;
+		margin-bottom: .5rem;
 	}
 
     &__question-buttons
@@ -369,6 +366,13 @@ body {
 		font-weight: 700;
 		color: var(--main-color);
 	}
+
+	&__result-error
+	{
+		display: none;
+		padding: 1rem;
+		color: var(--error-color);
+	}
 }
 
 .question-icon {
@@ -378,11 +382,6 @@ body {
 
 .question-icon:nth-child(2) {
     cursor: pointer;
-}
-
-.show-height
-{
-    max-height: 100vh;
 }
 
 .show-more-options
@@ -449,6 +448,11 @@ body {
 {
 	padding: 1rem 1rem;
 	max-height: 30vh;
+}
+
+.show-error
+{
+	display: block;
 }
 
 .footer
