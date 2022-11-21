@@ -18,9 +18,15 @@
 	}
 
 	.main {
+		&__header
+		{
+			padding: 0 1.5rem;
+		}
+
 		&__question-header {
 			display: flex;
-			flex-direction: column;
+			padding: .5rem;
+			font-size: 0.9rem;
 		}
 
 		&__question-buttons {
@@ -46,6 +52,11 @@
 
 		&__photo-img {
 			width: 80vw;
+		}
+
+		&__slider-container
+		{
+			margin: 0;
 		}
 	}
 

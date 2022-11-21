@@ -150,10 +150,18 @@ for (let i = 0; i < sliders.length; i++) {
 		}
 	}
 
+	const showPlaceholder = () => {
+		if (inputs[i].value === '')
+		{
+			handleSlideThumb()
+		}
+	}
+
+	
 	const addSliderValue = (e) => {
 		if (e.key === 'Enter' || e.key === 'Tab')
 		{
-			if (parseInt(inputs[i].value) <= parseInt(sliders[i].getAttribute('max')) && parseInt(inputs[i].value) >= parseInt(sliders[i].getAttribute('min')))
+			if (parseFloat(inputs[i].value) <= parseFloat(sliders[i].getAttribute('max')) && parseFloat(inputs[i].value) >= parseFloat(sliders[i].getAttribute('min')))
 			{
 				sliders[i].value = inputs[i].value
 				errors[i].style.display = 'none'
@@ -161,15 +169,18 @@ for (let i = 0; i < sliders.length; i++) {
 			}
 			else
 			{
+				errors[i].style.display = 'block'
 				errors[i].textContent = `Provide a value within ${sliders[i].getAttribute('min')} - ${sliders[i].getAttribute('max')}.`
 			}
 		}
 	}
-
+	
+	inputs[i].addEventListener('input', handleSlideThumb)
 	sliders[i].addEventListener('input', handleSlideThumb)
 	inputs[i].addEventListener('click', handlePlaceholder)
 	inputs[i].addEventListener('keyup', handlePlaceholder)
 	inputs[i].addEventListener('keydown', addSliderValue)
+	body.addEventListener('keydown', showPlaceholder)
 }
 
 const handleThumbDescription = () => {
@@ -335,16 +346,16 @@ const totalExpenditure = () => {
 				tdee = bmr * 1.1
 				break
 			case 25:
-				tdee = bmr * 1.275
+				tdee = bmr * 1.25
 				break
 			case 50:
 				tdee = bmr * 1.35
 				break
 			case 75:
-				tdee = bmr * 1.625
+				tdee = bmr * 1.425
 				break
 			case 100:
-				tdee = bmr * 1.8
+				tdee = bmr * 1.75
 				break
 		}
 	}
