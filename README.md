@@ -10,7 +10,7 @@ Therefore, I though I could address some issue concurrently with learning.
 
 **Sources**
 The photos of body fat percentage were taken from:
-* [Men](https://kubexfitness.com/blog/body-fat-percentages-actually-look-like/
+* [Men](https://kubexfitness.com/blog/body-fat-percentages-actually-look-like/)
 * [Women](https://pl.pinterest.com/pin/805440714592354881/)
 
 The icons were taken from: [iconscout.com](https://iconscout.com/)
