@@ -106,10 +106,10 @@ const handleImperialUnits = () => {
 	sliders[2].value = 3.9
 	sliders[2].style.backgroundImage = 'linear-gradient(90deg, var(--main-color) 50%, var(--option-color) 50%)'
 	
-	inputs[1].setAttribute('placeholder', 240)
+	inputs[1].value = inputs[1].setAttribute('placeholder', 240)
 	inputs[1].style.left = '50%'
 	inputs[1].style.transform = 'translateX(-50%)'
-	inputs[2].setAttribute('placeholder', 3.9)
+	inputs[2].value = inputs[2].setAttribute('placeholder', 3.9)
 	inputs[2].style.left = '50%'
 	inputs[2].style.transform = 'translateX(-50%)'
 }
@@ -124,12 +124,14 @@ const handleMetricUnits = () => {
 	sliders[1].style.backgroundImage = 'linear-gradient(90deg, var(--main-color) 50%, var(--option-color) 50%)'
 	sliders[2].setAttribute('min', 20)
 	sliders[2].setAttribute('max', 220)
+	sliders[2].setAttribute('step', 1)
 	sliders[2].value = 120
 	sliders[2].style.backgroundImage = 'linear-gradient(90deg, var(--main-color) 50%, var(--option-color) 50%)'
-	inputs[1].setAttribute('placeholder', 110)
+
+	inputs[1].value = inputs[1].setAttribute('placeholder', 110)
 	inputs[1].style.left = '50%'
 	inputs[1].style.transform = 'translateX(-50%)'
-	inputs[2].setAttribute('placeholder', 120)
+	inputs[2].value = inputs[2].setAttribute('placeholder', 120)
 	inputs[2].style.left = '50%'
 	inputs[2].style.transform = 'translateX(-50%)'
 }
@@ -143,13 +145,7 @@ const hideMoreOptions = (e) => {
 	const loseOptions = document.querySelector('.main__lose-options')
 
 	if (
-		e.target !== questionButtons[2] &&
-		e.target !== inputsTitle &&
-		e.target !== loseOptions &&
-		e.target !== inputs[0] &&
-		e.target !== inputs[1] &&
-		e.target !== labels[0] &&
-		e.target !== labels[1]
+		e.target !== questionButtons[2] && e.target !== inputsTitle && e.target !== loseOptions && e.target !== inputs[0] && e.target !== inputs[1] && e.target !== labels[0] && e.target !== labels[1]
 	) {
 		moreOptions.classList.remove('show-more-options')
 	}
