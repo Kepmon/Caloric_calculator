@@ -49,12 +49,19 @@ const saveMode = () => {
 	let currentMode = localStorage.getItem('mode')
 	body.setAttribute('data-mode', currentMode)
 
-	if (currentMode === 'dark') {
-		modeImg.setAttribute('src', 'dist/img/light.png')
-		spanImg.textContent = 'Light'
-	} else {
-		modeImg.setAttribute('src', 'dist/img/crescent-moon-and-star.png')
-		spanImg.textContent = 'Dark'
+	if (currentMode !== null)
+	{
+		if (currentMode === 'dark') {
+			modeImg.setAttribute('src', 'dist/img/light.png')
+			spanImg.textContent = 'Light'
+		} else {
+			modeImg.setAttribute('src', 'dist/img/crescent-moon-and-star.png')
+			spanImg.textContent = 'Dark'
+		}
+	}
+	else
+	{
+		body.setAttribute('data-mode', 'dark')
 	}
 }
 
