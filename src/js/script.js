@@ -160,17 +160,17 @@ const hideMoreOptions = (e) => {
 
 for (let i = 0; i < sliders.length; i++) {
 	const handleSlideThumb = () => {
-		const percentValue =
-			((sliders[i].value - sliders[i].getAttribute('min')) /
-				(sliders[i].getAttribute('max') - sliders[i].getAttribute('min'))) *
-			100
+		const percentValue = ((sliders[i].value - sliders[i].getAttribute('min')) / (sliders[i].getAttribute('max') - sliders[i].getAttribute('min'))) * 100
 
-		sliders[
-			i
-		].style.backgroundImage = `linear-gradient(90deg, var(--main-color) ${percentValue}%, var(--option-color) ${percentValue}%)`
+		sliders[i].style.backgroundImage = `linear-gradient(90deg, var(--main-color) ${percentValue}%, var(--option-color) ${percentValue}%)`
 		inputs[i].style.left = `${percentValue}%`
 		inputs[i].style.transform = 'translateX(-50%)'
-		inputs[i].setAttribute('placeholder', `${sliders[i].value}`)
+		inputs[i].setAttribute('placeholder', sliders[i].value)
+	}
+
+	const sliderClick = () => {
+		inputs[i].value = ''
+		handleSlideThumb()
 	}
 
 	const handlePlaceholder = (e) => {
@@ -209,6 +209,8 @@ for (let i = 0; i < sliders.length; i++) {
 
 	inputs[i].addEventListener('input', handleSlideThumb)
 	sliders[i].addEventListener('input', handleSlideThumb)
+	sliders[i].addEventListener('click', handleSlideThumb)
+	sliders[i].addEventListener('mousedown', sliderClick)
 	inputs[i].addEventListener('click', handlePlaceholder)
 	inputs[i].addEventListener('keyup', handlePlaceholder)
 	inputs[i].addEventListener('keydown', addSliderValue)
