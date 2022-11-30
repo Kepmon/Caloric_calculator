@@ -189,20 +189,13 @@ for (let i = 0; i < sliders.length; i++) {
 
 	const addSliderValue = (e) => {
 		if (e.key === 'Enter' || e.key === 'Tab') {
-			if (
-				parseFloat(inputs[i].value) <=
-					parseFloat(sliders[i].getAttribute('max')) &&
-				parseFloat(inputs[i].value) >=
-					parseFloat(sliders[i].getAttribute('min'))
-			) {
+			if (parseFloat(inputs[i].value) <= parseFloat(sliders[i].getAttribute('max')) && parseFloat(inputs[i].value) >= parseFloat(sliders[i].getAttribute('min'))) {
 				sliders[i].value = inputs[i].value
 				errors[i].style.display = 'none'
 				handleSlideThumb()
 			} else {
 				errors[i].style.display = 'block'
-				errors[i].textContent = `Provide a value within ${sliders[
-					i
-				].getAttribute('min')} - ${sliders[i].getAttribute('max')}.`
+				errors[i].textContent = `Provide a value within ${sliders[i].getAttribute('min')} - ${sliders[i].getAttribute('max')}.`
 			}
 		}
 	}
@@ -211,6 +204,7 @@ for (let i = 0; i < sliders.length; i++) {
 	sliders[i].addEventListener('input', handleSlideThumb)
 	sliders[i].addEventListener('click', handleSlideThumb)
 	sliders[i].addEventListener('mousedown', sliderClick)
+	sliders[i].addEventListener('touchstart', sliderClick)
 	inputs[i].addEventListener('click', handlePlaceholder)
 	inputs[i].addEventListener('keyup', handlePlaceholder)
 	inputs[i].addEventListener('keydown', addSliderValue)
