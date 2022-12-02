@@ -113,7 +113,7 @@ const handleImperialUnits = () => {
 	sliders[2].value = 3.9
 	sliders[2].style.backgroundImage = 'linear-gradient(90deg, var(--main-color) 50%, var(--option-color) 50%)'
 	
-	inputs[1].value = inputs[1].setAttribute('placeholder', 240)
+	inputs[1].setAttribute('placeholder', 240)
 	inputs[1].style.left = '50%'
 	inputs[1].style.transform = 'translateX(-50%)'
 	inputs[2].value = inputs[2].setAttribute('placeholder', 3.9)
@@ -135,7 +135,7 @@ const handleMetricUnits = () => {
 	sliders[2].value = 120
 	sliders[2].style.backgroundImage = 'linear-gradient(90deg, var(--main-color) 50%, var(--option-color) 50%)'
 
-	inputs[1].value = inputs[1].setAttribute('placeholder', 110)
+	inputs[1].setAttribute('placeholder', 110)
 	inputs[1].style.left = '50%'
 	inputs[1].style.transform = 'translateX(-50%)'
 	inputs[2].value = inputs[2].setAttribute('placeholder', 120)
