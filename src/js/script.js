@@ -3,9 +3,7 @@ const modeImg = document.querySelector('.header__img')
 const spanImg = document.querySelector('.header__mode-color')
 const modeChange = document.querySelector('.header__click')
 const whyQuestion = document.querySelector('.main__question-header')
-const questionButtons = Array.from(
-	document.querySelectorAll('.main__question-option')
-)
+const questionButtons = Array.from(document.querySelectorAll('.main__question-option'))
 const moreOptions = document.querySelector('.main__lose-options')
 const sliders = document.querySelectorAll('.main__slider')
 const unitInfo = document.querySelectorAll('.main__unit')
@@ -65,82 +63,92 @@ const saveMode = () => {
 	}
 }
 
-const removeUnitColor = () =>
-	units.forEach((unit) => unit.classList.remove('clicked-button'))
-const removeGoalColor = () =>
-	goals.forEach((goal) => goal.classList.remove('clicked-button'))
-const removeGenderColor = () =>
-	genders.forEach((gender) => gender.classList.remove('clicked-button'))
+const removeUnitColor = () => units.forEach((unit) => unit.classList.remove('clicked-button'))
+units.forEach(unit => unit.addEventListener('click', () => {
+	removeUnitColor()
+	unit.classList.add('clicked-button')
+}))
 
-for (let i = 0; i < units.length; i++) {
-	const addUnitColor = () => {
-		removeUnitColor()
-		units[i].classList.add('clicked-button')
-	}
+const removeGoalColor = () => goals.forEach((goal) => goal.classList.remove('clicked-button'))
+goals.forEach(goal => goal.addEventListener('click', () => {
+	removeGoalColor()
+	goal.classList.add('clicked-button')
+}))
 
-	units[i].addEventListener('click', addUnitColor)
-}
+const removeGenderColor = () => genders.forEach((gender) => gender.classList.remove('clicked-button'))
+genders.forEach(gender => gender.addEventListener('click', () => {
+	removeGenderColor()
+	gender.classList.add('clicked-button')
+}))
 
-for (let i = 0; i < goals.length; i++) {
-	const addGoalColor = () => {
-		removeGoalColor()
-		goals[i].classList.add('clicked-button')
-	}
+const handleUnits = e => {
+	const unitSliders = Array.from(document.querySelectorAll('input[data-slider]'))
+	const unitInputs = Array.from(document.querySelectorAll('input[data-input]'))
+	const unitInfos = Array.from(document.querySelectorAll('.main__unit'))
+	const unitIndex = units.indexOf(e.target);
+	const unitValues = [
+		{
+			values: [
+				{
+					symbol: 'kg',
+					min: 30,
+					max: 190,
+					value: 110,
+					placeholder: 110,
+				},
+				{
+					symbol: 'cm',
+					min: 20,
+					max: 220,
+					value: 120,
+					placeholder: 120,
+					step: 1,
+				}
+			]
+		},
+		{
+			values: [
+				{
+					symbol: 'lb',
+					min: 60,
+					max: 420,
+					value: 240,
+					placeholder: 240,
+				},
+				{
+					symbol: 'ft',
+					min: 0.6,
+					max: 7.2,
+					value: 3.9,
+					placeholder: 3.9,
+					step: 0.1,
+				}
+			],
+		}
+	]
 
-	goals[i].addEventListener('click', addGoalColor)
-}
+	unitInfos.forEach(info => {
+		const unitInfosIndex = unitInfos.indexOf(info)
 
-for (let i = 0; i < genders.length; i++) {
-	const addGenderColor = () => {
-		removeGenderColor()
-		genders[i].classList.add('clicked-button')
-	}
+		info.textContent = `in ${unitValues[unitIndex].values[unitInfosIndex].symbol}`
+	})
+	unitSliders.forEach(slider => {
+		const unitSliderIndex = unitSliders.indexOf(slider)
 
-	genders[i].addEventListener('click', addGenderColor)
-}
+		slider.setAttribute('min', unitValues[unitIndex].values[unitSliderIndex].min)
+		slider.setAttribute('max', unitValues[unitIndex].values[unitSliderIndex].max)
+		slider.setAttribute('step', unitValues[unitIndex].values[unitSliderIndex].step)
+		slider.value = unitValues[unitIndex].values[unitSliderIndex].value
+		slider.style.backgroundImage = 'linear-gradient(90deg, var(--main-color) 50%, var(--option-color) 50%)'
+	})
 
-const handleImperialUnits = () => {
-	unitInfo[0].textContent = 'in lb'
-	unitInfo[1].textContent = 'in ft'
-	
-	sliders[1].setAttribute('min', 60)
-	sliders[1].setAttribute('max', 420)
-	sliders[1].value = 240
-	sliders[1].style.backgroundImage = 'linear-gradient(90deg, var(--main-color) 50%, var(--option-color) 50%)'
-	sliders[2].setAttribute('min', 0.6)
-	sliders[2].setAttribute('max', 7.2)
-	sliders[2].setAttribute('step', 0.1)
-	sliders[2].value = 3.9
-	sliders[2].style.backgroundImage = 'linear-gradient(90deg, var(--main-color) 50%, var(--option-color) 50%)'
-	
-	inputs[1].setAttribute('placeholder', 240)
-	inputs[1].style.left = '50%'
-	inputs[1].style.transform = 'translateX(-50%)'
-	inputs[2].value = inputs[2].setAttribute('placeholder', 3.9)
-	inputs[2].style.left = '50%'
-	inputs[2].style.transform = 'translateX(-50%)'
-}
-
-const handleMetricUnits = () => {
-	unitInfo[0].textContent = 'in kg'
-	unitInfo[1].textContent = 'in cm'
-
-	sliders[1].setAttribute('min', 30)
-	sliders[1].setAttribute('max', 190)
-	sliders[1].value = 110
-	sliders[1].style.backgroundImage = 'linear-gradient(90deg, var(--main-color) 50%, var(--option-color) 50%)'
-	sliders[2].setAttribute('min', 20)
-	sliders[2].setAttribute('max', 220)
-	sliders[2].setAttribute('step', 1)
-	sliders[2].value = 120
-	sliders[2].style.backgroundImage = 'linear-gradient(90deg, var(--main-color) 50%, var(--option-color) 50%)'
-
-	inputs[1].setAttribute('placeholder', 110)
-	inputs[1].style.left = '50%'
-	inputs[1].style.transform = 'translateX(-50%)'
-	inputs[2].value = inputs[2].setAttribute('placeholder', 120)
-	inputs[2].style.left = '50%'
-	inputs[2].style.transform = 'translateX(-50%)'
+	unitInputs.forEach(input => {
+		const unitInputIndex = unitInputs.indexOf(input)
+		
+		input.style.left = '50%'
+		input.style.transform = 'translateX(-50%)'
+		input.setAttribute('placeholder', unitValues[unitIndex].values[unitInputIndex].placeholder)
+	})
 }
 
 const showMoreOptions = () => moreOptions.classList.toggle('show-more-options')
@@ -151,9 +159,8 @@ const hideMoreOptions = (e) => {
 	const inputsTitle = document.querySelector('.main__lose-title')
 	const loseOptions = document.querySelector('.main__lose-options')
 
-	if (
-		e.target !== questionButtons[2] && e.target !== inputsTitle && e.target !== loseOptions && e.target !== inputs[0] && e.target !== inputs[1] && e.target !== labels[0] && e.target !== labels[1]
-	) {
+	if (e.target !== questionButtons[2] && e.target !== inputsTitle && e.target !== loseOptions && e.target !== inputs[0] && e.target !==inputs[1] && e.target !== labels[0] && e.target !== labels[1]) 
+	{
 		moreOptions.classList.remove('show-more-options')
 	}
 }
@@ -423,8 +430,7 @@ window.addEventListener('DOMContentLoaded', saveMode)
 questionButtons[2].addEventListener('click', showMoreOptions)
 body.addEventListener('click', hideMoreOptions)
 sliders[4].addEventListener('input', handleThumbDescription)
-questionButtons[0].addEventListener('click', handleMetricUnits)
-questionButtons[1].addEventListener('click', handleImperialUnits)
+units.forEach(unit => unit.addEventListener('click', handleUnits))
 photosLink.addEventListener('click', showPhotos)
 examplesLink.addEventListener('click', showActivityLevels)
 closeBtn[0].addEventListener('click', closePhotos)
