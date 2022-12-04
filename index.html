@@ -56,179 +56,181 @@
                 </div>
             </div>
 
-            <div class="main__question-buttons">
-                <div class="main__question-header">
-                    <img src="dist/img/kettlebell.png" alt="" class="question-icon">
-                    <p>Units</p>
+            <form class="form">
+                <div class="main__question-buttons">
+                    <div class="main__question-header">
+                        <img src="dist/img/kettlebell.png" alt="" class="question-icon">
+                        <p>Units</p>
+                    </div>
+                    <div class="question-options">
+                        <input type="button" class="main__question-option unit clicked-button" value="Metric" name="units">
+                        <input type="button" class="main__question-option unit" value="Imperial" name="units">
+                    </div>
                 </div>
-                <div class="question-options">
-                    <input type="button" class="main__question-option unit clicked-button" value="Metric">
-                    <input type="button" class="main__question-option unit" value="Imperial">
-                </div>
-            </div>
-
-            <div class="main__question-buttons">
-                <div class="main__question-header">
-                    <img src="dist/img/target.png" alt="" class="question-icon">
-                    <p>Goal</p>
-                </div>
-                <div class="main__question-options">
-                    <div class="main__lose">
-                        <input type="button" class="main__question-option goal" value="Lose weight">
-                        <div class="main__lose-options">
-                            <div class="main__lose-title">Choose your preference:</div>
-                            <form>
-                                <div class="main__lose-option">
-                                    <input type="radio" id="faster" name="lose-option" class="lose-option">
-                                    <label for="faster">Faster fat loss in exchange for lower caloric intake</label>
+    
+                <div class="main__question-buttons">
+                    <div class="main__question-header">
+                        <img src="dist/img/target.png" alt="" class="question-icon">
+                        <p>Goal</p>
+                    </div>
+                    <div class="main__question-options">
+                        <div class="main__lose">
+                            <input type="button" class="main__question-option goal" value="Lose weight" name="goal">
+                            <div class="main__lose-options">
+                                <div class="main__lose-title">Choose your preference:</div>
+                                <div class="main__lose-options">
+                                    <div class="main__lose-option">
+                                        <input type="radio" id="faster" name="lose-option" class="lose-option">
+                                        <label for="faster">Faster fat loss in exchange for lower caloric intake</label>
+                                    </div>
+                                    <div class="main__lose-option">
+                                        <input type="radio" id="slower" name="lose-option" class="lose-option">
+                                        <label for="slower">Slower fat loss in exchange for higher caloric intake</label>
+                                    </div>
                                 </div>
-                                <div class="main__lose-option">
-                                    <input type="radio" id="slower" name="lose-option" class="lose-option">
-                                    <label for="slower">Slower fat loss in exchange for higher caloric intake</label>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <input type="button" class="main__question-option goal" value="Gain muscle">
-                    <input type="button" class="main__question-option goal" value="Maintain">
-                </div>
-            </div>
-
-            <div class="main__question-buttons">
-                <div class="main__question-header">
-                    <img src="dist/img/user-account.png" alt="" class="question-icon">
-                    <p>Gender</p>
-                </div>
-                <div class="question-options">
-                    <input type="button" class="main__question-option gender" value="Male">
-                    <input type="button" class="main__question-option gender" value="Female">
-                </div>
-            </div>
-
-            <div class="main__question-sliders">
-                <div class="main__question-slider">
-                    <div class="main__question-header">
-                        <img src="dist/img/hourglass.png" alt="" class="question-icon">
-                        <p>Age</p>
-                    </div>
-                    <div class="main__slider-container">
-                        <input type="range" min="1" max="100" value="50" class="main__slider">
-                        <input type="number" min="1" max="100" placeholder="50" class="main__input">
-                        <p class="main__error"></p>
-                    </div>
-                </div>
-                <div class="main__question-slider">
-                    <div class="main__question-header">
-                        <img src="dist/img/weighing-scale.png" alt="" class="question-icon">
-                        <p>Weight (<span class="main__unit">in kg</span>)</p>
-                    </div>
-                    <div class="main__slider-container">
-                        <input type="range" min="30" max="190" value="110" class="main__slider" data-slider="unit-1">
-                        <input type="number" min="30" max="190" placeholder="110" class="main__input" data-input="input-1">
-                        <p class="main__error"></p>
-                    </div>
-                </div>
-                <div class="main__question-slider">
-                    <div class="main__question-header">
-                        <img src="dist/img/analytics.png" alt="" class="question-icon">
-                        <p>Height (<span class="main__unit">in cm</span>)</p>
-                    </div>
-                    <div class="main__slider-container">
-                        <input type="range" min="20" max="220" value="120" class="main__slider" data-slider="unit-2">
-                        <input type="number" min="20" max="220" placeholder="120" class="main__input" data-input="input-2">
-                        <p class="main__error"></p>
-                    </div>
-                </div>
-                <div class="main__question-slider">
-                    <div class="main__question-header">
-                        <img src="dist/img/discount-tag.png" alt="" class="question-icon">
-                        <p>Body fat (<a class="main__charts">show helpful charts</a>)</p>
-                        <div class="main__fat-photos">
-                            <div class="main__photo">
-                                <p class="main__photo-header">Body fat percentage for women:</p>
-                                <img src="dist/img/body_fat_women.png" alt="Photos of different body fat values for women" class="main__photo-img">
                             </div>
-                            <div class="main__photo">
-                                <p class="main__photo-header">Body fat percentage for men:</p>
-                                <img src="dist/img/body_fat_men.png" alt="Photos of different body fat values for men" class="main__photo-img">
-                            </div>
-                            <div class="close-button"></div>
                         </div>
-                    </div>
-                    <div class="main__slider-container">
-                        <input type="range" min="1" max="50" value="25" class="main__slider">
-                        <input type="number" min="1" max="50" placeholder="25" class="main__input">
-                        <p class="main__error"></p>
+                        <input type="button" class="main__question-option goal" value="Gain muscle" name="goal">
+                        <input type="button" class="main__question-option goal" value="Maintain" name="goal">
                     </div>
                 </div>
-                <div class="main__question-slider">
+    
+                <div class="main__question-buttons">
                     <div class="main__question-header">
-                        <img src="dist/img/activity.png" alt="" class="question-icon">
-                        <p>Activity level (<span class="main__examples">show examples</span>)</p>
-                        <div class="main__activity-examples">
-                            <div class="close-button"></div>
-                            <h3 class="main__activity-header">Activity levels:</h3>
-                            <h4 class="main__activity-subheader">Little or no exercise:</h4>
-                            <ul class="main__activitity-items">
-                                <li>No intentional exercise,</li>
-                                <li>Intetional low-intensity exercise, such as stretching, yoga, slow walking, walking a dog, performed under 30 minutes a day,</li>
-                                <li>Activities of daily living, such as cleaning, shopping, gardering, taking out the trash, TV watching, using a computer,</li>
-                                <li>Most of the day spent sitting.</li>
-                            </ul>
-                            <h4 class="main__activity-subheader">Light activity:</h4>
-                            <ul class="main__activitity-items">
-                                <li>Low-intensity intentional exercise, such as fast walking, bowling, playing pool, performed for at least 30 minutes a day,</li>
-                                <li>Some more intense exercise, such as jogging, slow cycling, performed for a shorter period of time (e.g. 15-20 minutes).</li>
-                            </ul>
-                            <h4 class="main__activity-subheader">Moderate activity:</h4>
-                            <ul class="main__activitity-items">
-                                <li>Intentional more intense exercise, such as weight training, running, swimming, boxing, playing basketball etc., performed for 4-6 hours a week,</li>
-                                <li>Having a job that requires a low-intensity activity, such as a waitress or a mailman.</li>
-                            </ul>
-                            <h4 class="main__activity-subheader">Moderate activity:</h4>
-                            <ul class="main__activitity-items">
-                                <li>Intentional more intense exercise, such as weight training, running, swimming, boxing, playing basketball etc., performed for 7-9 hours a week.</li>
-                            </ul>
-                            <h4 class="main__activity-subheader">Moderate activity:</h4>
-                            <ul class="main__activitity-items">
-                                <li>Daily intense exercise, performed for over an hour a day,</li>
-                                <li>Having a job that requires a more intense activity, such as a construction worker or a bike delivery man.</li>
-                            </ul>
-                        </div>
+                        <img src="dist/img/user-account.png" alt="" class="question-icon">
+                        <p>Gender</p>
                     </div>
-                    <div class="main__slider-container">
-                        <input type="range" min="0" max="100" value="50" step="25" class="main__slider">
-                        <input type="number" min="1" max="50" class="main__input main__input--invisible">
-                        <div class="main__input-description"> Moderate activity</div>
-                        <p class="main__error"></p>
+                    <div class="question-options">
+                        <input type="button" class="main__question-option gender" value="Male" name="gender">
+                        <input type="button" class="main__question-option gender" value="Female" name="gender">
                     </div>
-
-                    <div class="main__calories-burnt">
-                        <input type="checkbox" id="calories-burnt" class="checkbox">
-                        <label for="calories-burnt">I know my daily caloric expenditure</label>
-                    </div>
-                    <div class="main__question-slider main__question-slider--hidden">
+                </div>
+    
+                <div class="main__question-sliders">
+                    <div class="main__question-slider">
                         <div class="main__question-header">
-                            <img src="dist/img/stove.png" alt="" class="question-icon">
-                            <p>Daily caloric expenditure</p>
+                            <img src="dist/img/hourglass.png" alt="" class="question-icon">
+                            <p>Age</p>
                         </div>
                         <div class="main__slider-container">
-                            <input type="range" min="1" max="1500" value="750" class="main__slider">
-                            <input type="number" min="1" max="1500" placeholder="750" class="main__input">
+                            <input type="range" min="1" max="100" value="50" class="main__slider" name="age">
+                            <input type="number" min="1" max="100" placeholder="50" class="main__input" name="age">
                             <p class="main__error"></p>
                         </div>
                     </div>
+                    <div class="main__question-slider">
+                        <div class="main__question-header">
+                            <img src="dist/img/weighing-scale.png" alt="" class="question-icon">
+                            <p>Weight (<span class="main__unit">in kg</span>)</p>
+                        </div>
+                        <div class="main__slider-container">
+                            <input type="range" min="30" max="190" value="110" class="main__slider" data-slider="unit-1" name="weight">
+                            <input type="number" min="30" max="190" placeholder="110" class="main__input" data-input="input-1" name="weight">
+                            <p class="main__error"></p>
+                        </div>
+                    </div>
+                    <div class="main__question-slider">
+                        <div class="main__question-header">
+                            <img src="dist/img/analytics.png" alt="" class="question-icon">
+                            <p>Height (<span class="main__unit">in cm</span>)</p>
+                        </div>
+                        <div class="main__slider-container">
+                            <input type="range" min="20" max="220" value="120" class="main__slider" data-slider="unit-2" name="height">
+                            <input type="number" min="20" max="220" placeholder="120" class="main__input" data-input="input-2" name="height">
+                            <p class="main__error"></p>
+                        </div>
+                    </div>
+                    <div class="main__question-slider">
+                        <div class="main__question-header">
+                            <img src="dist/img/discount-tag.png" alt="" class="question-icon">
+                            <p>Body fat (<a class="main__charts">show helpful charts</a>)</p>
+                            <div class="main__fat-photos">
+                                <div class="main__photo">
+                                    <p class="main__photo-header">Body fat percentage for women:</p>
+                                    <img src="dist/img/body_fat_women.png" alt="Photos of different body fat values for women" class="main__photo-img">
+                                </div>
+                                <div class="main__photo">
+                                    <p class="main__photo-header">Body fat percentage for men:</p>
+                                    <img src="dist/img/body_fat_men.png" alt="Photos of different body fat values for men" class="main__photo-img">
+                                </div>
+                                <div class="close-button"></div>
+                            </div>
+                        </div>
+                        <div class="main__slider-container">
+                            <input type="range" min="1" max="50" value="25" class="main__slider" name="fat">
+                            <input type="number" min="1" max="50" placeholder="25" class="main__input" name="fat">
+                            <p class="main__error"></p>
+                        </div>
+                    </div>
+                    <div class="main__question-slider">
+                        <div class="main__question-header">
+                            <img src="dist/img/activity.png" alt="" class="question-icon">
+                            <p>Activity level (<span class="main__examples">show examples</span>)</p>
+                            <div class="main__activity-examples">
+                                <div class="close-button"></div>
+                                <h3 class="main__activity-header">Activity levels:</h3>
+                                <h4 class="main__activity-subheader">Little or no exercise:</h4>
+                                <ul class="main__activitity-items">
+                                    <li>No intentional exercise,</li>
+                                    <li>Intetional low-intensity exercise, such as stretching, yoga, slow walking, walking a dog, performed under 30 minutes a day,</li>
+                                    <li>Activities of daily living, such as cleaning, shopping, gardering, taking out the trash, TV watching, using a computer,</li>
+                                    <li>Most of the day spent sitting.</li>
+                                </ul>
+                                <h4 class="main__activity-subheader">Light activity:</h4>
+                                <ul class="main__activitity-items">
+                                    <li>Low-intensity intentional exercise, such as fast walking, bowling, playing pool, performed for at least 30 minutes a day,</li>
+                                    <li>Some more intense exercise, such as jogging, slow cycling, performed for a shorter period of time (e.g. 15-20 minutes).</li>
+                                </ul>
+                                <h4 class="main__activity-subheader">Moderate activity:</h4>
+                                <ul class="main__activitity-items">
+                                    <li>Intentional more intense exercise, such as weight training, running, swimming, boxing, playing basketball etc., performed for 4-6 hours a week,</li>
+                                    <li>Having a job that requires a low-intensity activity, such as a waitress or a mailman.</li>
+                                </ul>
+                                <h4 class="main__activity-subheader">Moderate activity:</h4>
+                                <ul class="main__activitity-items">
+                                    <li>Intentional more intense exercise, such as weight training, running, swimming, boxing, playing basketball etc., performed for 7-9 hours a week.</li>
+                                </ul>
+                                <h4 class="main__activity-subheader">Moderate activity:</h4>
+                                <ul class="main__activitity-items">
+                                    <li>Daily intense exercise, performed for over an hour a day,</li>
+                                    <li>Having a job that requires a more intense activity, such as a construction worker or a bike delivery man.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="main__slider-container">
+                            <input type="range" min="0" max="100" value="50" step="25" class="main__slider" name="activity">
+                            <input type="number" min="1" max="50" class="main__input main__input--invisible">
+                            <div class="main__input-description"> Moderate activity</div>
+                            <p class="main__error"></p>
+                        </div>
+    
+                        <div class="main__calories-burnt">
+                            <input type="checkbox" id="calories-burnt" class="checkbox">
+                            <label for="calories-burnt">I know my daily caloric expenditure</label>
+                        </div>
+                        <div class="main__question-slider main__question-slider--hidden">
+                            <div class="main__question-header">
+                                <img src="dist/img/stove.png" alt="" class="question-icon">
+                                <p>Daily caloric expenditure</p>
+                            </div>
+                            <div class="main__slider-container">
+                                <input type="range" min="1" max="1500" value="750" class="main__slider" name="calories">
+                                <input type="number" min="1" max="1500" placeholder="750" class="main__input" name="calories">
+                                <p class="main__error"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>   
+    
+                <div class="main__result">
+                    <p class="main__result-error">Please, provide all necessary data (units, goal, gender, age, weight, height, body fat, and activity level or daily caloric expenditure).</p>
+                    <button class="main__show-result">Show result</button>
+                    <div class="main__result-popup">
+                        <p>Your recommended daily caloric intake is:</p>
+                        <p class="main__result-value"></p>
+                    </div>
                 </div>
-            </div>   
-
-            <div class="main__result">
-                <p class="main__result-error">Please, provide all necessary data (units, goal, gender, age, weight, height, body fat, and activity level or daily caloric expenditure).</p>
-                <button class="main__show-result">Show result</button>
-                <div class="main__result-popup">
-                    <p>Your recommended daily caloric intake is:</p>
-                    <p class="main__result-value"></p>
-                </div>
-            </div>
+            </form>
         </div>
     </main>
 

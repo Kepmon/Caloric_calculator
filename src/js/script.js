@@ -20,7 +20,6 @@ const goals = Array.from(document.querySelectorAll('.goal'))
 const genders = Array.from(document.querySelectorAll('.gender'))
 const checkboxInput = document.querySelector('.checkbox')
 const resultPopup = document.querySelector('.main__result-popup')
-
 let selectedValues = []
 let bmrhbe
 let bmrce
@@ -147,6 +146,7 @@ const handleUnits = e => {
 		
 		input.style.left = '50%'
 		input.style.transform = 'translateX(-50%)'
+		input.value = ''
 		input.setAttribute('placeholder', unitValues[unitIndex].values[unitInputIndex].placeholder)
 	})
 }
@@ -196,6 +196,7 @@ for (let i = 0; i < sliders.length; i++) {
 
 	const addSliderValue = (e) => {
 		if (e.key === 'Enter' || e.key === 'Tab') {
+			e.preventDefault()
 			if (parseFloat(inputs[i].value) <= parseFloat(sliders[i].getAttribute('max')) && parseFloat(inputs[i].value) >= parseFloat(sliders[i].getAttribute('min'))) {
 				sliders[i].value = inputs[i].value
 				errors[i].style.display = 'none'
@@ -443,3 +444,4 @@ resultButton.addEventListener('click', showResult)
 sliders.forEach((slider) => slider.addEventListener('change', hideResult))
 body.addEventListener('click', hideResult)
 window.addEventListener('DOMContentLoaded', displayYear)
+
