@@ -267,7 +267,9 @@ const showCaloriesSlider = () => {
 	caloriesSlider.classList.toggle('show-calories-burnt')
 }
 
-const showResult = () => {
+const showResult = e => {
+	e.preventDefault()
+	
 	readSelectedUnits()
 	readSelectedGoal()
 	readSelectedGender()
