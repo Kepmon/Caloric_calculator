@@ -29,6 +29,7 @@ import Header from '../components/Header.astro'
   :root {
     --clr-green-400: 120 100% 35%;
     --accent-clr: hsl(var(--clr-green-400));
+    --outline-width: 3px;
     --border-radius: 0.5em;
     --header-dark: 207 90% 4%;
     --header-light: 207 10% 98%;
@@ -83,12 +84,36 @@ import Header from '../components/Header.astro'
     cursor: pointer;
   }
 
+  .sr-only {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
   .content-grid,
   .full-width-grid {
+    --edge-size: 1rem;
+    --container-size: 70rem;
     display: grid;
     grid-template-columns:
-      [full-width-start] minmax(1rem, 1fr) [content-start] minmax(70rem, 1fr)
-      [content-end] minmax(1rem, 1fr) [full-width-end];
+      [full-width-start] minmax(
+        var(--edge-size),
+        calc((100% - var(--container-size)) / 2)
+      )
+      [content-start] 1fr
+      [content-end] minmax(
+        var(--edge-size),
+        calc((100% - var(--container-size)) / 2)
+      )
+      [full-width-end];
   }
 
   .content-grid > *,
@@ -106,5 +131,10 @@ import Header from '../components/Header.astro'
 
   .green-text {
     color: var(--accent-clr);
+  }
+
+  :focus-visible {
+    outline: var(--outline-width) solid transparent;
+    outline-offset: var(--outline-width);
   }
 </style>

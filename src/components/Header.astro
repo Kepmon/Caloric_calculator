@@ -4,7 +4,11 @@ import ThemeToggler from './ThemeToggler.astro'
 
 <header class="full-width-grid">
   <div class="header-content">
-    <h1 class="font-bold"><span class="green-text">Calorie</span>Company</h1>
+    <p class="logo-text font-bold">
+      <span class="green-text">Calorie</span>Company <span class="sr-only"
+        >logo</span
+      >
+    </p>
     <ThemeToggler />
   </div>
 </header>
@@ -17,10 +21,21 @@ import ThemeToggler from './ThemeToggler.astro'
 
     .header-content {
       display: flex;
+      grid-auto-flow: column;
       justify-content: space-between;
+      align-items: center;
+
+      @media (max-width: 30rem) {
+        flex-direction: column;
+        gap: 2rem;
+      }
     }
 
-    h1 {
+    @media (max-width: 30rem) {
+      padding-block: 1.5em;
+    }
+
+    .logo-text {
       font-size: clamp(1.0419rem, 0.9252rem + 0.7776vw, 1.8rem);
     }
   }
