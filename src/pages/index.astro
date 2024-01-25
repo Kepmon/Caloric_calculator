@@ -1,3 +1,7 @@
+---
+import Header from '../components/Header.astro'
+---
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -6,7 +10,101 @@
     <meta name="generator" content={Astro.generator} />
     <title>Calculate your caloric intake</title>
   </head>
-  <body>
-    <h1>Astro</h1>
+  <body class="content-grid">
+    <Header />
   </body>
 </html>
+
+<style is:global lang="scss">
+  @use '../sass/_mixins' as *;
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  :root {
+    --clr-green-400: 120 100% 35%;
+    --accent-clr: hsl(var(--clr-green-400));
+    --border-radius: 0.5em;
+    --header-dark: 207 90% 4%;
+    --header-light: 207 10% 98%;
+    --toggler-button-width: 3rem;
+    --toggler-translate-x: 0;
+    @include header-colors(var(--header-light), var(--header-dark));
+
+    @media (prefers-color-scheme: dark) {
+      --toggler-translate-x: calc(var(--toggler-button-width) / 2);
+      @include header-colors(var(--header-dark), var(--header-light));
+    }
+
+    & [data-theme='dark'] {
+      --toggler-translate-x: calc(var(--toggler-button-width) / 2);
+      @include header-colors(var(--header-dark), var(--header-light));
+    }
+
+    & [data-theme='light'] {
+      --toggler-translate-x: 0;
+      @include header-colors(var(--header-light), var(--header-dark));
+    }
+  }
+
+  body {
+    font-family:
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      'Open Sans',
+      'Helvetica Neue',
+      sans-serif;
+  }
+
+  img,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  input,
+  button {
+    font: inherit;
+  }
+
+  button {
+    border: none;
+    cursor: pointer;
+  }
+
+  .content-grid,
+  .full-width-grid {
+    display: grid;
+    grid-template-columns:
+      [full-width-start] minmax(1rem, 1fr) [content-start] minmax(70rem, 1fr)
+      [content-end] minmax(1rem, 1fr) [full-width-end];
+  }
+
+  .content-grid > *,
+  .full-width-grid > * {
+    grid-column: content;
+  }
+
+  .content-grid > .full-width-grid {
+    grid-column: full-width;
+  }
+
+  .font-bold {
+    font-weight: 700;
+  }
+
+  .green-text {
+    color: var(--accent-clr);
+  }
+</style>

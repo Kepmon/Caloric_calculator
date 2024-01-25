@@ -1,0 +1,4 @@
+@mixin header-colors ($background, $text) {
+  --header-background: hsl(#{$background});
+  --header-text: hsl(#{$text});
+}

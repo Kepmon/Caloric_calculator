@@ -1,0 +1,78 @@
+<div class="toggler-wrapper">
+  <img src="/icons/sun_light_mode.svg" alt="" />
+  <button aria-label="click here to change theme" data-button="theme-toggler"
+  ></button>
+  <img src="/icons/moon_dark_mode.svg" alt="" />
+</div>
+
+<script>
+  const themeToggler = document.querySelector('[data-button="theme-toggler"]')
+  const localStorageThemeKey = 'CC-theme'
+
+  const retrieveTheme = () => {
+    const theme = localStorage.getItem(localStorageThemeKey)
+    const prefersDarkTheme = window.matchMedia(
+      '(prefers-color-scheme: dark)'
+    ).matches
+
+    if (prefersDarkTheme) {
+      document.body.setAttribute('data-theme', 'dark')
+    }
+
+    if (theme != null) {
+      document.body.setAttribute('data-theme', theme)
+    }
+  }
+
+  const changeTheme = () => {
+    const currentTheme = document.body.getAttribute('data-theme')
+
+    if (currentTheme !== 'dark') {
+      document.body.setAttribute('data-theme', 'dark')
+      localStorage.setItem(localStorageThemeKey, 'dark')
+      return
+    }
+
+    document.body.setAttribute('data-theme', 'light')
+    localStorage.setItem(localStorageThemeKey, 'light')
+  }
+
+  themeToggler?.addEventListener('click', changeTheme)
+  document.addEventListener('DOMContentLoaded', retrieveTheme)
+</script>
+
+<style>
+  .toggler-wrapper {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+    img {
+      width: 1.5rem;
+    }
+
+    button {
+      --padding: calc(0.075 * var(--toggler-button-width));
+      --height: calc(var(--toggler-button-width) / 2);
+      position: relative;
+      padding: var(--padding);
+      width: var(--toggler-button-width);
+      height: var(--height);
+      background-color: var(--header-text);
+      border-radius: 100vmax;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: var(--padding);
+        left: var(--padding);
+        width: calc(var(--height) - (2 * var(--padding)));
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background-color: var(--accent-clr);
+        translate: var(--toggler-translate-x) 0;
+        transition: translate 0.4s;
+      }
+    }
+  }
+</style>
