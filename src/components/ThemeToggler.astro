@@ -41,14 +41,14 @@
   document.addEventListener('DOMContentLoaded', retrieveTheme)
 </script>
 
-<style>
+<style lang="scss">
   .toggler-wrapper {
     display: flex;
     gap: 1rem;
     align-items: center;
 
     img {
-      width: 1.5rem;
+      width: clamp(1rem, 0.854rem + 0.833vi, 1.5rem);
     }
 
     button {
@@ -58,7 +58,7 @@
       padding: var(--padding);
       width: var(--toggler-button-width);
       height: var(--height);
-      background-color: var(--header-text);
+      background-color: var(--content-text);
       border-radius: 100vmax;
       outline-color: var(--accent-clr);
 

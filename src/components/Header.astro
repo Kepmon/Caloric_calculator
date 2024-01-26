@@ -14,10 +14,12 @@ import ThemeToggler from './ThemeToggler.astro'
 </header>
 
 <style lang="scss">
+  @use '../sass/_mixins' as *;
+
   header {
     padding-block: 1.8em;
-    background-color: var(--header-background);
-    color: var(--header-text);
+    background-color: var(--darker-comp-bg);
+    color: var(--content-text);
 
     .header-content {
       display: flex;

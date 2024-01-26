@@ -1,0 +1,49 @@
+---
+const reasonsWhy = [
+  'This calculator requires you to provide your body fat percentage, which enhances its accuracy.',
+  'This calculator allows you to provide the number of calories that you burn throughout a day, if you happen to track that.',
+  `This information will be used instead of activity level, which enhances the calculator's accuracy.`,
+  'If you want to loose fat, you may choose between faster fat loss in exchange for lower caloric intake and the other way around.',
+  'For sliders, you can choose what better suits you - sliding to an appropriate value or inputing the value into an input field below each slider.'
+]
+---
+
+<section aria-labelledby="why-this">
+  <h2 id="why-this">
+    <span class="green-text">Why</span> should you choose <span
+      class="green-text">this</span
+    > calculator?
+  </h2>
+
+  <ul>
+    {reasonsWhy.map((reason) => <li>{reason}</li>)}
+  </ul>
+</section>
+
+<style lang="scss">
+  section {
+    --gap: 0.75em;
+  }
+
+  h2 {
+    margin-block-end: var(--gap);
+    font-size: clamp(1.25rem, 1.068rem + 1.042vi, 1.875rem);
+    text-align: center;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &::before {
+      content: url('/icons/checkmark.svg');
+      display: block;
+      scale: 0.75;
+    }
+
+    &:not(:last-child) {
+      margin-block-end: var(--gap);
+    }
+  }
+</style>

@@ -1,5 +1,7 @@
 ---
 import Header from '../components/Header.astro'
+import WhyThisCalc from '../components/WhyThisCalc.astro'
+import Footer from '../components/Footer.astro'
 ---
 
 <html lang="en">
@@ -12,6 +14,11 @@ import Header from '../components/Header.astro'
   </head>
   <body class="content-grid">
     <Header />
+    <main>
+      <h1>Calculate your caloric intake</h1>
+      <WhyThisCalc />
+    </main>
+    <Footer />
   </body>
 </html>
 
@@ -31,29 +38,34 @@ import Header from '../components/Header.astro'
     --accent-clr: hsl(var(--clr-green-400));
     --outline-width: 3px;
     --border-radius: 0.5em;
-    --header-dark: 207 90% 4%;
-    --header-light: 207 10% 98%;
-    --toggler-button-width: 3rem;
+    --toggler-button-width: clamp(2.25rem, 2.031rem + 1.25vi, 3rem);
     --toggler-translate-x: 0;
-    @include header-colors(var(--header-light), var(--header-dark));
+    --clr-white-400: 207 10% 95%;
+    --clr-white-900: 207 10% 90%;
+    --clr-dark-700: 207 10% 10%;
+    --clr-dark-900: 207 90% 4%;
+    @include theme-colors;
 
     @media (prefers-color-scheme: dark) {
       --toggler-translate-x: calc(var(--toggler-button-width) / 2);
-      @include header-colors(var(--header-dark), var(--header-light));
+      @include theme-colors(true);
     }
 
     & [data-theme='dark'] {
       --toggler-translate-x: calc(var(--toggler-button-width) / 2);
-      @include header-colors(var(--header-dark), var(--header-light));
+      @include theme-colors(true);
     }
 
     & [data-theme='light'] {
       --toggler-translate-x: 0;
-      @include header-colors(var(--header-light), var(--header-dark));
+      @include theme-colors;
     }
   }
 
   body {
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+    min-height: 100svh;
     font-family:
       system-ui,
       -apple-system,
@@ -66,6 +78,9 @@ import Header from '../components/Header.astro'
       'Open Sans',
       'Helvetica Neue',
       sans-serif;
+    font-size: clamp(0.875rem, 0.839rem + 0.208vi, 1rem);
+    color: var(--content-text);
+    background-color: var(--body-bg);
   }
 
   img,
@@ -82,6 +97,18 @@ import Header from '../components/Header.astro'
   button {
     border: none;
     cursor: pointer;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  h1 {
+    margin-block: clamp(2.5rem, 2rem + 2vi, 4rem);
+    font-size: clamp(1.5rem, 1.281rem + 1.25vi, 2.25rem);
+    color: var(--accent-clr);
+    text-align: center;
+    text-wrap: balance;
   }
 
   .sr-only {

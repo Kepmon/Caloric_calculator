@@ -18,5 +18,6 @@ The photos of body fat percentage were taken from:
 * [Women](https://pl.pinterest.com/pin/805440714592354881/)
 
 Favicon: [icons8.com](https://icons8.com/icon/udLNEDpg6Ek7/healthy-food-calories-calculator)
-Light mode icon: [svgrepo.com/](https://www.svgrepo.com/svg/398422/sun-with-face)
-Dark mode icon: [svgrepo.com/](https://www.svgrepo.com/svg/398422/sun-with-facehttps://www.svgrepo.com/svg/396485/first-quarter-moon-face)
+Light mode icon: [svgrepo.com](https://www.svgrepo.com/svg/398422/sun-with-face)
+Dark mode icon: [svgrepo.com](https://www.svgrepo.com/svg/396485/first-quarter-moon-face)
+Checkmark icon: [svgrepo.com](https://www.svgrepo.com/svg/395995/check-mark-button)

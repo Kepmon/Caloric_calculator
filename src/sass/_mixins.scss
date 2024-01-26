@@ -1,4 +1,11 @@
-@mixin header-colors ($background, $text) {
-  --header-background: hsl(#{$background});
-  --header-text: hsl(#{$text});
+@mixin theme-colors ($dark-theme: false) {
+  @if ($dark-theme) {
+    --darker-comp-bg: hsl(var(--clr-dark-900));
+    --body-bg: hsl(var(--clr-dark-700));
+    --content-text: hsl(var(--clr-white-900));
+  } @else {
+    --darker-comp-bg: hsl(var(--clr-white-900));
+    --body-bg: hsl(var(--clr-white-400));
+    --content-text: hsl(var(--clr-dark-900));
+  }
 }
