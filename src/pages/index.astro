@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro'
 import WhyThisCalc from '../components/WhyThisCalc.astro'
+import PersonalDataForm from '../components/PersonalDataForm.astro'
 import Footer from '../components/Footer.astro'
 ---
 
@@ -17,6 +18,7 @@ import Footer from '../components/Footer.astro'
     <main>
       <h1>Calculate your caloric intake</h1>
       <WhyThisCalc />
+      <PersonalDataForm />
     </main>
     <Footer />
   </body>
@@ -103,8 +105,13 @@ import Footer from '../components/Footer.astro'
     list-style: none;
   }
 
+  main {
+    display: grid;
+    gap: 4rem;
+    padding-block: clamp(2.5rem, 2rem + 2vi, 4rem);
+  }
+
   h1 {
-    margin-block: clamp(2.5rem, 2rem + 2vi, 4rem);
     font-size: clamp(1.5rem, 1.281rem + 1.25vi, 2.25rem);
     color: var(--accent-clr);
     text-align: center;
@@ -158,6 +165,11 @@ import Footer from '../components/Footer.astro'
 
   .green-text {
     color: var(--accent-clr);
+  }
+
+  .label-with-svg > svg {
+    width: var(--svg-width);
+    aspect-ratio: 1;
   }
 
   :focus-visible {

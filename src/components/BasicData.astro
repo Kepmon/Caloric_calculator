@@ -1,0 +1,111 @@
+---
+import Units from './svgs/Units.astro'
+import Goal from './svgs/Goal.astro'
+import Gender from './svgs/Gender.astro'
+
+const basicDataGroups = [
+  {
+    Icon: Units,
+    name: 'units',
+    legend: {
+      ariaPrefix: 'Choose preferred',
+      label: 'units'
+    },
+    options: ['Metric', 'Imperial']
+  },
+  {
+    Icon: Goal,
+    name: 'goal',
+    legend: {
+      ariaPrefix: 'Choose the',
+      label: 'fitness goal'
+    },
+    options: ['Lose Weight', 'Maintain', 'Gain Muscle']
+  },
+  {
+    Icon: Gender,
+    name: 'gender',
+    legend: {
+      ariaPrefix: 'Choose your',
+      label: 'gender'
+    },
+    options: ['Male', 'Female']
+  }
+]
+---
+
+{
+  basicDataGroups.map(({ Icon, name, legend, options }) => (
+    <fieldset>
+      <legend class="label-with-svg">
+        <Icon />
+        <span class="sr-only">{legend.ariaPrefix}</span>
+        <span class="group-label">{legend.label}</span>
+      </legend>
+      <div class="input-pairs-wrapper">
+        {options.map((option, index) => (
+          <label>
+            <span>{option}</span>
+            <input type="radio" name={name} checked={index === 0} />
+          </label>
+        ))}
+      </div>
+    </fieldset>
+  ))
+}
+
+<style lang="scss">
+  fieldset {
+    border: none;
+
+    legend {
+      --svg-width: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      font-size: 1.125em;
+      font-weight: 700;
+
+      .group-label {
+        text-transform: capitalize;
+      }
+    }
+
+    .input-pairs-wrapper {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-block-start: 0.75em;
+    }
+
+    label {
+      position: relative;
+      padding: 0.25rem 1.5rem;
+      color: var(--darker-comp-bg);
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    input {
+      appearance: none;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--content-text);
+      border-radius: var(--border-radius);
+      z-index: -1;
+      transition: background-color 0.3s;
+
+      &:checked {
+        background-color: var(--accent-clr);
+      }
+
+      &:checked + label {
+        color: hsl(var(--clr-dark-900));
+      }
+    }
+  }
+</style>

@@ -21,3 +21,6 @@ Favicon: [icons8.com](https://icons8.com/icon/udLNEDpg6Ek7/healthy-food-calories
 Light mode icon: [svgrepo.com](https://www.svgrepo.com/svg/398422/sun-with-face)
 Dark mode icon: [svgrepo.com](https://www.svgrepo.com/svg/396485/first-quarter-moon-face)
 Checkmark icon: [svgrepo.com](https://www.svgrepo.com/svg/395995/check-mark-button)
+Units icon: [svgrepo.com](https://www.svgrepo.com/svg/283098/measuring-measurement)
+Goal icon: [svgrepo.com](https://www.svgrepo.com/svg/283103/maps-and-flags-direction)
+Gender icon: [svgrepo.com](https://www.svgrepo.com/svg/283083/actions-buy)
