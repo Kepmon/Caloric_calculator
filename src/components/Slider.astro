@@ -1,0 +1,181 @@
+---
+interface Props {
+  min: number
+  max: number
+  value: number
+}
+
+const { min, max, value } = Astro.props
+---
+
+<div class="slider-inputs">
+  <input
+    type="range"
+    name=""
+    id=""
+    min={min}
+    max={max}
+    value={value}
+    step="1"
+  />
+  <input
+    type="number"
+    name=""
+    id=""
+    min={min}
+    max={max}
+    value={value}
+    step="1"
+  />
+</div>
+
+<script>
+  const form = document.querySelector('form')
+  const sliderInputs = document.querySelector(
+    '.slider-inputs'
+  ) as null | HTMLDivElement
+  const slider = document.querySelector(
+    'input[type="range"]'
+  ) as null | HTMLInputElement
+  const input = document.querySelector(
+    'input[type="number"]'
+  ) as null | HTMLInputElement
+
+  const returnSliderData = () => {
+    if (slider == null)
+      return {
+        sliderMin: null,
+        sliderMax: null,
+        sliderValue: null
+      }
+
+    const sliderMin = parseInt(slider.min, 10)
+    const sliderMax = parseInt(slider.max, 10)
+    const sliderValue = parseInt(slider.value, 10)
+
+    return { sliderMin, sliderMax, sliderValue }
+  }
+
+  const returnNewSliderValue = (e: Event) => {
+    const sliderData = returnSliderData()
+
+    if (
+      e.target == null ||
+      !('value' in e.target) ||
+      typeof e.target.value !== 'string' ||
+      sliderData.sliderMin == null ||
+      sliderData.sliderMax == null ||
+      sliderData.sliderValue == null
+    )
+      return { sliderData, valueError: false, newValue: null }
+
+    const inputedValueAsNumber = parseInt(e.target.value, 10)
+    if (
+      inputedValueAsNumber < sliderData.sliderMin ||
+      inputedValueAsNumber > sliderData.sliderMax
+    )
+      return { sliderData, valueError: true, newValue: null }
+
+    return {
+      sliderData,
+      valueError: false,
+      newValue: parseInt(e.target.value, 10)
+    }
+  }
+
+  const setThumbPosition = (e: Event) => {
+    if (slider == null) return
+
+    const { sliderData, valueError, newValue } = returnNewSliderValue(e)
+    const { sliderMin, sliderMax, sliderValue } = sliderData
+
+    if (sliderMin == null || sliderMax == null || sliderValue == null) return
+
+    const appliedValue = valueError || newValue == null ? sliderValue : newValue
+    const percentValue =
+      ((appliedValue - sliderMin) / (sliderMax - sliderMin)) * 100
+
+    sliderInputs?.style.setProperty('--thumb-position', percentValue.toString())
+    slider.value = appliedValue.toString()
+  }
+
+  const handleSubmit = (e: Event) => {
+    e.preventDefault()
+
+    return false
+  }
+
+  form?.addEventListener('submit', handleSubmit)
+  input?.addEventListener('change', setThumbPosition)
+  window.addEventListener('DOMContentLoaded', setThumbPosition)
+</script>
+
+<style>
+  .slider-inputs {
+    --default-input-bg: hsl(var(--clr-white-900));
+    --slider-height: 1.5;
+    --thumb-size: 2;
+    --thumb-position: 0;
+    position: relative;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+    }
+
+    &::before {
+      top: 0;
+      left: 0;
+      width: calc(var(--thumb-position) * 1%);
+      height: 100%;
+      background-color: var(--accent-clr);
+      border-radius: var(--border-radius);
+    }
+
+    &::after {
+      top: calc((0 - ((var(--thumb-size) - var(--slider-height)) / 2)) * 1rem);
+      left: calc(var(--thumb-position) * 1%);
+      width: calc(var(--thumb-size) * 1rem);
+      aspect-ratio: 1;
+      background-color: var(--default-input-bg);
+      translate: -50%;
+      border-radius: 50%;
+      box-shadow: 0 0 0.25rem hsl(var(--clr-dark-900));
+    }
+  }
+
+  input[type='range'] {
+    appearance: none;
+    display: block;
+    width: 100%;
+    height: calc(var(--slider-height) * 1rem);
+    background-color: var(--default-input-bg);
+    border-radius: var(--border-radius);
+
+    &::-webkit-slider-thumb {
+      appearance: none;
+    }
+  }
+
+  input[type='number'] {
+    position: absolute;
+    top: 120%;
+    left: calc(var(--thumb-position) * 1%);
+    padding: 0.25rem;
+    width: calc(var(--thumb-size) * 1.5rem);
+    aspect-ratio: 16 / 9;
+    background-color: var(--default-input-bg);
+    border-radius: var(--border-radius);
+    border: none;
+    translate: -50%;
+    text-align: center;
+    -moz-appearance: textfield;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+</style>
