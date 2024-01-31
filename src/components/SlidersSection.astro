@@ -1,0 +1,62 @@
+---
+import Slider from './Slider.astro'
+
+const calculateMiddleValue = (min: number, max: number) => (max + min) / 2
+
+const slidersData = {
+  age: {
+    min: 10,
+    max: 100
+  },
+  weight: {
+    min: 20,
+    max: 180
+  }, // kgs only, for now!
+  height: {
+    min: 120,
+    max: 220
+  }, // cms only, for now!
+  bodyFat: {
+    min: 1,
+    max: 55
+  }
+}
+---
+
+<div class="sliders-wrapper">
+  {
+    Object.keys(slidersData).map((key) => (
+      <Slider
+        min={slidersData[key as keyof typeof slidersData].min}
+        max={slidersData[key as keyof typeof slidersData].max}
+        value={calculateMiddleValue(
+          slidersData[key as keyof typeof slidersData].min,
+          slidersData[key as keyof typeof slidersData].max
+        )}
+      />
+    ))
+  }
+</div>
+
+<script>
+  import { setThumbPosition } from '../helpers/sliders'
+
+  const numberInputs = [
+    ...document.querySelectorAll('[type="number"]')
+  ] as HTMLInputElement[]
+
+  numberInputs.forEach((input, index) => {
+    input.addEventListener('change', () => setThumbPosition(input, index))
+  })
+  window.addEventListener('DOMContentLoaded', () =>
+    numberInputs.forEach((input, index) => setThumbPosition(input, index))
+  )
+</script>
+
+<style>
+  .sliders-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    gap: 4rem;
+  }
+</style>

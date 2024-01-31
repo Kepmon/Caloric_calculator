@@ -24,80 +24,13 @@ const { min, max, value } = Astro.props
     id=""
     min={min}
     max={max}
-    value={value}
+    value={value.toFixed(0)}
     step="1"
   />
 </div>
 
 <script>
   const form = document.querySelector('form')
-  const sliderInputs = document.querySelector(
-    '.slider-inputs'
-  ) as null | HTMLDivElement
-  const slider = document.querySelector(
-    'input[type="range"]'
-  ) as null | HTMLInputElement
-  const input = document.querySelector(
-    'input[type="number"]'
-  ) as null | HTMLInputElement
-
-  const returnSliderData = () => {
-    if (slider == null)
-      return {
-        sliderMin: null,
-        sliderMax: null,
-        sliderValue: null
-      }
-
-    const sliderMin = parseInt(slider.min, 10)
-    const sliderMax = parseInt(slider.max, 10)
-    const sliderValue = parseInt(slider.value, 10)
-
-    return { sliderMin, sliderMax, sliderValue }
-  }
-
-  const returnNewSliderValue = (e: Event) => {
-    const sliderData = returnSliderData()
-
-    if (
-      e.target == null ||
-      !('value' in e.target) ||
-      typeof e.target.value !== 'string' ||
-      sliderData.sliderMin == null ||
-      sliderData.sliderMax == null ||
-      sliderData.sliderValue == null
-    )
-      return { sliderData, valueError: false, newValue: null }
-
-    const inputedValueAsNumber = parseInt(e.target.value, 10)
-    if (
-      inputedValueAsNumber < sliderData.sliderMin ||
-      inputedValueAsNumber > sliderData.sliderMax
-    )
-      return { sliderData, valueError: true, newValue: null }
-
-    return {
-      sliderData,
-      valueError: false,
-      newValue: parseInt(e.target.value, 10)
-    }
-  }
-
-  const setThumbPosition = (e: Event) => {
-    if (slider == null) return
-
-    const { sliderData, valueError, newValue } = returnNewSliderValue(e)
-    const { sliderMin, sliderMax, sliderValue } = sliderData
-
-    if (sliderMin == null || sliderMax == null || sliderValue == null) return
-
-    const appliedValue = valueError || newValue == null ? sliderValue : newValue
-    const percentValue =
-      ((appliedValue - sliderMin) / (sliderMax - sliderMin)) * 100
-
-    sliderInputs?.style.setProperty('--thumb-position', percentValue.toString())
-    slider.value = appliedValue.toString()
-  }
 
   const handleSubmit = (e: Event) => {
     e.preventDefault()
@@ -106,8 +39,6 @@ const { min, max, value } = Astro.props
   }
 
   form?.addEventListener('submit', handleSubmit)
-  input?.addEventListener('change', setThumbPosition)
-  window.addEventListener('DOMContentLoaded', setThumbPosition)
 </script>
 
 <style>
