@@ -29,51 +29,16 @@ const { min, max, value } = Astro.props
   />
 </div>
 
-<script>
-  const form = document.querySelector('form')
+<style lang="scss">
+  @use '../sass/_mixins' as *;
 
-  const handleSubmit = (e: Event) => {
-    e.preventDefault()
-
-    return false
-  }
-
-  form?.addEventListener('submit', handleSubmit)
-</script>
-
-<style>
   .slider-inputs {
     --default-input-bg: hsl(var(--clr-white-900));
     --slider-height: 1.5;
-    --thumb-size: 2;
+    --thumb-size: 2rem;
     --thumb-position: 0;
+    --thumb-position-percent: calc(var(--thumb-position) * 1%);
     position: relative;
-
-    &::before,
-    &::after {
-      content: '';
-      position: absolute;
-    }
-
-    &::before {
-      top: 0;
-      left: 0;
-      width: calc(var(--thumb-position) * 1%);
-      height: 100%;
-      background-color: var(--accent-clr);
-      border-radius: var(--border-radius);
-    }
-
-    &::after {
-      top: calc((0 - ((var(--thumb-size) - var(--slider-height)) / 2)) * 1rem);
-      left: calc(var(--thumb-position) * 1%);
-      width: calc(var(--thumb-size) * 1rem);
-      aspect-ratio: 1;
-      background-color: var(--default-input-bg);
-      translate: -50%;
-      border-radius: 50%;
-      box-shadow: 0 0 0.25rem hsl(var(--clr-dark-900));
-    }
   }
 
   input[type='range'] {
@@ -81,20 +46,32 @@ const { min, max, value } = Astro.props
     display: block;
     width: 100%;
     height: calc(var(--slider-height) * 1rem);
-    background-color: var(--default-input-bg);
+    background-image: linear-gradient(
+      90deg,
+      var(--accent-clr) var(--thumb-position-percent),
+      var(--default-input-bg) var(--thumb-position-percent)
+    );
     border-radius: var(--border-radius);
 
     &::-webkit-slider-thumb {
       appearance: none;
+      width: var(--thumb-size);
+      aspect-ratio: 1;
+      background-color: var(--default-input-bg);
+      border-radius: 50%;
+      box-shadow: 0 0 0.25rem hsl(var(--clr-dark-900));
     }
   }
 
   input[type='number'] {
     position: absolute;
-    top: 120%;
-    left: calc(var(--thumb-position) * 1%);
+    top: 125%;
+    left: calc(
+      var(--thumb-position-percent) +
+        ((50 - var(--thumb-position)) / 100 * var(--thumb-size))
+    );
     padding: 0.25rem;
-    width: calc(var(--thumb-size) * 1.5rem);
+    width: calc(var(--thumb-size) * 1.5);
     aspect-ratio: 16 / 9;
     background-color: var(--default-input-bg);
     border-radius: var(--border-radius);
