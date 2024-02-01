@@ -1,24 +1,36 @@
 ---
 import Slider from './Slider.astro'
+import Age from './svgs/Age.astro'
+import Weight from './svgs/Weight.astro'
+import Height from './svgs/Height.astro'
+import BodyFat from './svgs/BodyFat.astro'
 
 const calculateMiddleValue = (min: number, max: number) => (max + min) / 2
 
 const slidersData = {
   age: {
     min: 10,
-    max: 100
+    max: 100,
+    label: 'age',
+    Icon: Age
   },
   weight: {
     min: 20,
-    max: 180
+    max: 180,
+    label: 'weight',
+    Icon: Weight
   }, // kgs only, for now!
   height: {
     min: 120,
-    max: 220
+    max: 220,
+    label: 'height',
+    Icon: Height
   }, // cms only, for now!
   bodyFat: {
     min: 1,
-    max: 55
+    max: 55,
+    label: 'body-fat',
+    Icon: BodyFat
   }
 }
 ---
@@ -33,6 +45,8 @@ const slidersData = {
           slidersData[key as keyof typeof slidersData].min,
           slidersData[key as keyof typeof slidersData].max
         )}
+        Icon={slidersData[key as keyof typeof slidersData].Icon}
+        label={slidersData[key as keyof typeof slidersData].label}
       />
     ))
   }
@@ -44,12 +58,24 @@ const slidersData = {
   const numberInputs = [
     ...document.querySelectorAll('[type="number"]')
   ] as HTMLInputElement[]
+  const sliderInputs = [
+    ...document.querySelectorAll('[type="range"]')
+  ] as HTMLInputElement[]
 
+  sliderInputs.forEach((slider, index) => {
+    slider.addEventListener('input', () => {
+      setThumbPosition(slider, index, sliderInputs, numberInputs)
+    })
+  })
   numberInputs.forEach((input, index) => {
-    input.addEventListener('change', () => setThumbPosition(input, index))
+    input.addEventListener('change', () => {
+      setThumbPosition(input, index, sliderInputs)
+    })
   })
   window.addEventListener('DOMContentLoaded', () =>
-    numberInputs.forEach((input, index) => setThumbPosition(input, index))
+    numberInputs.forEach((input, index) => {
+      setThumbPosition(input, index, sliderInputs)
+    })
   )
 </script>
 

@@ -24,3 +24,7 @@ Checkmark icon: [svgrepo.com](https://www.svgrepo.com/svg/395995/check-mark-butt
 Units icon: [svgrepo.com](https://www.svgrepo.com/svg/283098/measuring-measurement)
 Goal icon: [svgrepo.com](https://www.svgrepo.com/svg/283103/maps-and-flags-direction)
 Gender icon: [svgrepo.com](https://www.svgrepo.com/svg/283083/actions-buy)
+Age icon: [svgrepo.com](https://www.svgrepo.com/svg/283132/sand-clock)
+Weight icon: [svgrepo.com](https://www.svgrepo.com/svg/283067/kilograms-grams)
+Height icon: [svgrepo.com](https://www.svgrepo.com/svg/283065/graphs-economy)
+Body Fat icon: [svgrepo.com](https://www.svgrepo.com/svg/283163/measuring-measure)

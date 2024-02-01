@@ -3,16 +3,22 @@ interface Props {
   min: number
   max: number
   value: number
+  label: string
+  Icon: string
 }
 
-const { min, max, value } = Astro.props
+const { min, max, value, label, Icon } = Astro.props
 ---
 
 <div class="slider-inputs">
+  <div class="label-with-svg">
+    <Icon />
+    <label for={label}>{label.replaceAll('-', ' ')}</label>
+  </div>
   <input
     type="range"
-    name=""
-    id=""
+    name={label}
+    id={label}
     min={min}
     max={max}
     value={value}
@@ -41,6 +47,11 @@ const { min, max, value } = Astro.props
     position: relative;
   }
 
+  label {
+    text-transform: capitalize;
+    font-weight: 500;
+  }
+
   input[type='range'] {
     appearance: none;
     display: block;
@@ -65,7 +76,7 @@ const { min, max, value } = Astro.props
 
   input[type='number'] {
     position: absolute;
-    top: 125%;
+    top: 115%;
     left: calc(
       var(--thumb-position-percent) +
         ((50 - var(--thumb-position)) / 100 * var(--thumb-size))
