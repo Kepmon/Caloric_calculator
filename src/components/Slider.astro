@@ -24,10 +24,13 @@ const { min, max, value, label, Icon } = Astro.props
     value={value}
     step="1"
   />
+  <label class="sr-only" for={`${label}-number`}
+    >{`insert numeric value of ${label}`}</label
+  >
   <input
     type="number"
-    name=""
-    id=""
+    name={`${label}-number`}
+    id={`${label}-number`}
     min={min}
     max={max}
     value={value.toFixed(0)}
