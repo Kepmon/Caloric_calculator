@@ -6,7 +6,7 @@ import SlidersSection from './SlidersSection.astro'
 <form>
   <BasicData />
   <SlidersSection />
-  <button data-button="submit">Show Result</button>
+  <button data-button="submit" class="btn">Show Result</button>
 </form>
 
 <script>
@@ -26,14 +26,7 @@ import SlidersSection from './SlidersSection.astro'
       justify-self: center;
       padding: 0.5em 1.5em;
       margin-block-start: 2rem;
-      background-color: hsl(var(--clr-white-900));
-      border-radius: var(--border-radius);
       font-weight: 700;
-      transition: background-color 200ms;
-
-      &:hover {
-        background-color: var(--accent-clr);
-      }
     }
   }
 </style>

@@ -52,6 +52,11 @@ import Footer from '../components/Footer.astro'
     border-radius: 100vmax;
   }
 
+  ::selection {
+    background-color: var(--accent-clr);
+    color: hsl(var(--clr-dark-900));
+  }
+
   :root {
     --clr-green-400: 120 100% 35%;
     --accent-clr: hsl(var(--clr-green-400));
@@ -140,6 +145,13 @@ import Footer from '../components/Footer.astro'
     font-weight: 500;
   }
 
+  input[type="range"],
+  input[type="number"] {
+    &:focus-visible {
+      outline-color: var(--accent-clr);
+    }
+  }
+
   input[data-input] {
     position: absolute;
     top: 115%;
@@ -207,6 +219,21 @@ import Footer from '../components/Footer.astro'
 
   .green-text {
     color: var(--accent-clr);
+  }
+
+  .btn {
+    background-color: var(--content-text);
+    border-radius: var(--border-radius);
+    transition: scale 0.2s;
+
+    &:hover,
+    &:focus-visible {
+      scale: 1.125;
+    }
+
+    &:focus-visible {
+      outline-color: var(--accent-clr);
+    }
   }
 
   .label-with-svg {
