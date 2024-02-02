@@ -4,7 +4,7 @@ import ThemeToggler from './ThemeToggler.astro'
 
 <header class="full-width-grid">
   <div class="header-content">
-    <p class="logo-text font-bold">
+    <p class="logo-text">
       <span class="green-text">Calorie</span>Company <span class="sr-only"
         >logo</span
       >
@@ -33,12 +33,13 @@ import ThemeToggler from './ThemeToggler.astro'
       }
     }
 
-    @media (max-width: 30rem) {
-      padding-block: 1.5em;
-    }
-
     .logo-text {
       font-size: clamp(1.0419rem, 0.9252rem + 0.7776vw, 1.8rem);
+      font-weight: 700;
+    }
+
+    @media (max-width: 30rem) {
+      padding-block: 1.5em;
     }
   }
 </style>

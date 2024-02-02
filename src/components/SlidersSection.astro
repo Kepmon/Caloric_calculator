@@ -19,13 +19,13 @@ const slidersData = {
     max: 180,
     label: 'weight',
     Icon: Weight
-  }, // kgs only, for now!
+  },
   height: {
     min: 120,
     max: 220,
     label: 'height',
     Icon: Height
-  }, // cms only, for now!
+  },
   bodyFat: {
     min: 1,
     max: 55,
@@ -56,11 +56,11 @@ const slidersData = {
   import { setThumbPosition } from '../helpers/sliders'
 
   const numberInputs = [
-    ...document.querySelectorAll('[type="number"]')
-  ] as HTMLInputElement[]
-  const sliderInputs = [
-    ...document.querySelectorAll('[type="range"]')
-  ] as HTMLInputElement[]
+  ...document.querySelectorAll('[type="number"]')
+] as HTMLInputElement[]
+const sliderInputs = [
+  ...document.querySelectorAll('[type="range"]')
+] as HTMLInputElement[]
 
   sliderInputs.forEach((slider, index) => {
     slider.addEventListener('input', () => {
@@ -72,6 +72,7 @@ const slidersData = {
       setThumbPosition(input, index, sliderInputs)
     })
   })
+
   window.addEventListener('DOMContentLoaded', () =>
     numberInputs.forEach((input, index) => {
       setThumbPosition(input, index, sliderInputs)

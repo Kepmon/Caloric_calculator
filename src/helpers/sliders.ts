@@ -1,7 +1,3 @@
-const sliderInputs = [
-  ...document.querySelectorAll('[type="range"]')
-] as HTMLInputElement[]
-
 const returnSliderData = (input: HTMLInputElement) => {
   const sliderMin = parseInt(input.min, 10)
   const sliderMax = parseInt(input.max, 10)
@@ -10,7 +6,11 @@ const returnSliderData = (input: HTMLInputElement) => {
   return { sliderMin, sliderMax, sliderValue }
 }
 
-const returnNewSliderValue = (input: HTMLInputElement, index: number) => {
+const returnNewSliderValue = (
+  input: HTMLInputElement,
+  index: number,
+  sliderInputs: HTMLInputElement[]
+) => {
   const inputData = returnSliderData(input)
 
   if (
@@ -35,21 +35,37 @@ const returnNewSliderValue = (input: HTMLInputElement, index: number) => {
   }
 }
 
-export const setThumbPosition = (input: HTMLInputElement, index: number) => {
+const checkThumbPositionData = (
+  input: HTMLInputElement,
+  index: number,
+  sliderInputs: HTMLInputElement[]
+) => {
+  const { inputData, newValue } = returnNewSliderValue(
+    input,
+    index,
+    sliderInputs
+  )
+  const { sliderMin, sliderMax } = inputData
+
+  if (sliderMin == null || sliderMax == null || newValue == null) return null
+
+  return { sliderMin, sliderMax, newValue }
+}
+
+export const setThumbPosition = (
+  input: HTMLInputElement,
+  index: number,
+  sliderInputs: HTMLInputElement[],
+  numberInputs?: HTMLInputElement[]
+) => {
+  const thumbPositionData = checkThumbPositionData(input, index, sliderInputs)
+
+  if (thumbPositionData == null) return
+
   const sliderInputsWrappers = [
     ...document.querySelectorAll('.slider-inputs')
-  ] as (null | HTMLDivElement)[]
-
-  const { inputData, newValue } = returnNewSliderValue(input, index)
-  const { sliderMin, sliderMax, sliderValue } = inputData
-
-  if (
-    sliderMin == null ||
-    sliderMax == null ||
-    sliderValue == null ||
-    newValue == null
-  )
-    return
+  ] as HTMLDivElement[]
+  const { sliderMin, sliderMax, newValue } = thumbPositionData
 
   const percentValue = ((newValue - sliderMin) / (sliderMax - sliderMin)) * 100
 
@@ -58,6 +74,11 @@ export const setThumbPosition = (input: HTMLInputElement, index: number) => {
     percentValue.toString()
   )
 
-  input.value = newValue.toString()
-  sliderInputs[index].value = newValue.toString()
+  if (input !== sliderInputs[index]) {
+    sliderInputs[index].value = newValue.toString()
+  }
+
+  if (numberInputs != null && numberInputs[index] != null) {
+    numberInputs[index].value = newValue.toString()
+  }
 }
