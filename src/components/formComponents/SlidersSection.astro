@@ -1,11 +1,11 @@
 ---
 import Slider from './Slider.astro'
-import Age from './svgs/Age.astro'
-import Weight from './svgs/Weight.astro'
-import Height from './svgs/Height.astro'
-import BodyFat from './svgs/BodyFat.astro'
-import BodyFatPopupMen from './popups/BodyFatPopupMen.astro'
-import BodyFatPopupWomen from './popups/BodyFatPopupWomen.astro'
+import Age from '../svgs/Age.astro'
+import Weight from '../svgs/Weight.astro'
+import Height from '../svgs/Height.astro'
+import BodyFat from '../svgs/BodyFat.astro'
+import BodyFatPopupMen from '../popups/BodyFatPopupMen.astro'
+import BodyFatPopupWomen from '../popups/BodyFatPopupWomen.astro'
 
 const calculateMiddleValue = (min: number, max: number) => (max + min) / 2
 
@@ -83,7 +83,7 @@ const slidersData = {
 </div>
 
 <script>
-  import { setThumbPosition } from '../helpers/sliders'
+  import { setThumbPosition } from '../../helpers/sliders'
 
   const numberInputs = [
   ...document.querySelectorAll('[type="number"]')
