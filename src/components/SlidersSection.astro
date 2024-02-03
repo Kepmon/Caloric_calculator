@@ -4,6 +4,8 @@ import Age from './svgs/Age.astro'
 import Weight from './svgs/Weight.astro'
 import Height from './svgs/Height.astro'
 import BodyFat from './svgs/BodyFat.astro'
+import BodyFatPopupMen from './popups/BodyFatPopupMen.astro'
+import BodyFatPopupWomen from './popups/BodyFatPopupWomen.astro'
 
 const calculateMiddleValue = (min: number, max: number) => (max + min) / 2
 
@@ -30,11 +32,14 @@ const slidersData = {
     min: 1,
     max: 55,
     label: 'body-fat',
-    Icon: BodyFat
+    Icon: BodyFat,
+    additionalLabelContent: true
   }
 }
 ---
 
+<BodyFatPopupMen />
+<BodyFatPopupWomen />
 <div class="sliders-wrapper">
   {
     Object.keys(slidersData).map((key) => (
@@ -47,7 +52,32 @@ const slidersData = {
         )}
         Icon={slidersData[key as keyof typeof slidersData].Icon}
         label={slidersData[key as keyof typeof slidersData].label}
-      />
+      >
+        {'additionalLabelContent' in
+          slidersData[key as keyof typeof slidersData] && (
+          <span>
+            (show charts for{' '}
+            <button
+              type="button"
+              data-button="body-fat-men"
+              data-open="dialog"
+              class="popup-label"
+            >
+              men
+            </button>{' '}
+            and{' '}
+            <button
+              type="button"
+              data-button="body-fat-women"
+              data-open="dialog"
+              class="popup-label"
+            >
+              women
+            </button>
+            )
+          </span>
+        )}
+      </Slider>
     ))
   }
 </div>

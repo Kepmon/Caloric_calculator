@@ -1,0 +1,21 @@
+---
+import Popup from './Popup.astro'
+
+interface Props {
+  title: string
+  imgPath: string
+  imgPathFallback: string
+  dataDialog: string
+}
+
+const { title, imgPath, imgPathFallback, dataDialog } = Astro.props
+---
+
+<Popup dataDialog={dataDialog}>
+  <h3>{title}</h3>
+
+  <picture>
+    <source srcset={imgPath} />
+    <img src={imgPathFallback} alt="" loading="lazy" width="600" height="800" />
+  </picture>
+</Popup>

@@ -1,0 +1,108 @@
+---
+interface Props {
+  dataDialog: string
+}
+
+const { dataDialog } = Astro.props
+---
+
+<dialog data-dialog={dataDialog}>
+  <button
+    type="button"
+    aria-label="click here to close the dialog"
+    data-button="close-icon"
+  >
+    <img src="/icons/close_icon.svg" alt="" />
+  </button>
+  <slot />
+</dialog>
+
+<script>
+  const allOpeningBtns = [
+    ...document.querySelectorAll('[data-open="dialog"]')
+  ] as null | HTMLButtonElement[]
+
+  let currentlyOpenPopup: null | HTMLDialogElement = null
+
+  const closePopup = () => {
+    if (currentlyOpenPopup != null) {
+      currentlyOpenPopup.close()
+    }
+  }
+
+  allOpeningBtns?.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const popupIndicator = btn.getAttribute('data-button')
+      const popupToOpen = document.querySelector(
+        `[data-dialog="${popupIndicator}"]`
+      ) as null | HTMLDialogElement
+
+      if (popupToOpen != null) {
+        popupToOpen.showModal()
+        currentlyOpenPopup = popupToOpen
+
+        const closeBtn = popupToOpen.querySelector(
+          '[data-button="close-icon"]'
+        ) as null | HTMLButtonElement
+
+        if (closeBtn != null) {
+          closeBtn.addEventListener('click', closePopup, { once: true })
+        }
+      }
+    })
+  })
+
+  document.documentElement.addEventListener('click', (e: Event) => {
+    const isOpeningBtn =
+      e.target instanceof HTMLElement
+        ? e.target.getAttribute('data-open') != null
+        : false
+    const isInsideDialog =
+      e.target instanceof HTMLElement
+        ? e.target.closest('[data-dialog]') != null
+        : false
+
+    if (isOpeningBtn || isInsideDialog) return
+
+    closePopup()
+  })
+</script>
+
+<style lang="scss">
+  dialog {
+    --dialog-padding: 1em;
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    padding: var(--dialog-padding);
+    width: min((100% - 2rem), 70ch);
+    background-color: var(--body-bg);
+    color: var(--content-text);
+    border-radius: var(--border-radius);
+    border-color: var(--content-text);
+    border-color: var(--accent-clr);
+
+    &::backdrop {
+      background-color: hsl(0 0% 0% / 0.7);
+      pointer-events: none;
+    }
+
+    button {
+      --close-icon-padding: 0.5rem;
+      position: absolute;
+      top: calc(var(--dialog-padding) - var(--close-icon-padding));
+      right: calc(var(--dialog-padding) - var(--close-icon-padding));
+      padding: 0.5rem;
+      width: 1.5rem;
+      aspect-ratio: 1;
+      background: none;
+      border-radius: var(--border-radius);
+      box-sizing: content-box;
+      transition: scale 0.2s;
+
+      &:hover {
+        scale: 1.125;
+      }
+    }
+  }
+</style>

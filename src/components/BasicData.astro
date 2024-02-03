@@ -3,7 +3,7 @@ import Units from './svgs/Units.astro'
 import Goal from './svgs/Goal.astro'
 import Gender from './svgs/Gender.astro'
 import ActivityLevel from './svgs/ActivityLevel.astro'
-import ActivityLevelsPopup from './ActivityLevelsPopup.astro'
+import ActivityLevelsPopup from './popups/ActivityLevelsPopup.astro'
 
 const basicDataGroups = [
   {
@@ -56,17 +56,16 @@ const basicDataGroups = [
           <span class="sr-only">{legend.ariaPrefix}</span>
           <span class="group-label">
             {legend.label}
-            {label != null && '('}
             {label != null && (
               <button
                 type="button"
                 data-button="activity-levels"
+                data-open="dialog"
                 class="popup-label"
               >
-                {label}
+                ({label})
               </button>
             )}
-            {label != null && ')'}
           </span>
         </legend>
         <div class="input-pairs-wrapper">

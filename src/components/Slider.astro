@@ -15,6 +15,7 @@ const { min, max, value, label, Icon } = Astro.props
   <div class="label-with-svg">
     <Icon />
     <label for={label}>{label.replaceAll('-', ' ')}</label>
+    <slot />
   </div>
   <input
     type="range"

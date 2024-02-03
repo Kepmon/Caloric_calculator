@@ -1,0 +1,70 @@
+---
+import Popup from './Popup.astro'
+
+const activityLevels = [
+  {
+    label: 'Little or no exercise:',
+    items: [
+      'No intentional exercise',
+      'Intetional low-intensity exercise, such as stretching, yoga, slow walking, walking a dog, performed under 30 minutes a day',
+      'Activities of daily living, such as cleaning, shopping, gardering, taking out the trash, TV watching, using a computer',
+      'Most of the day spent sitting'
+    ]
+  },
+  {
+    label: 'Light activity:',
+    items: [
+      'Low-intensity intentional exercise, such as fast walking, bowling, playing pool, performed for at least 30 minutes a day',
+      'Some more intense exercise, such as jogging, slow cycling, performed for a shorter period of time (e.g. 15-20 minutes)'
+    ]
+  },
+  {
+    label: 'Moderate activity:',
+    items: [
+      'Intentional more intense exercise, such as weight training, running, swimming, boxing, playing basketball etc., performed for 4-6 hours a week',
+      'Having a job that requires a low-intensity activity, such as a waitress or a mailman',
+      'Activities of daily living, such as cleaning, shopping, gardering, taking out the trash, TV watching, using a computer'
+    ]
+  },
+  {
+    label: 'High activity:',
+    items: [
+      'Intentional more intense exercise, such as weight training, running, swimming, boxing, playing basketball etc., performed for 7-9 hours a week'
+    ]
+  },
+  {
+    label: 'Very high activity:',
+    items: [
+      'Daily intense exercise, performed for over an hour a day',
+      'Having a job that requires a more intense activity, such as a construction worker or a bike delivery man'
+    ]
+  }
+]
+---
+
+<Popup dataDialog="activity-levels">
+  <h3>Activity Levels:</h3>
+  {
+    activityLevels.map(({ label, items }) => (
+      <ul title={label}>
+        {items.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    ))
+  }
+</Popup>
+
+<style lang="scss">
+  ul {
+    padding: calc(var(--dialog-padding) / 2) var(--dialog-padding);
+    list-style: disc;
+
+    &::before {
+      content: attr(title);
+      display: block;
+      font-weight: 600;
+      translate: calc(var(--dialog-padding) * -1) 0;
+    }
+  }
+</style>
