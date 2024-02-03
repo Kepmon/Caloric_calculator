@@ -1,0 +1,154 @@
+---
+const activityLevels = [
+  {
+    label: 'Little or no exercise:',
+    items: [
+      'No intentional exercise',
+      'Intetional low-intensity exercise, such as stretching, yoga, slow walking, walking a dog, performed under 30 minutes a day',
+      'Activities of daily living, such as cleaning, shopping, gardering, taking out the trash, TV watching, using a computer',
+      'Most of the day spent sitting'
+    ]
+  },
+  {
+    label: 'Light activity:',
+    items: [
+      'Low-intensity intentional exercise, such as fast walking, bowling, playing pool, performed for at least 30 minutes a day',
+      'Some more intense exercise, such as jogging, slow cycling, performed for a shorter period of time (e.g. 15-20 minutes)'
+    ]
+  },
+  {
+    label: 'Moderate activity:',
+    items: [
+      'Intentional more intense exercise, such as weight training, running, swimming, boxing, playing basketball etc., performed for 4-6 hours a week',
+      'Having a job that requires a low-intensity activity, such as a waitress or a mailman',
+      'Activities of daily living, such as cleaning, shopping, gardering, taking out the trash, TV watching, using a computer'
+    ]
+  },
+  {
+    label: 'High activity:',
+    items: [
+      'Intentional more intense exercise, such as weight training, running, swimming, boxing, playing basketball etc., performed for 7-9 hours a week'
+    ]
+  },
+  {
+    label: 'Very high activity:',
+    items: [
+      'Daily intense exercise, performed for over an hour a day',
+      'Having a job that requires a more intense activity, such as a construction worker or a bike delivery man'
+    ]
+  }
+]
+---
+
+<dialog data-dialog="activity-levels">
+  <button
+    type="button"
+    aria-label="click here to close the dialog"
+    data-button="close-icon"
+  >
+    <img src="/icons/close_icon.svg" alt="" />
+  </button>
+  <h3>Activity Levels:</h3>
+  {
+    activityLevels.map(({ label, items }) => (
+      <ul title={label}>
+        {items.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    ))
+  }
+</dialog>
+
+<script>
+  const activityLevelsPopup = document.querySelector(
+    '[data-dialog="activity-levels"]'
+  ) as null | HTMLDialogElement
+  const activityLevelsBtn = document.querySelector(
+    '[data-button="activity-levels"]'
+  ) as null | HTMLButtonElement
+  const closeBtn = document.querySelector(
+    '[data-button="close-icon"]'
+  ) as null | HTMLButtonElement
+
+  const closePopup = () => {
+    if (activityLevelsPopup != null) {
+      activityLevelsPopup.close()
+    }
+  }
+
+  activityLevelsBtn?.addEventListener('click', () => {
+    if (activityLevelsPopup != null) {
+      activityLevelsPopup.showModal()
+    }
+  })
+
+  closeBtn?.addEventListener('click', closePopup)
+
+  document.documentElement.addEventListener('click', (e: Event) => {
+    const isOpeningBtn = e.target === activityLevelsBtn
+    const isInsideDialog =
+      e.target instanceof HTMLElement
+        ? e.target.closest('[data-dialog]') != null
+        : false
+
+    if (isOpeningBtn || isInsideDialog) return
+
+    closePopup()
+  })
+</script>
+
+<style lang="scss">
+  dialog {
+    --dialog-padding: 1em;
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    padding: var(--dialog-padding);
+    width: min((100% - 2rem), 70ch);
+    background-color: var(--body-bg);
+    color: var(--content-text);
+    border-radius: var(--border-radius);
+    border-color: var(--content-text);
+    border-color: var(--accent-clr);
+
+    &::backdrop {
+      background-color: hsl(0 0% 0% / 0.7);
+      pointer-events: none;
+    }
+
+    h3 {
+      margin-block-end: 0.5em;
+    }
+
+    button {
+      --close-icon-padding: 0.5rem;
+      position: absolute;
+      top: calc(var(--dialog-padding) - var(--close-icon-padding));
+      right: calc(var(--dialog-padding) - var(--close-icon-padding));
+      padding: 0.5rem;
+      width: 1.5rem;
+      aspect-ratio: 1;
+      background: none;
+      border-radius: var(--border-radius);
+      box-sizing: content-box;
+      transition: scale 0.2s;
+
+      &:hover {
+        scale: 1.125;
+      }
+    }
+
+    ul {
+      padding: calc(var(--dialog-padding) / 2) var(--dialog-padding);
+      list-style: disc;
+
+      &::before {
+        content: attr(title);
+        display: block;
+        font-weight: 600;
+        translate: calc(var(--dialog-padding) * -1) 0;
+      }
+    }
+  }
+</style>

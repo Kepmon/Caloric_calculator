@@ -3,6 +3,7 @@ import Units from './svgs/Units.astro'
 import Goal from './svgs/Goal.astro'
 import Gender from './svgs/Gender.astro'
 import ActivityLevel from './svgs/ActivityLevel.astro'
+import ActivityLevelsPopup from './ActivityLevelsPopup.astro'
 
 const basicDataGroups = [
   {
@@ -39,19 +40,34 @@ const basicDataGroups = [
       ariaPrefix: 'Choose your current',
       label: 'activity level'
     },
-    options: ['Little or none', 'Light', 'Moderate', 'High', 'Very high']
+    options: ['Little or none', 'Light', 'Moderate', 'High', 'Very high'],
+    label: 'show examples'
   }
 ]
 ---
 
+<ActivityLevelsPopup />
 <div class="basic-data-wrapper">
   {
-    basicDataGroups.map(({ Icon, name, legend, options }) => (
+    basicDataGroups.map(({ Icon, name, legend, options, label }) => (
       <fieldset>
         <legend class="label-with-svg">
           <Icon />
           <span class="sr-only">{legend.ariaPrefix}</span>
-          <span class="group-label">{legend.label}</span>
+          <span class="group-label">
+            {legend.label}
+            {label != null && '('}
+            {label != null && (
+              <button
+                type="button"
+                data-button="activity-levels"
+                class="popup-label"
+              >
+                {label}
+              </button>
+            )}
+            {label != null && ')'}
+          </span>
         </legend>
         <div class="input-pairs-wrapper">
           {options.map((option, index) => (
