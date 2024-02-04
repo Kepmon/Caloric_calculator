@@ -13,7 +13,16 @@ const basicDataGroups = [
       ariaPrefix: 'Choose preferred',
       label: 'units'
     },
-    options: ['Metric', 'Imperial']
+    options: [
+      {
+        value: 'Metric',
+        id: 'metric'
+      },
+      {
+        value: 'Imperial',
+        id: 'imperial'
+      }
+    ]
   },
   {
     Icon: Gender,
@@ -22,7 +31,16 @@ const basicDataGroups = [
       ariaPrefix: 'Choose your',
       label: 'gender'
     },
-    options: ['Male', 'Female']
+    options: [
+      {
+        value: 'Male',
+        id: 'male'
+      },
+      {
+        value: 'Female',
+        id: 'female'
+      }
+    ]
   },
   {
     Icon: Goal,
@@ -31,7 +49,20 @@ const basicDataGroups = [
       ariaPrefix: 'Choose your',
       label: 'fitness goal'
     },
-    options: ['Lose Weight', 'Maintain', 'Gain Muscle']
+    options: [
+      {
+        value: 'Lose Weight',
+        id: 'lose-weight'
+      },
+      {
+        value: 'Maintain',
+        id: 'maintain'
+      },
+      {
+        value: 'Gain Muscle',
+        id: 'gain-muscle'
+      }
+    ]
   },
   {
     Icon: ActivityLevel,
@@ -40,7 +71,28 @@ const basicDataGroups = [
       ariaPrefix: 'Choose your current',
       label: 'activity level'
     },
-    options: ['Little or none', 'Light', 'Moderate', 'High', 'Very high'],
+    options: [
+      {
+        value: 'Little or none',
+        id: 'little-or-none'
+      },
+      {
+        value: 'Light',
+        id: 'light'
+      },
+      {
+        value: 'Moderate',
+        id: 'moderate'
+      },
+      {
+        value: 'High',
+        id: 'figh'
+      },
+      {
+        value: 'Very high',
+        id: 'very-high'
+      }
+    ],
     label: 'show examples'
   }
 ]
@@ -69,12 +121,13 @@ const basicDataGroups = [
           </span>
         </legend>
         <div class="input-pairs-wrapper">
-          {options.map((option, index) => (
+          {options.map(({ value, id }, index) => (
             <label>
-              <span>{option}</span>
+              <span>{value}</span>
               <input
                 type="radio"
                 name={name}
+                id={id}
                 checked={index === 0}
                 class="btn"
               />
@@ -85,6 +138,24 @@ const basicDataGroups = [
     ))
   }
 </div>
+
+<script>
+  import { handleUnitChange } from '../../helpers/sliders'
+
+  const unitRadioBtns = [
+    ...document.querySelectorAll('input[name="units"]')
+  ] as HTMLInputElement[]
+
+  unitRadioBtns.forEach((btn) => {
+    const newUnit = btn.getAttribute('id') as null | 'metric' | 'imperial'
+    const hasNewUnitPorperValue =
+      ['metric', 'imperial'].find((unit) => unit === newUnit) != null
+
+    if (newUnit == null || !hasNewUnitPorperValue) return
+
+    btn.addEventListener('change', () => handleUnitChange(newUnit))
+  })
+</script>
 
 <style lang="scss">
   .basic-data-wrapper {

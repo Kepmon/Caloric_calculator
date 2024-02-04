@@ -4,17 +4,22 @@ interface Props {
   max: number
   value: number
   label: string
+  additionalLabel?: string
   // eslint-disable-next-line no-unused-vars
   Icon: (_: Record<string, unknown>) => void
+  dataUnit?: string
 }
 
-const { min, max, value, label, Icon } = Astro.props
+const { min, max, value, label, additionalLabel, Icon, dataUnit } = Astro.props
 ---
 
 <div class="slider-inputs">
   <div class="label-with-svg">
     <Icon />
-    <label for={label}>{label.replaceAll('-', ' ')}</label>
+    <label for={label}>
+      {label.replaceAll('-', ' ')}
+      {additionalLabel && <span class="input-label">({additionalLabel})</span>}
+    </label>
     <slot />
   </div>
   <input
@@ -25,6 +30,7 @@ const { min, max, value, label, Icon } = Astro.props
     max={max}
     value={value}
     step="1"
+    data-unit={dataUnit}
   />
   <label class="sr-only" for={`${label}-number`}
     >{`insert numeric value of ${label}`}</label
@@ -50,11 +56,16 @@ const { min, max, value, label, Icon } = Astro.props
     --thumb-size: 2rem;
     --thumb-position: 0;
     --thumb-position-percent: calc(var(--thumb-position) * 1%);
+    --follow-thumb-position: calc(
+      var(--thumb-position-percent) +
+        ((50 - var(--thumb-position)) / 100 * var(--thumb-size))
+    );
     position: relative;
   }
 
   input[type='range'] {
     appearance: none;
+    position: relative;
     display: block;
     width: 100%;
     height: calc(var(--slider-height) * 1rem);
@@ -68,11 +79,14 @@ const { min, max, value, label, Icon } = Astro.props
 
     &::-webkit-slider-thumb {
       appearance: none;
+      position: absolute;
+      left: var(--follow-thumb-position);
       width: var(--thumb-size);
       aspect-ratio: 1;
       background-color: var(--default-input-bg);
       border-radius: 50%;
       box-shadow: 0 0 0.25rem hsl(var(--clr-dark-900));
+      translate: -50% -50%;
     }
   }
 </style>

@@ -14,26 +14,33 @@ const slidersData = {
     min: 10,
     max: 100,
     label: 'age',
-    Icon: Age
+    additionalLabel: undefined,
+    Icon: Age,
+    dataUnit: undefined
   },
   weight: {
     min: 20,
     max: 180,
     label: 'weight',
-    Icon: Weight
+    additionalLabel: 'in kg',
+    Icon: Weight,
+    dataUnit: 'kg'
   },
   height: {
     min: 120,
     max: 220,
     label: 'height',
-    Icon: Height
+    additionalLabel: 'in cm',
+    Icon: Height,
+    dataUnit: 'cm'
   },
   bodyFat: {
     min: 1,
     max: 55,
     label: 'body-fat',
+    additionalLabel: undefined,
     Icon: BodyFat,
-    additionalLabelContent: true
+    dataUnit: undefined
   }
 }
 ---
@@ -52,6 +59,10 @@ const slidersData = {
         )}
         Icon={slidersData[key as keyof typeof slidersData].Icon}
         label={slidersData[key as keyof typeof slidersData].label}
+        additionalLabel={
+          slidersData[key as keyof typeof slidersData].additionalLabel
+        }
+        dataUnit={slidersData[key as keyof typeof slidersData].dataUnit}
       >
         {'additionalLabelContent' in
           slidersData[key as keyof typeof slidersData] && (

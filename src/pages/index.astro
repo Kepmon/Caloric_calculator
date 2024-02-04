@@ -148,10 +148,7 @@ import Footer from '../components/Footer.astro'
   input[data-input] {
     position: absolute;
     top: 115%;
-    left: calc(
-      var(--thumb-position-percent) +
-        ((50 - var(--thumb-position)) / 100 * var(--thumb-size))
-    );
+    left: var(--follow-thumb-position);
     padding: 0.25rem;
     width: calc(var(--thumb-size) * 1.5);
     height: 1.75rem;
@@ -278,6 +275,11 @@ import Footer from '../components/Footer.astro'
       transform-origin: left;
       transition: scale 0.2s;
     }
+  }
+
+  .input-label {
+    color: var(--accent-clr);
+    text-transform: initial;
   }
 
   :focus-visible {
