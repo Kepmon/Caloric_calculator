@@ -1,7 +1,11 @@
 [The old version of this website](https://kepmon.github.io/Caloric_calculator/) was created to practice some JS during my learning process.
 
 **UPDATE**  
-Currently, the project is being refactored to assure better standards of code quality, maintability, and accessibility. The rest of this README will be updated at the end of the refactoring process.  
+Currently, the project is being refactored to assure better standards of code quality, maintability, and accessibility. 
+
+The most of the [current version of this website](https://clever-naiad-d0b904.netlify.app/) has already been finished coding but it still presents some layout, code quality and accessibility issues, and the form submission hasn't still been handled.
+
+The rest of this README will be updated at the end of the refactoring process.  
 *End of update*
 
 However, I found this kind of website actually needed since most websites I saw on calculating caloric intake usually lack some important questions, such as:
@@ -17,16 +21,16 @@ The photos of body fat percentage were taken from:
 * [Men](https://kubexfitness.com/blog/body-fat-percentages-actually-look-like/)
 * [Women](https://pl.pinterest.com/pin/805440714592354881/)
 
-Favicon: [icons8.com](https://icons8.com/icon/udLNEDpg6Ek7/healthy-food-calories-calculator)
-Light mode icon: [svgrepo.com](https://www.svgrepo.com/svg/398422/sun-with-face)
-Dark mode icon: [svgrepo.com](https://www.svgrepo.com/svg/396485/first-quarter-moon-face)
-Checkmark icon: [svgrepo.com](https://www.svgrepo.com/svg/395995/check-mark-button)
-Units icon: [svgrepo.com](https://www.svgrepo.com/svg/283098/measuring-measurement)
-Gender icon: [svgrepo.com](https://www.svgrepo.com/svg/283083/actions-buy)
-Goal icon: [svgrepo.com](https://www.svgrepo.com/svg/283103/maps-and-flags-direction)
-Activity Level icon: [svgrepo.com](https://www.svgrepo.com/svg/283180/sit-down-sofa)
-Age icon: [svgrepo.com](https://www.svgrepo.com/svg/283132/sand-clock)
-Weight icon: [svgrepo.com](https://www.svgrepo.com/svg/283067/kilograms-grams)
-Height icon: [svgrepo.com](https://www.svgrepo.com/svg/283065/graphs-economy)
-Body Fat icon: [svgrepo.com](https://www.svgrepo.com/svg/283163/measuring-measure)
-Close icon: [svgrepo.com](https://www.svgrepo.com/svg/500512/close-bold)
+Favicon: [icons8.com](https://icons8.com/icon/udLNEDpg6Ek7/healthy-food-calories-calculator)  
+Light mode icon: [svgrepo.com](https://www.svgrepo.com/svg/398422/sun-with-face)  
+Dark mode icon: [svgrepo.com](https://www.svgrepo.com/svg/396485/first-quarter-moon-face)  
+Checkmark icon: [svgrepo.com](https://www.svgrepo.com/svg/395995/check-mark-button)  
+Units icon: [svgrepo.com](https://www.svgrepo.com/svg/283098/measuring-measurement)  
+Gender icon: [svgrepo.com](https://www.svgrepo.com/svg/283083/actions-buy)  
+Goal icon: [svgrepo.com](https://www.svgrepo.com/svg/283103/maps-and-flags-direction)  
+Activity Level icon: [svgrepo.com](https://www.svgrepo.com/svg/283180/sit-down-sofa)  
+Age icon: [svgrepo.com](https://www.svgrepo.com/svg/283132/sand-clock)  
+Weight icon: [svgrepo.com](https://www.svgrepo.com/svg/283067/kilograms-grams)  
+Height icon: [svgrepo.com](https://www.svgrepo.com/svg/283065/graphs-economy)  
+Body Fat icon: [svgrepo.com](https://www.svgrepo.com/svg/283163/measuring-measure)  
+Close icon: [svgrepo.com](https://www.svgrepo.com/svg/500512/close-bold)  
