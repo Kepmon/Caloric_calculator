@@ -114,122 +114,58 @@ const unitsToBeChanged = {
   }
 }
 
-const returnUnitRelatedElements = () => {
-  const weightSlider = document.querySelector(
-    'input[id="weight"]'
-  ) as null | HTMLInputElement
-  const weightInput = document.querySelector(
-    'input[id="weight"] ~ [type="number"]'
-  ) as null | HTMLInputElement
-  const weightUnitLabel = document.querySelector(
-    'label[for="weight"] > span'
-  ) as null | HTMLSpanElement
-  const heightSlider = document.querySelector(
-    'input[id="height"]'
-  ) as null | HTMLInputElement
-  const heightInput = document.querySelector(
-    'input[id="height"] ~ [type="number"]'
-  ) as null | HTMLInputElement
-  const heightUnitLabel = document.querySelector(
-    'label[for="height"] > span'
-  ) as null | HTMLSpanElement
+const calculateNewValue = (
+  slider: HTMLInputElement,
+  newUnit: 'metric' | 'imperial',
+  category: 'weight' | 'height'
+) => {
+  const previousValue = parseFloat(slider.value)
+  const previousMaxValue = parseFloat(slider.max)
 
-  if (
-    [
-      weightSlider,
-      weightInput,
-      weightUnitLabel,
-      heightSlider,
-      heightInput,
-      heightUnitLabel
-    ].some((element) => element == null)
+  return (
+    (previousValue * unitsToBeChanged[newUnit][category].max) / previousMaxValue
   )
-    return false
-
-  return {
-    weightSlider: weightSlider as HTMLInputElement,
-    weightInput: weightInput as HTMLInputElement,
-    weightUnitLabel: weightUnitLabel as HTMLSpanElement,
-    heightSlider: heightSlider as HTMLInputElement,
-    heightInput: heightInput as HTMLInputElement,
-    heightUnitLabel: heightUnitLabel as HTMLSpanElement
-  }
 }
 
-const calculateNewValues = (
-  weightSlider: HTMLInputElement,
-  heightSlider: HTMLInputElement,
-  newUnit: 'metric' | 'imperial'
+const setInputAttributes = (
+  newUnit: 'metric' | 'imperial',
+  input: HTMLInputElement
 ) => {
-  const previousWeightValue = parseFloat(weightSlider.value)
-  const previousMaxWeightValue = parseFloat(weightSlider.max)
-  const previousHeightValue = parseFloat(heightSlider.value)
-  const previousMaxHeightValue = parseFloat(heightSlider.max)
+  const attributesToChange = ['min', 'max', 'step'] as const
 
-  const newWeightValue =
-    (previousWeightValue * unitsToBeChanged[newUnit].weight.max) /
-    previousMaxWeightValue
+  attributesToChange.forEach((attribute) => {
+    if (!(input.name === 'weight' || input.name === 'height')) return
 
-  const newHeightValue =
-    (previousHeightValue * unitsToBeChanged[newUnit].height.max) /
-    previousMaxHeightValue
+    const attributeAsString = unitsToBeChanged[newUnit][input.name][attribute]
+      .toFixed(unitsToBeChanged[newUnit][input.name].step === 0.1 ? 1 : 0)
+      .toString()
 
-  return { newWeightValue, newHeightValue }
+    input.setAttribute(attribute, attributeAsString)
+  })
 }
 
 export const handleUnitChange = (newUnit: 'metric' | 'imperial') => {
-  const elementsData = returnUnitRelatedElements()
+  const weightInputs = document.querySelectorAll('input[name="weight"]')
+  const heightInputs = document.querySelectorAll('input[name="height"]')
+  const allInputs = [...weightInputs, ...heightInputs] as HTMLInputElement[]
 
-  if (!elementsData) return
+  allInputs.forEach((input) => {
+    if (!(input.name === 'weight' || input.name === 'height')) return
 
-  const {
-    weightSlider,
-    weightInput,
-    weightUnitLabel,
-    heightSlider,
-    heightInput,
-    heightUnitLabel
-  } = elementsData
+    const newValue = calculateNewValue(input, newUnit, input.name)
+    const newValueAsString = newValue
+      .toFixed(unitsToBeChanged[newUnit][input.name].step === 0.1 ? 1 : 0)
+      .toString()
 
-  const newValues = calculateNewValues(weightSlider, heightSlider, newUnit)
+    input.setAttribute('value', newValueAsString)
+    input.value = newValueAsString
 
-  if (!newValues) return
+    const unitLabel = document.querySelector(`[data-span="${input.name}"]`)
 
-  const attributesToChange = ['min', 'max', 'step'] as const
+    if (unitLabel != null) {
+      unitLabel.textContent = unitsToBeChanged[newUnit][input.name].unitLabel
+    }
 
-  ;[weightSlider, weightInput].forEach((input) => {
-    attributesToChange.forEach((attribute) => {
-      const attributeAsString = unitsToBeChanged[newUnit].weight[attribute]
-        .toFixed(unitsToBeChanged[newUnit].weight.step === 0.1 ? 1 : 0)
-        .toString()
-
-      input.setAttribute(attribute, attributeAsString)
-
-      const valueAsString = newValues.newWeightValue
-        .toFixed(unitsToBeChanged[newUnit].weight.step === 0.1 ? 1 : 0)
-        .toString()
-
-      input.setAttribute('value', valueAsString)
-      input.value = valueAsString
-    })
+    setInputAttributes(newUnit, input)
   })
-  ;[heightSlider, heightInput].forEach((input) => {
-    attributesToChange.forEach((attribute) => {
-      const attributeAsString = unitsToBeChanged[newUnit].height[attribute]
-        .toFixed(unitsToBeChanged[newUnit].height.step === 0.1 ? 1 : 0)
-        .toString()
-
-      input.setAttribute(attribute, attributeAsString)
-
-      const valueAsString = newValues.newHeightValue
-        .toFixed(unitsToBeChanged[newUnit].height.step === 0.1 ? 1 : 0)
-        .toString()
-
-      input.setAttribute('value', valueAsString)
-      input.value = valueAsString
-    })
-  })
-
-  weightUnitLabel.textContent = unitsToBeChanged[newUnit].weight.unitLabel
-  heightUnitLabel.textContent = unitsToBeChanged[newUnit].height.unitLabel
 }

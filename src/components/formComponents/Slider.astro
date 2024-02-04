@@ -18,7 +18,13 @@ const { min, max, value, label, additionalLabel, Icon, dataUnit } = Astro.props
     <Icon />
     <label for={label}>
       {label.replaceAll('-', ' ')}
-      {additionalLabel && <span class="input-label">({additionalLabel})</span>}
+      {
+        additionalLabel && (
+          <span data-span={label} class="input-label">
+            ({additionalLabel})
+          </span>
+        )
+      }
     </label>
     <slot />
   </div>
@@ -37,7 +43,7 @@ const { min, max, value, label, additionalLabel, Icon, dataUnit } = Astro.props
   >
   <input
     type="number"
-    name={`${label}-number`}
+    name={label}
     id={`${label}-number`}
     data-input="number"
     min={min}
