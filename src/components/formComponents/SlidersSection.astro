@@ -97,11 +97,11 @@ const slidersData = {
   import { setThumbPosition } from '../../helpers/sliders'
 
   const numberInputs = [
-  ...document.querySelectorAll('[type="number"]')
-] as HTMLInputElement[]
-const sliderInputs = [
-  ...document.querySelectorAll('[type="range"]')
-] as HTMLInputElement[]
+  ...document.querySelectorAll('[id$="-number"]')
+  ] as HTMLInputElement[]
+  const sliderInputs = [
+    ...document.querySelectorAll('[type="range"]')
+  ] as HTMLInputElement[]
 
   sliderInputs.forEach((slider, index) => {
     slider.addEventListener('input', () => {

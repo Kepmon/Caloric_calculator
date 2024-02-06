@@ -12,6 +12,7 @@ type AllFormData = {
     unit: 'kg' | 'lb'
     value: string
   }
+  expenditure: string
 }
 
 const validateForm = (formDataObj: { [k: string]: string | File }) => {
@@ -46,7 +47,8 @@ const returnFormData = (formDataObj: { [k: string]: string | File }) => {
       unit: unitInputValue.id === 'metric' ? 'cm' : 'ft',
       value: formDataObj.height
     },
-    bodyFat: formDataObj.bodyFat
+    bodyFat: formDataObj.bodyFat,
+    expenditure: formDataObj.numberExpenditure
   }
 
   return { ...radioBtnsData, ...slidersData } as AllFormData
@@ -79,6 +81,18 @@ const calculateBMR = (formData: AllFormData) => {
   )
 }
 
+const returnActivityFactor = (activity: AllFormData['activity']) => {
+  const activityFactos = {
+    'little-or-none': 1.15,
+    light: 1.25,
+    moderate: 1.35,
+    high: 1.45,
+    'very-high': 1.55
+  }
+
+  return activityFactos[activity]
+}
+
 export const handleSubmit: boolean = () => {
   const form = document.querySelector(
     '[data-form="caloric-intake"]'
@@ -98,4 +112,8 @@ export const handleSubmit: boolean = () => {
   if (!formData) return false
 
   const BMR = calculateBMR(formData)
+  const TDEE =
+    formData.expenditure !== ''
+      ? BMR + parseFloat(formData.expenditure)
+      : BMR * returnActivityFactor(formData.activity)
 }
