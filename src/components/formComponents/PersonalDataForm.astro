@@ -3,17 +3,21 @@ import BasicData from './BasicData.astro'
 import SlidersSection from './SlidersSection.astro'
 ---
 
-<form>
+<form data-form="caloric-intake">
   <BasicData />
   <SlidersSection />
   <button data-button="submit" class="btn">Show Result</button>
 </form>
 
 <script>
+  import { handleSubmit } from '../../helpers/form'
+
   const submitBtn = document.querySelector('[data-button="submit"]')
 
   submitBtn?.addEventListener('click', (e: Event) => {
     e.preventDefault()
+
+    handleSubmit()
   })
 </script>
 
