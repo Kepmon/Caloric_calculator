@@ -24,6 +24,29 @@ import Footer from '../components/Footer.astro'
   </body>
 </html>
 
+<script>
+  window.addEventListener('click', (e: Event) => {
+    const target = e.target as HTMLElement
+
+    const popupLabel = target.closest('[data-open]')
+
+    if (popupLabel != null) return
+
+    const openedPopup =
+      document.querySelector('[open]') ||
+      document.querySelector('.show-options')
+
+    if (target.closest('[data-popup]') === openedPopup) return
+
+    if (openedPopup?.nodeName === 'DIALOG') {
+      ;(openedPopup as HTMLDialogElement).close()
+      return
+    }
+
+    openedPopup?.classList.remove('show-options')
+  })
+</script>
+
 <style is:global lang="scss">
   @use '../sass/_mixins' as *;
 

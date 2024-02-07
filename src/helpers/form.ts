@@ -4,6 +4,7 @@ type AllFormData = {
   bodyFat: string
   gender: 'male' | 'female'
   goal: 'lose-weight' | 'maintain' | 'gain-muscle'
+  goalSpeed?: 'faster' | 'slower'
   height: {
     unit: 'cm' | 'ft'
     value: string
@@ -93,7 +94,7 @@ const returnActivityFactor = (activity: AllFormData['activity']) => {
   return activityFactos[activity]
 }
 
-export const handleSubmit: boolean = () => {
+export const handleSubmit = () => {
   const form = document.querySelector(
     '[data-form="caloric-intake"]'
   ) as null | HTMLFormElement
@@ -116,4 +117,24 @@ export const handleSubmit: boolean = () => {
     formData.expenditure !== ''
       ? BMR + parseFloat(formData.expenditure)
       : BMR * returnActivityFactor(formData.activity)
+
+  if (formData.goal === 'lose-weight') {
+    const speedOptions = {
+      faster: TDEE - 500,
+      slower: TDEE - 300
+    }
+
+    const fatLostSpeed = document
+      .querySelector('[name="goalSpeed"]:checked')
+      ?.getAttribute('id')
+
+    return fatLostSpeed != null &&
+      (fatLostSpeed === 'slower' || fatLostSpeed === 'faster')
+      ? speedOptions[fatLostSpeed]
+      : TDEE - 300
+  }
+
+  if (formData.goal === 'gain-muscle') return TDEE + 200
+
+  return TDEE
 }
