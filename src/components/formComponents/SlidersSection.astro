@@ -65,7 +65,7 @@ const slidersDataKeys = Object.keys(slidersData) as (keyof typeof slidersData)[]
         dataUnit={slidersData[key].dataUnit}
       >
         {key === 'bodyFat' && (
-          <span>
+          <p class="additional-label">
             (show charts for{' '}
             <button
               type="button"
@@ -87,7 +87,7 @@ const slidersDataKeys = Object.keys(slidersData) as (keyof typeof slidersData)[]
               women
             </button>
             )
-          </span>
+          </p>
         )}
       </Slider>
     ))
@@ -127,5 +127,9 @@ const slidersDataKeys = Object.keys(slidersData) as (keyof typeof slidersData)[]
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
     gap: 4rem;
+  }
+
+  .additional-label {
+    font-size: var(--sublabel-size);
   }
 </style>

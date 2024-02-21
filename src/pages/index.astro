@@ -257,6 +257,7 @@ import Footer from '../components/Footer.astro'
   }
 
   .label-with-svg {
+    --sublabel-size: 0.85em;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -303,6 +304,7 @@ import Footer from '../components/Footer.astro'
   .input-label {
     color: var(--accent-clr);
     text-transform: initial;
+    font-size: var(--sublabel-size);
   }
 
   :focus-visible {
