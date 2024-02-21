@@ -51,6 +51,8 @@ const { min, max, value, label, additionalLabel, Icon, dataUnit } = Astro.props
     value={value.toFixed(0)}
     step="1"
   />
+
+  <p data-error={`${label}-number`} class="error-message"></p>
 </div>
 
 <style lang="scss">
@@ -94,5 +96,12 @@ const { min, max, value, label, additionalLabel, Icon, dataUnit } = Astro.props
       box-shadow: 0 0 0.25rem hsl(var(--clr-dark-900));
       translate: -50% -50%;
     }
+  }
+
+  .error-message {
+    position: absolute;
+    top: 170%;
+    color: hsl(var(--clr-red-400));
+    font-weight: 500;
   }
 </style>

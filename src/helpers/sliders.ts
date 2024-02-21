@@ -12,6 +12,7 @@ const returnNewSliderValue = (
   sliderInputs: HTMLInputElement[]
 ) => {
   const inputData = returnSliderData(input)
+  const errorMessage = document.querySelector(`[data-error=${input.id}`)
 
   if (
     inputData.sliderMin == null ||
@@ -23,11 +24,20 @@ const returnNewSliderValue = (
   if (
     inputData.sliderValue < inputData.sliderMin ||
     inputData.sliderValue > inputData.sliderMax
-  )
+  ) {
+    if (errorMessage != null) {
+      errorMessage.textContent = `Provide a value within ${inputData.sliderMin} and ${inputData.sliderMax}`
+    }
+
     return {
       inputData,
       newValue: parseInt(sliderInputs[index].value, 10)
     }
+  }
+
+  if (errorMessage != null) {
+    errorMessage.textContent = ''
+  }
 
   return {
     inputData,

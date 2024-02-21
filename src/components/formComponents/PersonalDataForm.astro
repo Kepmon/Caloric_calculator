@@ -36,6 +36,12 @@ import SlidersSection from './SlidersSection.astro'
   submitBtn?.addEventListener('click', (e: Event) => {
     e.preventDefault()
 
+    const sliderErrors = [
+      ...document.querySelectorAll('[data-error$="number"]')
+    ]
+    if (sliderErrors.some((errorElement) => errorElement.textContent !== ''))
+      return
+
     if (submitBtn.getAttribute('aria-expanded') !== 'true') {
       const calorieValue = document.querySelector(
         '[data-span="calorie-intake"]'
