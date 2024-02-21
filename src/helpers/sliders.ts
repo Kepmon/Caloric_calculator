@@ -75,11 +75,11 @@ export const setThumbPosition = (
   )
 
   if (input !== sliderInputs[index]) {
-    sliderInputs[index].value = newValue.toString()
+    sliderInputs[index].setAttribute('value', newValue.toString())
   }
 
   if (numberInputs != null && numberInputs[index] != null) {
-    numberInputs[index].value = newValue.toString()
+    numberInputs[index].setAttribute('value', newValue.toString())
   }
 }
 

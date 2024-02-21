@@ -7,7 +7,7 @@ import SlidersSection from './SlidersSection.astro'
   <BasicData />
   <SlidersSection />
   <div class="result-section">
-    <button aria-expanded="false" data-button="submit" class="btn"
+    <button type="button" aria-expanded="false" data-button="submit" class="btn"
       >Show Result</button
     >
     <div class="result-popup-parent" data-popup="calorie-intake-value">
@@ -25,6 +25,15 @@ import SlidersSection from './SlidersSection.astro'
   import { handleSubmit } from '../../helpers/form'
 
   const submitBtn = document.querySelector('[data-button="submit"]')
+  const allFormInputs = [
+    ...document.querySelectorAll('[data-form="caloric-intake"] input')
+  ]
+
+  allFormInputs.forEach((formInput) => {
+    formInput.addEventListener('change', () => {
+      submitBtn.setAttribute('aria-expanded', 'false')
+    })
+  })
 
   submitBtn?.addEventListener('click', (e: Event) => {
     e.preventDefault()
