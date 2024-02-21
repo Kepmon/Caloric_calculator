@@ -13,9 +13,7 @@ import SlidersSection from './SlidersSection.astro'
     <div class="result-popup-parent" data-popup="calorie-intake-value">
       <div class="result-popup">
         <p>Your recommended daily caloric intake is:</p>
-        <p data-result="calorie-intake">
-          <span data-span="calorie-intake">0</span> kcal
-        </p>
+        <p data-result="calorie-intake" data-span="calorie-intake">0 kcal</p>
       </div>
     </div>
   </div>
@@ -31,7 +29,7 @@ import SlidersSection from './SlidersSection.astro'
 
   allFormInputs.forEach((formInput) => {
     formInput.addEventListener('change', () => {
-      submitBtn.setAttribute('aria-expanded', 'false')
+      submitBtn?.setAttribute('aria-expanded', 'false')
     })
   })
 
@@ -41,16 +39,23 @@ import SlidersSection from './SlidersSection.astro'
     if (submitBtn.getAttribute('aria-expanded') !== 'true') {
       const calorieValue = document.querySelector(
         '[data-span="calorie-intake"]'
-      )
+      ) as null | HTMLParagraphElement
 
       submitBtn.setAttribute('aria-expanded', 'true')
 
       const submitResult = handleSubmit()
 
-      if (!submitResult) return
+      if (!submitResult && calorieValue != null) {
+        calorieValue.textContent = `Ooops, something went wrong. Try again.`
+        calorieValue.style.setProperty(
+          '--result-text-clr',
+          'hsl(var(--clr-red-400))'
+        )
+      }
 
       if (calorieValue != null) {
-        calorieValue.textContent = submitResult
+        calorieValue.textContent = `${submitResult} kcal`
+        calorieValue.style.setProperty('--result-text-clr', 'var(--accent-clr)')
       }
       return
     }
@@ -99,10 +104,15 @@ import SlidersSection from './SlidersSection.astro'
     > * {
       padding: 1em;
     }
+
+    &:first-child {
+      font-weight: 700;
+    }
   }
 
   [data-result='calorie-intake'] {
-    color: var(--accent-clr);
+    --result-text-clr: var(--accent-clr);
+    color: var(--result-text-clr);
     font-size: clamp(1.5rem, 1.3542rem + 0.8333vi, 2rem);
     font-weight: 700;
   }

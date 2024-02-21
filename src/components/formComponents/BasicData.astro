@@ -4,6 +4,7 @@ import Goal from '../svgs/Goal.astro'
 import Gender from '../svgs/Gender.astro'
 import ActivityLevel from '../svgs/ActivityLevel.astro'
 import ActivityLevelsPopup from '../popups/ActivityLevelsPopup.astro'
+import Checkmark from '../svgs/Checkmark.astro'
 
 const basicDataGroups = [
   {
@@ -132,34 +133,37 @@ const basicDataGroups = [
           </span>
         </legend>
         <div class="input-pairs-wrapper">
-          {options.map((option, index) => (
+          {options.map((option, optionIndex) => (
             <label data-open>
               <span>{option.value}</span>
               <input
                 type="radio"
                 name={name}
                 id={option.id}
-                checked={index === 0}
+                checked={optionIndex === 0}
                 class="btn"
               />
 
-              {option.additionalOptions != null && (
+              {'additionalOptions' in option && (
                 <div
                   class="additional-options"
                   data-popup="weight-loss-preference"
                 >
                   <h3>Choose your preference:</h3>
-                  {option.additionalOptions.map(({ id, value }, index) => (
-                    <label>
-                      <input
-                        type="radio"
-                        name={`${name}Speed`}
-                        id={id}
-                        checked={index === 0}
-                      />
-                      {value}
-                    </label>
-                  ))}
+                  {option.additionalOptions != null &&
+                    option.additionalOptions.map(
+                      ({ id, value }, additionalOptionIndex) => (
+                        <label>
+                          <input
+                            type="radio"
+                            name={`${name}Speed`}
+                            id={id}
+                            checked={additionalOptionIndex === 0}
+                          />
+                          {value}
+                        </label>
+                      )
+                    )}
                 </div>
               )}
             </label>
@@ -171,7 +175,10 @@ const basicDataGroups = [
 
   <div class="daily-expenditure">
     <label class="checkbox-label">
-      <input type="checkbox" name="checkbox-expenditure" />
+      <div class="checkbox-wrapper">
+        <Checkmark />
+        <input type="checkbox" name="checkbox-expenditure" />
+      </div>
       I know my daily caloric expenditure
     </label>
 
@@ -293,11 +300,20 @@ const basicDataGroups = [
     }
   }
 
+  [data-button='activity-levels'] {
+    font-size: var(--sublabel-size);
+  }
+
   .daily-expenditure {
     &:has([type='checkbox']:checked) {
       .expenditure-number-wrapper {
         grid-template-rows: 1fr;
       }
+    }
+
+    .checkbox-wrapper {
+      --checkbox-width: 1rem;
+      position: relative;
     }
 
     .checkbox-label {
@@ -310,7 +326,7 @@ const basicDataGroups = [
 
     [type='checkbox'] {
       appearance: none;
-      width: 1rem;
+      width: var(--checkbox-width);
       aspect-ratio: 1;
       background-color: var(--content-text);
       border-radius: calc(var(--border-radius) / 2);

@@ -48,7 +48,7 @@ const returnFormData = (formDataObj: { [k: string]: string | File }) => {
       unit: unitInputValue.id === 'metric' ? 'cm' : 'ft',
       value: formDataObj.height
     },
-    bodyFat: formDataObj.bodyFat,
+    bodyFat: formDataObj['body-fat'],
     expenditure: formDataObj.numberExpenditure
   }
 

@@ -82,6 +82,7 @@ import Footer from '../components/Footer.astro'
 
   :root {
     --clr-green-400: 120 100% 35%;
+    --clr-red-400: 0 100% 35%;
     --accent-clr: hsl(var(--clr-green-400));
     --outline-width: 3px;
     --border-radius: 0.5em;
@@ -91,6 +92,7 @@ import Footer from '../components/Footer.astro'
     --clr-white-900: 207 10% 90%;
     --clr-dark-700: 207 10% 10%;
     --clr-dark-900: 207 90% 4%;
+    --sublabel-size: 0.85em;
     @include theme-colors;
 
     @media (prefers-color-scheme: dark) {
@@ -257,7 +259,6 @@ import Footer from '../components/Footer.astro'
   }
 
   .label-with-svg {
-    --sublabel-size: 0.85em;
     display: flex;
     align-items: center;
     justify-content: center;
