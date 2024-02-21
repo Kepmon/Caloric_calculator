@@ -43,13 +43,15 @@ const slidersData = {
     dataUnit: undefined
   }
 }
+
+const slidersDataKeys = Object.keys(slidersData) as (keyof typeof slidersData)[]
 ---
 
 <BodyFatPopupMen />
 <BodyFatPopupWomen />
 <div class="sliders-wrapper">
   {
-    Object.keys(slidersData).map((key) => (
+    slidersDataKeys.map((key) => (
       <Slider
         min={slidersData[key as keyof typeof slidersData].min}
         max={slidersData[key as keyof typeof slidersData].max}
@@ -57,12 +59,10 @@ const slidersData = {
           slidersData[key as keyof typeof slidersData].min,
           slidersData[key as keyof typeof slidersData].max
         )}
-        Icon={slidersData[key as keyof typeof slidersData].Icon}
-        label={slidersData[key as keyof typeof slidersData].label}
-        additionalLabel={
-          slidersData[key as keyof typeof slidersData].additionalLabel
-        }
-        dataUnit={slidersData[key as keyof typeof slidersData].dataUnit}
+        Icon={slidersData[key].Icon}
+        label={slidersData[key].label}
+        additionalLabel={slidersData[key].additionalLabel}
+        dataUnit={slidersData[key].dataUnit}
       >
         {key === 'bodyFat' && (
           <span>
