@@ -3,17 +3,70 @@ import BasicData from './BasicData.astro'
 import SlidersSection from './SlidersSection.astro'
 ---
 
-<form>
+<form data-form="caloric-intake">
   <BasicData />
   <SlidersSection />
-  <button data-button="submit" class="btn">Show Result</button>
+  <div class="result-section">
+    <button type="button" aria-expanded="false" data-button="submit" class="btn"
+      >Show Result</button
+    >
+    <div class="result-popup-parent" data-popup="calorie-intake-value">
+      <div class="result-popup">
+        <p>Your recommended daily caloric intake is:</p>
+        <p data-result="calorie-intake" data-span="calorie-intake">0 kcal</p>
+      </div>
+    </div>
+  </div>
 </form>
 
 <script>
+  import { handleSubmit } from '../../helpers/form'
+
   const submitBtn = document.querySelector('[data-button="submit"]')
+  const allFormInputs = [
+    ...document.querySelectorAll('[data-form="caloric-intake"] input')
+  ]
+
+  allFormInputs.forEach((formInput) => {
+    formInput.addEventListener('change', () => {
+      submitBtn?.setAttribute('aria-expanded', 'false')
+    })
+  })
 
   submitBtn?.addEventListener('click', (e: Event) => {
     e.preventDefault()
+
+    const sliderErrors = [
+      ...document.querySelectorAll('[data-error$="number"]')
+    ]
+    if (sliderErrors.some((errorElement) => errorElement.textContent !== ''))
+      return
+
+    if (submitBtn.getAttribute('aria-expanded') !== 'true') {
+      const calorieValue = document.querySelector(
+        '[data-span="calorie-intake"]'
+      ) as null | HTMLParagraphElement
+
+      submitBtn.setAttribute('aria-expanded', 'true')
+
+      const submitResult = handleSubmit()
+
+      if (!submitResult && calorieValue != null) {
+        calorieValue.textContent = `Ooops, something went wrong. Try again.`
+        calorieValue.style.setProperty(
+          '--result-text-clr',
+          'hsl(var(--clr-red-400))'
+        )
+      }
+
+      if (calorieValue != null) {
+        calorieValue.textContent = `${submitResult} kcal`
+        calorieValue.style.setProperty('--result-text-clr', 'var(--accent-clr)')
+      }
+      return
+    }
+
+    submitBtn.setAttribute('aria-expanded', 'false')
   })
 </script>
 
@@ -21,12 +74,52 @@ import SlidersSection from './SlidersSection.astro'
   form {
     display: grid;
     gap: 4rem;
+  }
 
-    button {
-      justify-self: center;
-      padding: 0.5em 1.5em;
-      margin-block-start: 2rem;
+  [data-button='submit'] {
+    justify-self: center;
+    padding: 0.5em 1.5em;
+    margin-block-start: 2rem;
+    font-weight: 700;
+
+    &[aria-expanded='true'] + .result-popup-parent {
+      grid-template-rows: 1fr;
+    }
+  }
+
+  .result-section {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .result-popup-parent {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.2s;
+  }
+
+  .result-popup {
+    margin-inline: auto;
+    width: min(100%, 25rem);
+    background-color: var(--content-text);
+    color: var(--body-bg);
+    text-align: center;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+
+    > * {
+      padding: 1em;
+    }
+
+    &:first-child {
       font-weight: 700;
     }
+  }
+
+  [data-result='calorie-intake'] {
+    --result-text-clr: var(--accent-clr);
+    color: var(--result-text-clr);
+    font-size: clamp(1.5rem, 1.3542rem + 0.8333vi, 2rem);
+    font-weight: 700;
   }
 </style>

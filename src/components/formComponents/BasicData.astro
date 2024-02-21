@@ -4,6 +4,7 @@ import Goal from '../svgs/Goal.astro'
 import Gender from '../svgs/Gender.astro'
 import ActivityLevel from '../svgs/ActivityLevel.astro'
 import ActivityLevelsPopup from '../popups/ActivityLevelsPopup.astro'
+import Checkmark from '../svgs/Checkmark.astro'
 
 const basicDataGroups = [
   {
@@ -52,7 +53,17 @@ const basicDataGroups = [
     options: [
       {
         value: 'Lose Weight',
-        id: 'lose-weight'
+        id: 'lose-weight',
+        additionalOptions: [
+          {
+            id: 'slower',
+            value: 'Slower fat loss in exchange for higher caloric intake'
+          },
+          {
+            id: 'faster',
+            value: 'Faster fat loss in exchange for lower caloric intake'
+          }
+        ]
       },
       {
         value: 'Maintain',
@@ -86,7 +97,7 @@ const basicDataGroups = [
       },
       {
         value: 'High',
-        id: 'figh'
+        id: 'high'
       },
       {
         value: 'Very high',
@@ -112,7 +123,8 @@ const basicDataGroups = [
               <button
                 type="button"
                 data-button="activity-levels"
-                data-open="dialog"
+                data-open="activity-levels"
+                data-open-dialog
                 class="popup-label"
               >
                 ({label})
@@ -121,22 +133,62 @@ const basicDataGroups = [
           </span>
         </legend>
         <div class="input-pairs-wrapper">
-          {options.map(({ value, id }, index) => (
-            <label>
-              <span>{value}</span>
+          {options.map((option, optionIndex) => (
+            <label data-open>
+              <span>{option.value}</span>
               <input
                 type="radio"
                 name={name}
-                id={id}
-                checked={index === 0}
+                id={option.id}
+                checked={optionIndex === 0}
                 class="btn"
               />
+
+              {'additionalOptions' in option && (
+                <div
+                  class="additional-options"
+                  data-popup="weight-loss-preference"
+                >
+                  <h3>Choose your preference:</h3>
+                  {option.additionalOptions != null &&
+                    option.additionalOptions.map(
+                      ({ id, value }, additionalOptionIndex) => (
+                        <label>
+                          <input
+                            type="radio"
+                            name={`${name}Speed`}
+                            id={id}
+                            checked={additionalOptionIndex === 0}
+                          />
+                          {value}
+                        </label>
+                      )
+                    )}
+                </div>
+              )}
             </label>
           ))}
         </div>
       </fieldset>
     ))
   }
+
+  <div class="daily-expenditure">
+    <label class="checkbox-label">
+      <div class="checkbox-wrapper">
+        <Checkmark />
+        <input type="checkbox" name="checkbox-expenditure" />
+      </div>
+      I know my daily caloric expenditure
+    </label>
+
+    <div class="expenditure-number-wrapper">
+      <label>
+        Insert your daily caloric expenditure here
+        <input type="number" name="numberExpenditure" min="0" max="2000" />
+      </label>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -145,6 +197,7 @@ const basicDataGroups = [
   const unitRadioBtns = [
     ...document.querySelectorAll('input[name="units"]')
   ] as HTMLInputElement[]
+  const loseWeightRadioBtn = document.querySelector('[id="lose-weight"]')
 
   unitRadioBtns.forEach((btn) => {
     const newUnit = btn.getAttribute('id') as null | 'metric' | 'imperial'
@@ -155,11 +208,21 @@ const basicDataGroups = [
 
     btn.addEventListener('change', () => handleUnitChange(newUnit))
   })
+  loseWeightRadioBtn?.addEventListener('click', () => {
+    const popup = document.querySelector(
+      '[data-popup="weight-loss-preference"]'
+    )
+
+    if (popup != null) {
+      popup.classList.toggle('show-options')
+    }
+  })
 </script>
 
 <style lang="scss">
   .basic-data-wrapper {
     display: grid;
+    justify-content: center;
     gap: 2rem;
   }
 
@@ -173,15 +236,15 @@ const basicDataGroups = [
         text-transform: capitalize;
       }
     }
+  }
 
-    .input-pairs-wrapper {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
+  .input-pairs-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
 
-    label {
+    > label {
       position: relative;
       padding: 0.25rem 1.5rem;
       color: var(--darker-comp-bg);
@@ -189,7 +252,7 @@ const basicDataGroups = [
       cursor: pointer;
     }
 
-    input[type='radio'] {
+    .btn[type='radio'] {
       appearance: none;
       position: absolute;
       inset: 0;
@@ -204,6 +267,95 @@ const basicDataGroups = [
       &:checked + label {
         color: hsl(var(--clr-dark-900));
       }
+    }
+  }
+
+  .additional-options {
+    display: none;
+    gap: 0.5rem;
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    padding: 0.5em;
+    width: min(100vw, 20em);
+    background-color: var(--content-text);
+    z-index: 10;
+    border: 5px ridge var(--accent-clr);
+    border-radius: var(--border-radius);
+
+    &.show-options {
+      display: grid;
+    }
+
+    h3 {
+      font-size: 1.125em;
+    }
+
+    label {
+      display: block;
+
+      input[type='radio'] {
+        accent-color: var(--accent-clr);
+      }
+    }
+  }
+
+  [data-button='activity-levels'] {
+    font-size: var(--sublabel-size);
+  }
+
+  .daily-expenditure {
+    &:has([type='checkbox']:checked) {
+      .expenditure-number-wrapper {
+        grid-template-rows: 1fr;
+      }
+    }
+
+    .checkbox-wrapper {
+      --checkbox-width: 1rem;
+      position: relative;
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      text-transform: initial;
+    }
+
+    [type='checkbox'] {
+      appearance: none;
+      width: var(--checkbox-width);
+      aspect-ratio: 1;
+      background-color: var(--content-text);
+      border-radius: calc(var(--border-radius) / 2);
+
+      &:checked {
+        background-color: var(--accent-clr);
+      }
+    }
+  }
+
+  .expenditure-number-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 200ms;
+
+    label {
+      display: grid;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-block-start: 1em;
+      overflow: hidden;
+      text-transform: initial;
+    }
+
+    [type='number'] {
+      margin-block-end: 0.5em;
+      padding: 0.25em 0.5em;
+      background-color: var(--content-text);
+      border-radius: var(--border-radius);
     }
   }
 </style>
