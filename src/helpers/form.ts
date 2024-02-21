@@ -120,8 +120,8 @@ export const handleSubmit = () => {
 
   if (formData.goal === 'lose-weight') {
     const speedOptions = {
-      faster: TDEE - 500,
-      slower: TDEE - 300
+      faster: (TDEE - 500).toFixed(0),
+      slower: (TDEE - 300).toFixed(0)
     }
 
     const fatLostSpeed = document
@@ -131,10 +131,10 @@ export const handleSubmit = () => {
     return fatLostSpeed != null &&
       (fatLostSpeed === 'slower' || fatLostSpeed === 'faster')
       ? speedOptions[fatLostSpeed]
-      : TDEE - 300
+      : (TDEE - 300).toFixed(0)
   }
 
-  if (formData.goal === 'gain-muscle') return TDEE + 200
+  if (formData.goal === 'gain-muscle') return (TDEE + 200).toFixed(0)
 
-  return TDEE
+  return TDEE.toFixed(0)
 }

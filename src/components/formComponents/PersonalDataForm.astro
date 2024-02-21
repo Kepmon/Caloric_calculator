@@ -6,7 +6,19 @@ import SlidersSection from './SlidersSection.astro'
 <form data-form="caloric-intake">
   <BasicData />
   <SlidersSection />
-  <button data-button="submit" class="btn">Show Result</button>
+  <div class="result-section">
+    <button aria-expanded="false" data-button="submit" class="btn"
+      >Show Result</button
+    >
+    <div class="result-popup-parent" data-popup="calorie-intake-value">
+      <div class="result-popup">
+        <p>Your recommended daily caloric intake is:</p>
+        <p data-result="calorie-intake">
+          <span data-span="calorie-intake">0</span> kcal
+        </p>
+      </div>
+    </div>
+  </div>
 </form>
 
 <script>
@@ -17,7 +29,24 @@ import SlidersSection from './SlidersSection.astro'
   submitBtn?.addEventListener('click', (e: Event) => {
     e.preventDefault()
 
-    const submitResult = handleSubmit()
+    if (submitBtn.getAttribute('aria-expanded') !== 'true') {
+      const calorieValue = document.querySelector(
+        '[data-span="calorie-intake"]'
+      )
+
+      submitBtn.setAttribute('aria-expanded', 'true')
+
+      const submitResult = handleSubmit()
+
+      if (!submitResult) return
+
+      if (calorieValue != null) {
+        calorieValue.textContent = submitResult
+      }
+      return
+    }
+
+    submitBtn.setAttribute('aria-expanded', 'false')
   })
 </script>
 
@@ -25,12 +54,47 @@ import SlidersSection from './SlidersSection.astro'
   form {
     display: grid;
     gap: 4rem;
+  }
 
-    button {
-      justify-self: center;
-      padding: 0.5em 1.5em;
-      margin-block-start: 2rem;
-      font-weight: 700;
+  [data-button='submit'] {
+    justify-self: center;
+    padding: 0.5em 1.5em;
+    margin-block-start: 2rem;
+    font-weight: 700;
+
+    &[aria-expanded='true'] + .result-popup-parent {
+      grid-template-rows: 1fr;
     }
+  }
+
+  .result-section {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .result-popup-parent {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.2s;
+  }
+
+  .result-popup {
+    margin-inline: auto;
+    width: min(100%, 25rem);
+    background-color: var(--content-text);
+    color: var(--body-bg);
+    text-align: center;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+
+    > * {
+      padding: 1em;
+    }
+  }
+
+  [data-result='calorie-intake'] {
+    color: var(--accent-clr);
+    font-size: clamp(1.5rem, 1.3542rem + 0.8333vi, 2rem);
+    font-weight: 700;
   }
 </style>
