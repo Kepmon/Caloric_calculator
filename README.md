@@ -3,7 +3,10 @@
 **UPDATE**  
 Currently, the project is being refactored to assure better standards of code quality, maintability, and accessibility. 
 
-The most of the [current version of this website](https://clever-naiad-d0b904.netlify.app/) has already been finished coding but it still presents some layout, code quality and accessibility issues, and the form submission hasn't still been handled.
+The most of the [current version of this website](https://clever-naiad-d0b904.netlify.app/) has already been finished coding but it still presents some layout issues.
+
+**Important info:**  
+The option "I know my daily caloric expenditure" works ONLY if your browser supports the `:has` selector. You can check for the current support [here](https://caniuse.com/?search=%3Ahas). If you don't know how to find your browser version, check [here](https://www.wikihow.com/Find-Your-Browser-Type-and-Version).
 
 The rest of this README will be updated at the end of the refactoring process.  
 *End of update*
@@ -35,3 +38,5 @@ Height icon: [svgrepo.com](https://www.svgrepo.com/svg/283065/graphs-economy)
 Body Fat icon: [svgrepo.com](https://www.svgrepo.com/svg/283163/measuring-measure)  
 Close icon: [svgrepo.com](https://www.svgrepo.com/svg/500512/close-bold)  
 Checkmark (daily-expenditure-checkbox): [svgrepo.com](https://www.svgrepo.com/svg/474769/checkmark)  
+
+Body fat percentage description, for accessibility purposes: [men](https://www.mensjournal.com/health-fitness/what-body-fat-percentage-ranges-look-men#gid=ci02b8d174000c2605&pid=18-to-20-body-fat) and [women](https://athleanx.com/articles/women-body-fat-percentage-photos)

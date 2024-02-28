@@ -5,14 +5,45 @@ interface Props {
   title: string
   imgPath: string
   imgPathFallback: string
-  dataDialog: string
+  dataDialog: 'body-fat-men' | 'body-fat-women'
 }
 
 const { title, imgPath, imgPathFallback, dataDialog } = Astro.props
+
+const bodyFatDescriptions = {
+  'body-fat-men': [
+    `5% to 8% - You pretty much look like a living anatomy chart. All your muscles and veins are defined. You might not have the biggest muscles in the room, but they are certainly the most defined.`,
+    `9% to 13% - You definitely have a six-pack and obvious vascularity; you are totally ripped. Your chest and arms are well defined too.`,
+    `14% to 17% - You might see the upper two abdominal areas, but the bottom abs probably aren’t coming in as much. You have some separation and hardness of the muscles all over and slight vascularity, but everything isn’t dug out quite as deep.`,
+    `18% to 20% - Others can tell you’re active and healthy, but you don’t have as much definition of the muscles. There’s probably shadowing of the abs and definition in your arms, but you don’t have a six-pack or rippling arms. `
+  ],
+  'body-fat-women': [
+    `10% to 12% - At this body fat level not only can you see the separation of the individual muscles, but you can also clearly see the striations in the muscles and vascularity (veins sticking out). Most women will experience lack of menstrual periods in this range.`,
+    `15% to 17% - In this body fat range, a women will have a visible six pack and you can still see some muscle striations and veins. The 15 – 17% body fat range is achieved by many female fitness models in preparation for photo shoots. At this range, hips, buttocks and thighs will look muscular and less round. Some women still do experience lack of menstrual periods in this range.`,
+    `18% to 20% - You can still see strong ab muscles, but the six pack may not be as defined. While there’s usually a small amount fat on the hips, thighs and butt, it’s not very noticeable.`,
+    `21% to 23% - You may see a small amount of ab definition, but definitely no six pack. There will be slightly more curves in the legs and buttocks at this range than in the 18% to 20% range.`,
+    `24% to 26% - At this level a woman is generally considered to look slim, but not too skinny. Curves in the hips, thighs and buttocks will be apparent at this range.`,
+    `27% to 29% - At this body fat range, fat begins to accumulate in the breasts, stomach, legs and butt. If a woman has been training, you may be able to see some muscle definition in some areas, but you may also be able to pinch some fat in the abdominal area.`,
+    `30% to 35% - Curves in the stomach, breasts, hips, thighs and butt will be more pronounced. You will probably not see much muscle definition at this range.`,
+    `36% to 40% - At this range, the hips begin to become wider and the face and neck will become rounder.`
+  ]
+}
 ---
 
 <Popup dataDialog={dataDialog}>
   <h3>{title}</h3>
+
+  <div class="sr-only">
+    <span
+      >Below, a description of selected body fat percentage ranges has been
+      described. If you couldn't find a match for yourself, just leave the
+      default value</span
+    >
+
+    <ul>
+      {bodyFatDescriptions[dataDialog].map((item) => <li>{item}</li>)}
+    </ul>
+  </div>
 
   <picture>
     <source srcset={imgPath} />

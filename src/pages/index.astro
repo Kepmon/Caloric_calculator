@@ -25,6 +25,8 @@ import Footer from '../components/Footer.astro'
 </html>
 
 <script>
+  import { closeWeightLossSpeedPopup } from '../helpers/radios'
+
   window.addEventListener('click', (e: Event) => {
     const target = e.target as HTMLElement
 
@@ -44,6 +46,12 @@ import Footer from '../components/Footer.astro'
     }
 
     openedPopup?.classList.remove('show-options')
+  })
+
+  window.addEventListener('keyup', (e: KeyboardEvent) => {
+    if (e.key !== 'Escape') return
+
+    closeWeightLossSpeedPopup(true)
   })
 </script>
 
@@ -252,8 +260,8 @@ import Footer from '../components/Footer.astro'
     border-radius: var(--border-radius);
     transition: scale 0.2s;
 
-    &:hover,
-    &:focus-visible {
+    &:not(:disabled):hover,
+    &:not(:disabled):focus-visible {
       scale: 1.125;
     }
   }
