@@ -3,7 +3,10 @@
 **UPDATE**  
 Currently, the project is being refactored to assure better standards of code quality, maintability, and accessibility. 
 
-The most of the [current version of this website](https://clever-naiad-d0b904.netlify.app/) has already been finished coding but it still presents some layout, code quality and accessibility issues, and the form submission hasn't still been handled.
+The most of the [current version of this website](https://clever-naiad-d0b904.netlify.app/) has already been finished coding but it still presents some layout issues.
+
+**Important info:**  
+The option "I know my daily caloric expenditure" works ONLY if your browser supports the `:has` selector. You can check for the current support [here](https://caniuse.com/?search=%3Ahas). If you don't know how to find your browser version, check [here](https://www.wikihow.com/Find-Your-Browser-Type-and-Version).
 
 The rest of this README will be updated at the end of the refactoring process.  
 *End of update*
