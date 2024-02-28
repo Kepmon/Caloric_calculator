@@ -21,6 +21,7 @@ import SlidersSection from './SlidersSection.astro'
 
 <script>
   import { handleSubmit } from '../../helpers/form'
+  import { closeWeightLossSpeedPopup } from '../../helpers/radios'
 
   const submitBtn = document.querySelector('[data-button="submit"]')
   const allFormInputs = [
@@ -29,6 +30,7 @@ import SlidersSection from './SlidersSection.astro'
 
   allFormInputs.forEach((formInput) => {
     formInput.addEventListener('change', () => {
+      closeWeightLossSpeedPopup()
       submitBtn?.setAttribute('aria-expanded', 'false')
     })
   })
