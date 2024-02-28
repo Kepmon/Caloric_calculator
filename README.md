@@ -35,3 +35,5 @@ Height icon: [svgrepo.com](https://www.svgrepo.com/svg/283065/graphs-economy)
 Body Fat icon: [svgrepo.com](https://www.svgrepo.com/svg/283163/measuring-measure)  
 Close icon: [svgrepo.com](https://www.svgrepo.com/svg/500512/close-bold)  
 Checkmark (daily-expenditure-checkbox): [svgrepo.com](https://www.svgrepo.com/svg/474769/checkmark)  
+
+Body fat percentage description, for accessibility purposes: [men](https://www.mensjournal.com/health-fitness/what-body-fat-percentage-ranges-look-men#gid=ci02b8d174000c2605&pid=18-to-20-body-fat) and [women](https://athleanx.com/articles/women-body-fat-percentage-photos)
