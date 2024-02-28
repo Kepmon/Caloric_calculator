@@ -252,8 +252,8 @@ import Footer from '../components/Footer.astro'
     border-radius: var(--border-radius);
     transition: scale 0.2s;
 
-    &:hover,
-    &:focus-visible {
+    &:not(:disabled):hover,
+    &:not(:disabled):focus-visible {
       scale: 1.125;
     }
   }

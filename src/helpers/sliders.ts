@@ -13,6 +13,7 @@ const returnNewSliderValue = (
 ) => {
   const inputData = returnSliderData(input)
   const errorMessage = document.querySelector(`[data-error=${input.id}`)
+  const submitBtn = document.querySelector('[data-button="submit"]')
 
   if (
     inputData.sliderMin == null ||
@@ -27,6 +28,8 @@ const returnNewSliderValue = (
   ) {
     if (errorMessage != null) {
       errorMessage.textContent = `Provide a value within ${inputData.sliderMin} and ${inputData.sliderMax}`
+
+      submitBtn?.setAttribute('disabled', '')
     }
 
     return {
@@ -37,6 +40,7 @@ const returnNewSliderValue = (
 
   if (errorMessage != null) {
     errorMessage.textContent = ''
+    submitBtn?.removeAttribute('disabled')
   }
 
   return {
