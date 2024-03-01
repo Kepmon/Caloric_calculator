@@ -3,21 +3,26 @@ import BasicData from './BasicData.astro'
 import SlidersSection from './SlidersSection.astro'
 ---
 
-<form data-form="caloric-intake">
-  <BasicData />
-  <SlidersSection />
-  <div class="result-section">
-    <button type="button" aria-expanded="false" data-button="submit" class="btn"
-      >Show Result</button
-    >
-    <div class="result-popup-parent" data-popup="calorie-intake-value">
-      <div class="result-popup">
-        <p>Your recommended daily caloric intake is:</p>
-        <p data-result="calorie-intake" data-span="calorie-intake">0 kcal</p>
+<section id="form-data">
+  <form data-form="caloric-intake">
+    <BasicData />
+    <SlidersSection />
+    <div class="result-section">
+      <button
+        type="button"
+        aria-expanded="false"
+        data-button="submit"
+        class="btn">Show Result</button
+      >
+      <div class="result-popup-parent" data-popup="calorie-intake-value">
+        <div class="result-popup">
+          <p>Your recommended daily caloric intake is:</p>
+          <p data-result="calorie-intake" data-span="calorie-intake">0 kcal</p>
+        </div>
       </div>
     </div>
-  </div>
-</form>
+  </form>
+</section>
 
 <script>
   import { handleSubmit } from '../../helpers/form'
@@ -108,8 +113,8 @@ import SlidersSection from './SlidersSection.astro'
   .result-popup {
     margin-inline: auto;
     width: min(100%, 25rem);
-    background-color: var(--content-text);
-    color: var(--body-bg);
+    background-color: var(--input-bg);
+    color: hsl(var(--clr-dark-900));
     text-align: center;
     border-radius: var(--border-radius);
     overflow: hidden;

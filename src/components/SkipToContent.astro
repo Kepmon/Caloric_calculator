@@ -1,0 +1,20 @@
+<a href="#form-data">Skip to form</a>
+
+<style lang="scss">
+  a {
+    position: fixed;
+    top: 1.5rem;
+    left: 1.5rem;
+    padding: 1rem;
+    background-color: hsl(var(--clr-white-200));
+    color: hsl(var(--clr-dark-900));
+    font-size: 1.125rem;
+    border-radius: var(--border-radius);
+    translate: 0 -200%;
+    transition: translate 200ms;
+
+    &:focus-visible {
+      translate: 0 0;
+    }
+  }
+</style>
