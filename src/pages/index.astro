@@ -1,8 +1,8 @@
 ---
-import Header from '../components/Header.astro'
-import WhyThisCalc from '../components/WhyThisCalc.astro'
-import PersonalDataForm from '../components/formComponents/PersonalDataForm.astro'
-import Footer from '../components/Footer.astro'
+import Header from "../components/Header.astro";
+import WhyThisCalc from "../components/WhyThisCalc.astro";
+import PersonalDataForm from "../components/formComponents/PersonalDataForm.astro";
+import Footer from "../components/Footer.astro";
 ---
 
 <html lang="en">
@@ -25,34 +25,34 @@ import Footer from '../components/Footer.astro'
 </html>
 
 <script>
-  import { closeWeightLossSpeedPopup } from '../helpers/radios'
+  import { closeWeightLossSpeedPopup } from "../helpers/radios";
 
-  window.addEventListener('click', (e: Event) => {
-    const target = e.target as HTMLElement
+  window.addEventListener("click", (e: Event) => {
+    const target = e.target as HTMLElement;
 
-    const popupLabel = target.closest('[data-open]')
+    const popupLabel = target.closest("[data-open]");
 
-    if (popupLabel != null) return
+    if (popupLabel != null) return;
 
     const openedPopup =
-      document.querySelector('[open]') ||
-      document.querySelector('.show-options')
+      document.querySelector("[open]") ||
+      document.querySelector(".show-options");
 
-    if (target.closest('[data-popup]') === openedPopup) return
+    if (target.closest("[data-popup]") === openedPopup) return;
 
-    if (openedPopup?.nodeName === 'DIALOG') {
-      ;(openedPopup as HTMLDialogElement).close()
-      return
+    if (openedPopup?.nodeName === "DIALOG") {
+      (openedPopup as HTMLDialogElement).close();
+      return;
     }
 
-    openedPopup?.classList.remove('show-options')
-  })
+    openedPopup?.classList.remove("show-options");
+  });
 
-  window.addEventListener('keyup', (e: KeyboardEvent) => {
-    if (e.key !== 'Escape') return
+  window.addEventListener("keyup", (e: KeyboardEvent) => {
+    if (e.key !== "Escape") return;
 
-    closeWeightLossSpeedPopup(true)
-  })
+    closeWeightLossSpeedPopup(true);
+  });
 </script>
 
 <style is:global lang="scss">
@@ -69,7 +69,7 @@ import Footer from '../components/Footer.astro'
   @supports (scrollbar-width: thin) {
     * {
       scrollbar-width: thin;
-      scrollbar-color: hsl(var(--clr-white-400) / 0.3) hsl(var(--clr-dark-900));
+      scrollbar-color: hsl(var(--clr-white-200) / 0.3) hsl(var(--clr-dark-900));
     }
   }
 
@@ -79,7 +79,7 @@ import Footer from '../components/Footer.astro'
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: hsl(var(--clr-white-400) / 0.3);
+    background-color: hsl(var(--clr-white-200) / 0.3);
     border-radius: 100vmax;
   }
 
@@ -96,11 +96,14 @@ import Footer from '../components/Footer.astro'
     --border-radius: 0.5em;
     --toggler-button-width: clamp(2.25rem, 2.031rem + 1.25vi, 3rem);
     --toggler-translate-x: 0;
-    --clr-white-400: 207 10% 95%;
-    --clr-white-900: 207 10% 90%;
-    --clr-dark-700: 207 10% 10%;
-    --clr-dark-900: 207 90% 4%;
+    --clr-white-200: 207 10% 98%;
+    --clr-white-400: 0 0% 87%;
+    --clr-white-400: 0 0% 93%;
+    --clr-blue-300: 207 50% 95%;
+    --clr-dark-700: 207 90% 3%;
+    --clr-dark-900: 207 90% 1%;
     --sublabel-size: 0.85em;
+    --input-bg: hsl(var(--clr-white-400));
     @include theme-colors;
 
     @media (prefers-color-scheme: dark) {
@@ -136,6 +139,7 @@ import Footer from '../components/Footer.astro'
       'Helvetica Neue',
       sans-serif;
     font-size: clamp(0.875rem, 0.839rem + 0.208vi, 1rem);
+    font-weight: 500;
     color: var(--content-text);
     background-color: var(--body-bg);
   }
@@ -185,7 +189,7 @@ import Footer from '../components/Footer.astro'
     padding: 0.25rem;
     width: calc(var(--thumb-size) * 1.5);
     height: 1.75rem;
-    background-color: var(--default-input-bg);
+    background-color: var(--input-bg);
     border-radius: var(--border-radius);
     border: none;
     translate: -50%;
@@ -255,8 +259,8 @@ import Footer from '../components/Footer.astro'
   }
 
   .btn {
-    background-color: var(--content-text);
-    color: var(--body-bg);
+    background-color: var(--input-bg);
+    color: hsl(var(--clr-dark-900));
     border-radius: var(--border-radius);
     transition: scale 0.2s;
 
